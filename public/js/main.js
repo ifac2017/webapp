@@ -151,10 +151,14 @@ function LoginCtrl(AuthService, NotificationsService, $location) {
 
 angular.module('webapp').controller('ProfileCtrl', ProfileCtrl);
 
-function ProfileCtrl(AuthService, $scope) {
+function ProfileCtrl(AuthService, $scope, $rootScope) {
   var vm = this;
 
-  $scope.$on('onAuth', function (event, args) {
+  if (AuthService.isConnected) {
+    AuthService.currentUser.$bindTo($scope, "profile")
+  }
+
+  $rootScope.$on('onAuth', function (event, args) {
     AuthService.currentUser.$bindTo($scope, "profile")
   })
 
@@ -295,17 +299,18 @@ function AuthService($firebaseAuth, $firebaseObject, $rootScope) {
         if (authData) {
             AuthService._currentUserRef = AuthService._ref.child("users").child(authData.uid)
             AuthService._currentUserRef.on("value", function(snapshot) {
-              if (!snapshot.val()) {
-                  AuthService._currentUserRef.set({
-                      provider: authData.provider,
-                      email: authData.password.email
-                  });
-              }
-              AuthService.currentUser = $firebaseObject(AuthService._currentUserRef)
-              AuthService.currentUser.$loaded().then(function(){
-                AuthService.isConnected = true
-                AuthService._notifierAuth()
-              })
+                if (!snapshot.val()) {
+                    AuthService._currentUserRef.set({
+                        provider: authData.provider,
+                        email: authData.password.email
+                    });
+                }
+                AuthService.currentUser = $firebaseObject(AuthService._currentUserRef)
+                AuthService.currentUser.$loaded().then(function() {
+                    AuthService.isConnected = true
+                    AuthService._notifierAuth()
+                })
+
             })
         } else {
             AuthService._currentUserRef = null
@@ -316,7 +321,7 @@ function AuthService($firebaseAuth, $firebaseObject, $rootScope) {
     })
 
     AuthService._notifierAuth = function() {
-      $rootScope.$broadcast('onAuth')
+        $rootScope.$broadcast('onAuth')
     }
 
     return AuthService

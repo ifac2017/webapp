@@ -6,10 +6,14 @@
 
 angular.module('webapp').controller('ProfileCtrl', ProfileCtrl);
 
-function ProfileCtrl(AuthService, $scope) {
+function ProfileCtrl(AuthService, $scope, $rootScope) {
   var vm = this;
 
-  $scope.$on('onAuth', function (event, args) {
+  if (AuthService.isConnected) {
+    AuthService.currentUser.$bindTo($scope, "profile")
+  }
+
+  $rootScope.$on('onAuth', function (event, args) {
     AuthService.currentUser.$bindTo($scope, "profile")
   })
 
