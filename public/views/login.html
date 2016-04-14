@@ -1,0 +1,25 @@
+<div layout="column">
+    <md-content layout-padding>
+        <h2>Login form</h2>
+        <form name="loginForm">
+            <md-input-container class="md-block">
+                <input ng-model="loginCtrl.user.email" type="email" name="email" placeholder="Email address" required>
+                <div ng-messages="loginForm.email.$error">
+                    <div ng-message="required">This is required.</div>
+                    <div ng-message="email">The email address is not correct.</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <input ng-model="loginCtrl.user.password" type="password" name="password" placeholder="Password" required>
+                <div ng-messages="loginForm.password.$error">
+                    <div ng-message="required">This is required.</div>
+                </div>
+            </md-input-container>
+            <div layout="row">
+                <md-button class="md-raised md-primary" ng-click="loginCtrl.login()">Login !</md-button>
+                <h4>OR</h4>
+                <md-button class="md-raised md-warn" ng-click="loginCtrl.signup()">Signup !</md-button>
+            </div>
+        </form>
+    </md-content>
+</div>

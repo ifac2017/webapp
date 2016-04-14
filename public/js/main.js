@@ -19,17 +19,309 @@ require('./services')
 require('./filters')
 require('./controllers')
 
-},{"./config":2,"./controllers":3,"./filters":4,"./run":5,"./services":6,"angular-material":12,"angular-messages":14,"angular-route":16,"angularfire":20,"firebase":21}],2:[function(require,module,exports){
+},{"./config":4,"./controllers":8,"./filters":9,"./run":11,"./services":15,"angular-material":21,"angular-messages":23,"angular-route":25,"angularfire":29,"firebase":30}],2:[function(require,module,exports){
+// app/controllers/Router.js
+
+/**
+ * Router of the app
+ **/
+
+angular.module('webapp').config(Router);
+
+function Router($routeProvider) {
+    $routeProvider
+        .when('/admin', {
+            templateUrl: 'views/admin/home.html',
+            controller: 'AdminCtrl',
+            controllerAs: 'adminCtrl',
+            resolve: {
+                "currentAuth": ["AuthService", function(AuthService) {
+                    return AuthService.requireAuth()
+                }]
+            }
+        })
+        .when('/login', {
+            templateUrl: 'views/login.html',
+            controller: 'LoginCtrl',
+            controllerAs: 'loginCtrl'
+        })
+        .otherwise({
+            redirectTo: '/admin'
+        })
+}
 
 },{}],3:[function(require,module,exports){
-arguments[4][2][0].apply(exports,arguments)
-},{"dup":2}],4:[function(require,module,exports){
-arguments[4][2][0].apply(exports,arguments)
-},{"dup":2}],5:[function(require,module,exports){
-arguments[4][2][0].apply(exports,arguments)
-},{"dup":2}],6:[function(require,module,exports){
-arguments[4][2][0].apply(exports,arguments)
-},{"dup":2}],7:[function(require,module,exports){
+// app/controllers/Theme.js
+
+/**
+  * Config app theme
+**/
+
+angular.module('webapp').config(Theme);
+
+function Theme($mdThemingProvider) {
+  $mdThemingProvider.theme('default')
+    .primaryPalette('blue-grey')
+    .accentPalette('blue')
+    .warnPalette('red');
+}
+
+},{}],4:[function(require,module,exports){
+// app/config/index.js
+
+/**
+  * Require all config
+**/
+
+require('./Theme.js')
+require('./Router.js')
+
+},{"./Router.js":2,"./Theme.js":3}],5:[function(require,module,exports){
+// app/controllers/AdminCtrl.js
+
+/**
+  * Sidebar controller: in charge of the sidebar responsivness
+**/
+
+angular.module('webapp').controller('AdminCtrl', AdminCtrl);
+
+function AdminCtrl() {
+  var vm = this;
+}
+
+},{}],6:[function(require,module,exports){
+// app/controllers/LoginCtrl.js
+
+/**
+  * Login controller of the app
+**/
+
+angular.module('webapp').controller('LoginCtrl', LoginCtrl);
+
+function LoginCtrl(AuthService, NotificationsService, $location) {
+  var vm = this;
+
+  vm.user = {
+    email: "",
+    password: ""
+  }
+
+  vm.login = function() {
+    AuthService.login(vm.user.email, vm.user.password, function(error, res) {
+      if (error) {
+        NotificationsService.error("Error during logging. Please verify your password.");
+      } else {
+        $location.path('/')
+      }
+    })
+  }
+
+  vm.signup = function() {
+    AuthService.signup(vm.user.email, vm.user.password, function(error, res) {
+      if (error) {
+        NotificationsService.error("Error during signing up. Please try again.");
+      } else {
+        vm.login(vm.user.email, vm.user.password)
+      }
+    })
+  }
+}
+
+},{}],7:[function(require,module,exports){
+// app/controllers/SidebarCtrl.js
+
+/**
+  * Sidebar controller: in charge of the sidebar responsivness
+**/
+
+angular.module('webapp').controller('SidebarCtrl', SidebarCtrl);
+
+function SidebarCtrl(CurrentUser, AuthService, $location, $scope) {
+  var vm = this;
+  vm.isLogged = CurrentUser.exist
+
+  vm.login = function() {
+    $location.path('/login')
+  }
+
+  vm.logout = function() {
+    AuthService.logout()
+    $location.path('/')
+  }
+
+  $scope.$on('onAuth', function (event, args) {
+    vm.isLogged = CurrentUser.exist
+  })
+}
+
+},{}],8:[function(require,module,exports){
+// app/controllers/index.js
+
+/**
+  * Require all controllers
+**/
+
+require('./SidebarCtrl.js');
+require('./AdminCtrl.js');
+require('./LoginCtrl.js');
+
+},{"./AdminCtrl.js":5,"./LoginCtrl.js":6,"./SidebarCtrl.js":7}],9:[function(require,module,exports){
+
+},{}],10:[function(require,module,exports){
+// app/run/Resolver.js
+
+/**
+ * Resolver for routing
+ **/
+ angular.module('webapp').run(Resolver);
+
+ function Resolver($rootScope, $location) {
+     $rootScope.$on("$routeChangeError", function(event, next, previous, error) {
+         if (error === "AUTH_REQUIRED") {
+             $location.path("/login");
+         }
+     })
+ }
+
+},{}],11:[function(require,module,exports){
+// app/run/index.js
+
+/**
+  * Require all runners
+**/
+
+require('./Resolver.js')
+
+},{"./Resolver.js":10}],12:[function(require,module,exports){
+// app/services/AuthService.js
+
+/**
+ * Authentification service: in charge of the auth with Firebase
+ **/
+
+angular.module('webapp').factory('AuthService', AuthService);
+
+function AuthService(CurrentUser, $firebaseAuth, $rootScope) {
+    var AuthService = {}
+
+    AuthService.ref = new Firebase("https://planner31.firebaseio.com/")
+    AuthService.auth = $firebaseAuth(AuthService.ref)
+
+    AuthService.requireAuth = function() {
+        return AuthService.auth.$requireAuth()
+    }
+
+    AuthService.signup = function(email, password, then) {
+        this.auth.$createUser({
+            email: email,
+            password: password
+        }).then(function(userData) {
+            then(null, userData)
+        }).catch(function(error) {
+            then(error, null)
+        })
+    }
+
+    AuthService.login = function(email, password, then) {
+        this.auth.$authWithPassword({
+            email: email,
+            password: password
+        }).then(function(userData) {
+            then(null, userData)
+        }).catch(function(error) {
+            then(error, null)
+        })
+    }
+
+    AuthService.logout = function() {
+        this.auth.$unauth()
+    }
+
+    AuthService.auth.$onAuth(function(authData) {
+        if (authData) {
+          CurrentUser.add(authData.password.email)
+        } else {
+          CurrentUser.remove()
+        }
+        $rootScope.$broadcast('onAuth', {
+            data: authData
+        })
+    })
+    return AuthService
+}
+
+},{}],13:[function(require,module,exports){
+// app/services/CurrentUser.js
+
+/**
+ * CurrentUser model: represents the user of the session
+ **/
+
+angular.module('webapp').factory('CurrentUser', CurrentUser);
+
+function CurrentUser() {
+    var CurrentUser = {
+      exist: false,
+      email: null
+    }
+
+    CurrentUser.add = function(email) {
+      CurrentUser.email = email
+      CurrentUser.exist = true
+      
+    }
+
+    CurrentUser.remove = function() {
+      CurrentUser.email = null
+      CurrentUser.exist = false
+    }
+
+    return CurrentUser
+}
+
+},{}],14:[function(require,module,exports){
+// app/services/NotificationsService.js
+
+/**
+  * Notifications service: in charge of the showing notifications
+**/
+
+angular.module('webapp').factory('NotificationsService', NotificationsService);
+
+function NotificationsService ($mdToast) {
+  var NotificationsService = {}
+
+  NotificationsService.error = function(message) {
+    $mdToast.show($mdToast.simple().textContent(message).theme('error-toast'));
+  }
+
+  NotificationsService.success = function(message) {
+    $mdToast.show($mdToast.simple().textContent(message).theme('success-toast'));
+  }
+
+  NotificationsService.info = function(message) {
+    $mdToast.show($mdToast.simple().textContent(message).theme('info-toast'));
+  }
+
+  NotificationsService.warn = function(message) {
+    $mdToast.show($mdToast.simple().textContent(message).theme('warn-toast'));
+  }
+
+  return NotificationsService;
+}
+
+},{}],15:[function(require,module,exports){
+// app/services/index.js
+
+/**
+  * Require all services
+**/
+
+require('./AuthService.js')
+require('./CurrentUser.js')
+require('./NotificationsService.js')
+
+},{"./AuthService.js":12,"./CurrentUser.js":13,"./NotificationsService.js":14}],16:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.3
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -4146,11 +4438,11 @@ angular.module('ngAnimate', [])
 
 })(window, window.angular);
 
-},{}],8:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 require('./angular-animate');
 module.exports = 'ngAnimate';
 
-},{"./angular-animate":7}],9:[function(require,module,exports){
+},{"./angular-animate":16}],18:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.3
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -4550,11 +4842,11 @@ ngAriaModule.directive('ngShow', ['$aria', function($aria) {
 
 })(window, window.angular);
 
-},{}],10:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 require('./angular-aria');
 module.exports = 'ngAria';
 
-},{"./angular-aria":9}],11:[function(require,module,exports){
+},{"./angular-aria":18}],20:[function(require,module,exports){
 /*!
  * Angular Material Design
  * https://github.com/angular/material
@@ -29416,7 +29708,7 @@ angular.module("material.core").constant("$MD_THEME_CSS", "md-autocomplete.md-TH
 
 
 })(window, window.angular);;window.ngMaterial={version:{full: "1.0.7"}};
-},{}],12:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 // Should already be required, here for clarity
 require('angular');
 
@@ -29430,7 +29722,7 @@ require('./angular-material');
 // Export namespace
 module.exports = 'ngMaterial';
 
-},{"./angular-material":11,"angular":18,"angular-animate":8,"angular-aria":10}],13:[function(require,module,exports){
+},{"./angular-material":20,"angular":27,"angular-animate":17,"angular-aria":19}],22:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.3
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -30154,11 +30446,11 @@ function ngMessageDirectiveFactory() {
 
 })(window, window.angular);
 
-},{}],14:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 require('./angular-messages');
 module.exports = 'ngMessages';
 
-},{"./angular-messages":13}],15:[function(require,module,exports){
+},{"./angular-messages":22}],24:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.3
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -31182,11 +31474,11 @@ function ngViewFillContentFactory($compile, $controller, $route) {
 
 })(window, window.angular);
 
-},{}],16:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 require('./angular-route');
 module.exports = 'ngRoute';
 
-},{"./angular-route":15}],17:[function(require,module,exports){
+},{"./angular-route":24}],26:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.3
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -61901,11 +62193,11 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],18:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":17}],19:[function(require,module,exports){
+},{"./angular":26}],28:[function(require,module,exports){
 /*!
  * AngularFire is the officially supported AngularJS binding for Firebase. Firebase
  * is a full backend so you don't need servers to build your Angular app. AngularFire
@@ -64245,11 +64537,11 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
     }
 })();
 
-},{}],20:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 require('./dist/angularfire');
 module.exports = 'firebase';
 
-},{"./dist/angularfire":19}],21:[function(require,module,exports){
+},{"./dist/angularfire":28}],30:[function(require,module,exports){
 /*! @license Firebase v2.4.2
     License: https://www.firebase.com/terms/terms-of-service.html */
 (function() {var h,n=this;function p(a){return void 0!==a}function aa(){}function ba(a){a.yb=function(){return a.zf?a.zf:a.zf=new a}}

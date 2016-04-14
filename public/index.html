@@ -9,6 +9,12 @@
         <link rel="stylesheet" href="css/style.css">
         <script src="js/main.js"></script>
     </head>
-    <body ng-cloak>
+    <body layout="column" ng-cloak>
+        <div ng-include src="'views/topbar.html'"></div>
+        <div flex layout="row">
+          <div layout="column" ng-include src="'views/sidebar.html'"></div>
+          <div flex layout="column" ng-view></div>
+        </div>
+        <div ng-include src="'views/bottombar.html'"></div>
     </body>
 </html>

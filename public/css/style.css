@@ -1,3 +1,12 @@
+/******************************/
+/** define globals variables **/
+/******************************/
+/***********/
+/** Icons **/
+/***********/
+body {
+  overflow: hidden; }
+
 /***************************************/
 /** hide page until Angular is loaded **/
 /***************************************/
@@ -8,3 +17,61 @@
 [ng\:cloak],
 [x-ng-cloak] {
   display: none !important; }
+
+/******************/
+/** toast themes **/
+/******************/
+md-toast.md-success-toast-theme .md-toast-content {
+  background-color: #3498db; }
+
+md-toast.md-error-toast-theme .md-toast-content {
+  background-color: #e74c3c; }
+
+md-toast.md-info-toast-theme .md-toast-content {
+  background-color: #3498db; }
+
+md-toast.md-warn-toast-theme .md-toast-content {
+  background-color: #e67e22; }
+
+/*************/
+/** Toolbar **/
+/*************/
+md-toolbar h3 {
+  margin: auto;
+  font-weight: 500; }
+
+md-toolbar a h3 {
+  font-size: 36px; }
+
+/***********/
+/** Icons **/
+/***********/
+/* Rules for sizing the icon. */
+.material-icons.md-18 {
+  font-size: 18px; }
+
+.material-icons.md-24 {
+  font-size: 24px; }
+
+.material-icons.md-36 {
+  font-size: 36px; }
+
+.material-icons.md-48 {
+  font-size: 48px; }
+
+.material-icons.md-72 {
+  font-size: 72px; }
+
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark {
+  color: rgba(0, 0, 0, 0.54); }
+
+.material-icons.md-dark.md-inactive {
+  color: rgba(0, 0, 0, 0.26); }
+
+/* Rules for using icons as white on a dark background. */
+.material-icons.md-light {
+  color: white; }
+
+.material-icons.md-light.md-inactive {
+  color: rgba(255, 255, 255, 0.3); }
