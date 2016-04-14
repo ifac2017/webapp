@@ -5,5 +5,4 @@
 **/
 
 require('./AuthService.js')
-require('./CurrentUser.js')
 require('./NotificationsService.js')

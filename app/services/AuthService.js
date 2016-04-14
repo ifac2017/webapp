@@ -6,18 +6,20 @@
 
 angular.module('webapp').factory('AuthService', AuthService);
 
-function AuthService(CurrentUser, $firebaseAuth, $rootScope) {
+function AuthService($firebaseAuth, $firebaseObject, $rootScope) {
     var AuthService = {}
-
-    AuthService.ref = new Firebase("https://planner31.firebaseio.com/")
-    AuthService.auth = $firebaseAuth(AuthService.ref)
+    AuthService._ref = new Firebase("https://planner31.firebaseio.com/")
+    AuthService._auth = $firebaseAuth(AuthService._ref)
+    AuthService._currentUserRef = null
+    AuthService.currentUser = null
+    AuthService.isConnected = false
 
     AuthService.requireAuth = function() {
-        return AuthService.auth.$requireAuth()
+        return AuthService._auth.$requireAuth()
     }
 
     AuthService.signup = function(email, password, then) {
-        this.auth.$createUser({
+        AuthService._auth.$createUser({
             email: email,
             password: password
         }).then(function(userData) {
@@ -28,7 +30,7 @@ function AuthService(CurrentUser, $firebaseAuth, $rootScope) {
     }
 
     AuthService.login = function(email, password, then) {
-        this.auth.$authWithPassword({
+        AuthService._auth.$authWithPassword({
             email: email,
             password: password
         }).then(function(userData) {
@@ -39,18 +41,36 @@ function AuthService(CurrentUser, $firebaseAuth, $rootScope) {
     }
 
     AuthService.logout = function() {
-        this.auth.$unauth()
+        AuthService._auth.$unauth()
     }
 
-    AuthService.auth.$onAuth(function(authData) {
+    AuthService._auth.$onAuth(function(authData) {
         if (authData) {
-          CurrentUser.add(authData.password.email)
+            AuthService._currentUserRef = AuthService._ref.child("users").child(authData.uid)
+            AuthService._currentUserRef.on("value", function(snapshot) {
+              if (!snapshot.val()) {
+                  AuthService._currentUserRef.set({
+                      provider: authData.provider,
+                      email: authData.password.email
+                  });
+              }
+              AuthService.currentUser = $firebaseObject(AuthService._currentUserRef)
+              AuthService.currentUser.$loaded().then(function(){
+                AuthService.isConnected = true
+                AuthService._notifierAuth()
+              })
+            })
         } else {
-          CurrentUser.remove()
+            AuthService._currentUserRef = null
+            AuthService.CurrentUser = null
+            AuthService.isConnected = false
+            AuthService._notifierAuth()
         }
-        $rootScope.$broadcast('onAuth', {
-            data: authData
-        })
     })
+
+    AuthService._notifierAuth = function() {
+      $rootScope.$broadcast('onAuth')
+    }
+
     return AuthService
 }

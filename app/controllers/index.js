@@ -7,3 +7,5 @@
 require('./SidebarCtrl.js');
 require('./AdminCtrl.js');
 require('./LoginCtrl.js');
+require('./TopbarCtrl.js');
+require('./ProfileCtrl.js');

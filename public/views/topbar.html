@@ -1,3 +1,4 @@
+<div ng-controller="TopbarCtrl as topbarCtrl">
 <md-toolbar>
     <div class="md-toolbar-tools">
         <md-button class="md-icon-button" hide-gt-sm><i class="material-icons md-24">dehaze</i></md-button>
@@ -5,6 +6,7 @@
             <span>IFAC 2017</span>
         </h2>
         <span flex></span>
-        <md-button class="md-icon-button"><i class="material-icons md-24">settings</i></md-button>
+        <md-button class="md-icon-button" ng-click="topbarCtrl.openProfile()"><i class="material-icons md-24">settings</i></md-button>
     </div>
 </md-toolbar>
+</div>

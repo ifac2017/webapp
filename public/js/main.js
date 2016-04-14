@@ -19,7 +19,7 @@ require('./services')
 require('./filters')
 require('./controllers')
 
-},{"./config":4,"./controllers":8,"./filters":9,"./run":11,"./services":15,"angular-material":21,"angular-messages":23,"angular-route":25,"angularfire":29,"firebase":30}],2:[function(require,module,exports){
+},{"./config":4,"./controllers":10,"./filters":11,"./run":13,"./services":16,"angular-material":22,"angular-messages":24,"angular-route":26,"angularfire":30,"firebase":31}],2:[function(require,module,exports){
 // app/controllers/Router.js
 
 /**
@@ -40,6 +40,16 @@ function Router($routeProvider) {
                 }]
             }
         })
+        .when('/profile', {
+            templateUrl: 'views/profile.html',
+            controller: 'ProfileCtrl',
+            controllerAs: 'profileCtrl',
+            resolve: {
+                "currentAuth": ["AuthService", function(AuthService) {
+                    return AuthService.requireAuth()
+                }]
+            }
+        })
         .when('/login', {
             templateUrl: 'views/login.html',
             controller: 'LoginCtrl',
@@ -54,16 +64,21 @@ function Router($routeProvider) {
 // app/controllers/Theme.js
 
 /**
-  * Config app theme
-**/
+ * Config app theme
+ **/
 
 angular.module('webapp').config(Theme);
 
 function Theme($mdThemingProvider) {
-  $mdThemingProvider.theme('default')
-    .primaryPalette('blue-grey')
-    .accentPalette('blue')
-    .warnPalette('red');
+    $mdThemingProvider.theme('default')
+        .primaryPalette('blue-grey')
+        .accentPalette('blue')
+        .warnPalette('red');
+
+    $mdThemingProvider.theme("error-toast")
+    $mdThemingProvider.theme("success-toast")
+    $mdThemingProvider.theme("info-toast")
+    $mdThemingProvider.theme("warn-toast")
 }
 
 },{}],4:[function(require,module,exports){
@@ -128,6 +143,24 @@ function LoginCtrl(AuthService, NotificationsService, $location) {
 }
 
 },{}],7:[function(require,module,exports){
+// app/controllers/ProfileCtrl.js
+
+/**
+  * Profile controller: ahndle profile updates on the go
+**/
+
+angular.module('webapp').controller('ProfileCtrl', ProfileCtrl);
+
+function ProfileCtrl(AuthService, $scope) {
+  var vm = this;
+
+  $scope.$on('onAuth', function (event, args) {
+    AuthService.currentUser.$bindTo($scope, "profile")
+  })
+
+}
+
+},{}],8:[function(require,module,exports){
 // app/controllers/SidebarCtrl.js
 
 /**
@@ -136,9 +169,9 @@ function LoginCtrl(AuthService, NotificationsService, $location) {
 
 angular.module('webapp').controller('SidebarCtrl', SidebarCtrl);
 
-function SidebarCtrl(CurrentUser, AuthService, $location, $scope) {
+function SidebarCtrl(AuthService, $location, $scope) {
   var vm = this;
-  vm.isLogged = CurrentUser.exist
+  vm.isLogged = AuthService.isConnected
 
   vm.login = function() {
     $location.path('/login')
@@ -150,11 +183,28 @@ function SidebarCtrl(CurrentUser, AuthService, $location, $scope) {
   }
 
   $scope.$on('onAuth', function (event, args) {
-    vm.isLogged = CurrentUser.exist
+    vm.isLogged = AuthService.isConnected
   })
 }
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
+// app/controllers/TopbarCtrl.js
+
+/**
+  * Sidebar controller: in charge of the sidebar responsivness
+**/
+
+angular.module('webapp').controller('TopbarCtrl', TopbarCtrl);
+
+function TopbarCtrl($location) {
+  var vm = this;
+
+  vm.openProfile = function() {
+    $location.path('/profile')
+  }
+}
+
+},{}],10:[function(require,module,exports){
 // app/controllers/index.js
 
 /**
@@ -164,10 +214,12 @@ function SidebarCtrl(CurrentUser, AuthService, $location, $scope) {
 require('./SidebarCtrl.js');
 require('./AdminCtrl.js');
 require('./LoginCtrl.js');
+require('./TopbarCtrl.js');
+require('./ProfileCtrl.js');
 
-},{"./AdminCtrl.js":5,"./LoginCtrl.js":6,"./SidebarCtrl.js":7}],9:[function(require,module,exports){
+},{"./AdminCtrl.js":5,"./LoginCtrl.js":6,"./ProfileCtrl.js":7,"./SidebarCtrl.js":8,"./TopbarCtrl.js":9}],11:[function(require,module,exports){
 
-},{}],10:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 // app/run/Resolver.js
 
 /**
@@ -183,7 +235,7 @@ require('./LoginCtrl.js');
      })
  }
 
-},{}],11:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 // app/run/index.js
 
 /**
@@ -192,7 +244,7 @@ require('./LoginCtrl.js');
 
 require('./Resolver.js')
 
-},{"./Resolver.js":10}],12:[function(require,module,exports){
+},{"./Resolver.js":12}],14:[function(require,module,exports){
 // app/services/AuthService.js
 
 /**
@@ -201,18 +253,20 @@ require('./Resolver.js')
 
 angular.module('webapp').factory('AuthService', AuthService);
 
-function AuthService(CurrentUser, $firebaseAuth, $rootScope) {
+function AuthService($firebaseAuth, $firebaseObject, $rootScope) {
     var AuthService = {}
-
-    AuthService.ref = new Firebase("https://planner31.firebaseio.com/")
-    AuthService.auth = $firebaseAuth(AuthService.ref)
+    AuthService._ref = new Firebase("https://planner31.firebaseio.com/")
+    AuthService._auth = $firebaseAuth(AuthService._ref)
+    AuthService._currentUserRef = null
+    AuthService.currentUser = null
+    AuthService.isConnected = false
 
     AuthService.requireAuth = function() {
-        return AuthService.auth.$requireAuth()
+        return AuthService._auth.$requireAuth()
     }
 
     AuthService.signup = function(email, password, then) {
-        this.auth.$createUser({
+        AuthService._auth.$createUser({
             email: email,
             password: password
         }).then(function(userData) {
@@ -223,7 +277,7 @@ function AuthService(CurrentUser, $firebaseAuth, $rootScope) {
     }
 
     AuthService.login = function(email, password, then) {
-        this.auth.$authWithPassword({
+        AuthService._auth.$authWithPassword({
             email: email,
             password: password
         }).then(function(userData) {
@@ -234,52 +288,41 @@ function AuthService(CurrentUser, $firebaseAuth, $rootScope) {
     }
 
     AuthService.logout = function() {
-        this.auth.$unauth()
+        AuthService._auth.$unauth()
     }
 
-    AuthService.auth.$onAuth(function(authData) {
+    AuthService._auth.$onAuth(function(authData) {
         if (authData) {
-          CurrentUser.add(authData.password.email)
+            AuthService._currentUserRef = AuthService._ref.child("users").child(authData.uid)
+            AuthService._currentUserRef.on("value", function(snapshot) {
+              if (!snapshot.val()) {
+                  AuthService._currentUserRef.set({
+                      provider: authData.provider,
+                      email: authData.password.email
+                  });
+              }
+              AuthService.currentUser = $firebaseObject(AuthService._currentUserRef)
+              AuthService.currentUser.$loaded().then(function(){
+                AuthService.isConnected = true
+                AuthService._notifierAuth()
+              })
+            })
         } else {
-          CurrentUser.remove()
+            AuthService._currentUserRef = null
+            AuthService.CurrentUser = null
+            AuthService.isConnected = false
+            AuthService._notifierAuth()
         }
-        $rootScope.$broadcast('onAuth', {
-            data: authData
-        })
     })
+
+    AuthService._notifierAuth = function() {
+      $rootScope.$broadcast('onAuth')
+    }
+
     return AuthService
 }
 
-},{}],13:[function(require,module,exports){
-// app/services/CurrentUser.js
-
-/**
- * CurrentUser model: represents the user of the session
- **/
-
-angular.module('webapp').factory('CurrentUser', CurrentUser);
-
-function CurrentUser() {
-    var CurrentUser = {
-      exist: false,
-      email: null
-    }
-
-    CurrentUser.add = function(email) {
-      CurrentUser.email = email
-      CurrentUser.exist = true
-      
-    }
-
-    CurrentUser.remove = function() {
-      CurrentUser.email = null
-      CurrentUser.exist = false
-    }
-
-    return CurrentUser
-}
-
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 // app/services/NotificationsService.js
 
 /**
@@ -310,7 +353,7 @@ function NotificationsService ($mdToast) {
   return NotificationsService;
 }
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 // app/services/index.js
 
 /**
@@ -318,10 +361,9 @@ function NotificationsService ($mdToast) {
 **/
 
 require('./AuthService.js')
-require('./CurrentUser.js')
 require('./NotificationsService.js')
 
-},{"./AuthService.js":12,"./CurrentUser.js":13,"./NotificationsService.js":14}],16:[function(require,module,exports){
+},{"./AuthService.js":14,"./NotificationsService.js":15}],17:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.3
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -4438,11 +4480,11 @@ angular.module('ngAnimate', [])
 
 })(window, window.angular);
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 require('./angular-animate');
 module.exports = 'ngAnimate';
 
-},{"./angular-animate":16}],18:[function(require,module,exports){
+},{"./angular-animate":17}],19:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.3
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -4842,11 +4884,11 @@ ngAriaModule.directive('ngShow', ['$aria', function($aria) {
 
 })(window, window.angular);
 
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 require('./angular-aria');
 module.exports = 'ngAria';
 
-},{"./angular-aria":18}],20:[function(require,module,exports){
+},{"./angular-aria":19}],21:[function(require,module,exports){
 /*!
  * Angular Material Design
  * https://github.com/angular/material
@@ -29708,7 +29750,7 @@ angular.module("material.core").constant("$MD_THEME_CSS", "md-autocomplete.md-TH
 
 
 })(window, window.angular);;window.ngMaterial={version:{full: "1.0.7"}};
-},{}],21:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 // Should already be required, here for clarity
 require('angular');
 
@@ -29722,7 +29764,7 @@ require('./angular-material');
 // Export namespace
 module.exports = 'ngMaterial';
 
-},{"./angular-material":20,"angular":27,"angular-animate":17,"angular-aria":19}],22:[function(require,module,exports){
+},{"./angular-material":21,"angular":28,"angular-animate":18,"angular-aria":20}],23:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.3
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -30446,11 +30488,11 @@ function ngMessageDirectiveFactory() {
 
 })(window, window.angular);
 
-},{}],23:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 require('./angular-messages');
 module.exports = 'ngMessages';
 
-},{"./angular-messages":22}],24:[function(require,module,exports){
+},{"./angular-messages":23}],25:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.3
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -31474,11 +31516,11 @@ function ngViewFillContentFactory($compile, $controller, $route) {
 
 })(window, window.angular);
 
-},{}],25:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 require('./angular-route');
 module.exports = 'ngRoute';
 
-},{"./angular-route":24}],26:[function(require,module,exports){
+},{"./angular-route":25}],27:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.3
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -62193,11 +62235,11 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],27:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":26}],28:[function(require,module,exports){
+},{"./angular":27}],29:[function(require,module,exports){
 /*!
  * AngularFire is the officially supported AngularJS binding for Firebase. Firebase
  * is a full backend so you don't need servers to build your Angular app. AngularFire
@@ -64537,11 +64579,11 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
     }
 })();
 
-},{}],29:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 require('./dist/angularfire');
 module.exports = 'firebase';
 
-},{"./dist/angularfire":28}],30:[function(require,module,exports){
+},{"./dist/angularfire":29}],31:[function(require,module,exports){
 /*! @license Firebase v2.4.2
     License: https://www.firebase.com/terms/terms-of-service.html */
 (function() {var h,n=this;function p(a){return void 0!==a}function aa(){}function ba(a){a.yb=function(){return a.zf?a.zf:a.zf=new a}}

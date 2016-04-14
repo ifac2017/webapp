@@ -6,9 +6,9 @@
 
 angular.module('webapp').controller('SidebarCtrl', SidebarCtrl);
 
-function SidebarCtrl(CurrentUser, AuthService, $location, $scope) {
+function SidebarCtrl(AuthService, $location, $scope) {
   var vm = this;
-  vm.isLogged = CurrentUser.exist
+  vm.isLogged = AuthService.isConnected
 
   vm.login = function() {
     $location.path('/login')
@@ -20,6 +20,6 @@ function SidebarCtrl(CurrentUser, AuthService, $location, $scope) {
   }
 
   $scope.$on('onAuth', function (event, args) {
-    vm.isLogged = CurrentUser.exist
+    vm.isLogged = AuthService.isConnected
   })
 }

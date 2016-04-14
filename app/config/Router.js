@@ -18,6 +18,16 @@ function Router($routeProvider) {
                 }]
             }
         })
+        .when('/profile', {
+            templateUrl: 'views/profile.html',
+            controller: 'ProfileCtrl',
+            controllerAs: 'profileCtrl',
+            resolve: {
+                "currentAuth": ["AuthService", function(AuthService) {
+                    return AuthService.requireAuth()
+                }]
+            }
+        })
         .when('/login', {
             templateUrl: 'views/login.html',
             controller: 'LoginCtrl',
