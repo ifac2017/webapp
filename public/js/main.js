@@ -122,7 +122,7 @@ function LoginCtrl(AuthService, NotificationsService, $location) {
   }
 
   vm.login = function() {
-    AuthService.login(vm.user.email, vm.user.password, function(error, res) {
+    AuthService.login(vm.user.email, vm.user.password, function(error) {
       if (error) {
         NotificationsService.error("Error during logging. Please verify your password.");
       } else {
@@ -132,7 +132,7 @@ function LoginCtrl(AuthService, NotificationsService, $location) {
   }
 
   vm.signup = function() {
-    AuthService.signup(vm.user.email, vm.user.password, function(error, res) {
+    AuthService.signup(vm.user.email, vm.user.password, function(error) {
       if (error) {
         NotificationsService.error("Error during signing up. Please try again.");
       } else {
@@ -259,6 +259,7 @@ angular.module('webapp').factory('AuthService', AuthService);
 
 function AuthService($firebaseAuth, $firebaseObject, $rootScope) {
     var AuthService = {}
+
     AuthService._ref = new Firebase("https://planner31.firebaseio.com/")
     AuthService._auth = $firebaseAuth(AuthService._ref)
     AuthService._currentUserRef = null
@@ -273,10 +274,17 @@ function AuthService($firebaseAuth, $firebaseObject, $rootScope) {
         AuthService._auth.$createUser({
             email: email,
             password: password
-        }).then(function(userData) {
-            then(null, userData)
+        }).then(function(authData) {
+            AuthService._currentUserRef = AuthService._ref.child("users").child(authData.uid)
+            AuthService._currentUserRef.on("value", function(snapshot) {
+                AuthService._currentUserRef.set({
+                    email: email,
+                    role: "user"
+                });
+                then()
+            })
         }).catch(function(error) {
-            then(error, null)
+            then(error)
         })
     }
 
@@ -284,10 +292,11 @@ function AuthService($firebaseAuth, $firebaseObject, $rootScope) {
         AuthService._auth.$authWithPassword({
             email: email,
             password: password
-        }).then(function(userData) {
-            then(null, userData)
+        }).then(function(authData) {
+            AuthService._processAuth(authData)
+            then()
         }).catch(function(error) {
-            then(error, null)
+            then(error)
         })
     }
 
@@ -295,28 +304,26 @@ function AuthService($firebaseAuth, $firebaseObject, $rootScope) {
         AuthService._auth.$unauth()
     }
 
+    AuthService._processAuth = function(authData) {
+        AuthService._currentUserRef = AuthService._ref.child("users").child(authData.uid)
+        AuthService.currentUser = $firebaseObject(AuthService._currentUserRef)
+        AuthService.currentUser.$loaded().then(function() {
+            AuthService.isConnected = true
+            AuthService._notifierAuth()
+        })
+    }
+    AuthService._resetAuth = function() {
+      AuthService._currentUserRef = null
+      AuthService.CurrentUser = null
+      AuthService.isConnected = false
+      AuthService._notifierAuth()
+    }
+
     AuthService._auth.$onAuth(function(authData) {
         if (authData) {
-            AuthService._currentUserRef = AuthService._ref.child("users").child(authData.uid)
-            AuthService._currentUserRef.on("value", function(snapshot) {
-                if (!snapshot.val()) {
-                    AuthService._currentUserRef.set({
-                        provider: authData.provider,
-                        email: authData.password.email
-                    });
-                }
-                AuthService.currentUser = $firebaseObject(AuthService._currentUserRef)
-                AuthService.currentUser.$loaded().then(function() {
-                    AuthService.isConnected = true
-                    AuthService._notifierAuth()
-                })
-
-            })
+            AuthService._processAuth(authData)
         } else {
-            AuthService._currentUserRef = null
-            AuthService.CurrentUser = null
-            AuthService.isConnected = false
-            AuthService._notifierAuth()
+            AuthService._resetAuth()
         }
     })
 
