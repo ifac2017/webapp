@@ -1,11 +1,10 @@
-// app/controllers/AdminCtrl.js
+angular.module('webapp').controller('AdminCtrl', AdminCtrl)
 
 /**
-  * Sidebar controller: in charge of the sidebar responsivness
-**/
-
-angular.module('webapp').controller('AdminCtrl', AdminCtrl);
-
+ * @ngdoc controller
+ * @name webapp.controller:AdminCtrl
+ * @description In charge of the admin view.
+ */
 function AdminCtrl() {
-  var vm = this;
+    var vm = this
 }

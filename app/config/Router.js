@@ -1,11 +1,11 @@
-// app/controllers/Router.js
+angular.module('webapp').config(Router)
 
 /**
- * Router of the app
- **/
-
-angular.module('webapp').config(Router);
-
+ * @ngdoc object
+ * @name webapp.config:Router
+ * @description
+ * To do...
+ */
 function Router($routeProvider) {
     $routeProvider
         .when('/', {

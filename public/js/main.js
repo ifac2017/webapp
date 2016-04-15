@@ -5,6 +5,7 @@
   * Require all the app dependencies
   * Create the main module of the app
 **/
+
 require('angular-material')
 require('angularfire')
 require('firebase')
@@ -20,14 +21,14 @@ require('./filters')
 require('./controllers')
 
 },{"./config":4,"./controllers":11,"./filters":12,"./run":14,"./services":17,"angular-material":23,"angular-messages":25,"angular-route":27,"angularfire":31,"firebase":32}],2:[function(require,module,exports){
-// app/controllers/Router.js
+angular.module('webapp').config(Router)
 
 /**
- * Router of the app
- **/
-
-angular.module('webapp').config(Router);
-
+ * @ngdoc object
+ * @name webapp.config:Router
+ * @description
+ * To do...
+ */
 function Router($routeProvider) {
     $routeProvider
         .when('/', {
@@ -66,19 +67,19 @@ function Router($routeProvider) {
 }
 
 },{}],3:[function(require,module,exports){
-// app/controllers/Theme.js
+angular.module('webapp').config(Theme)
 
 /**
- * Config app theme
- **/
-
-angular.module('webapp').config(Theme);
-
+ * @ngdoc object
+ * @name webapp.config:Theme
+ * @description
+ * To do...
+ */
 function Theme($mdThemingProvider) {
     $mdThemingProvider.theme('default')
         .primaryPalette('blue-grey')
         .accentPalette('blue')
-        .warnPalette('red');
+        .warnPalette('red')
 
     $mdThemingProvider.theme("error-toast")
     $mdThemingProvider.theme("success-toast")
@@ -97,132 +98,213 @@ require('./Theme.js')
 require('./Router.js')
 
 },{"./Router.js":2,"./Theme.js":3}],5:[function(require,module,exports){
-// app/controllers/AdminCtrl.js
+angular.module('webapp').controller('AdminCtrl', AdminCtrl)
 
 /**
-  * Sidebar controller: in charge of the sidebar responsivness
-**/
-
-angular.module('webapp').controller('AdminCtrl', AdminCtrl);
-
+ * @ngdoc controller
+ * @name webapp.controller:AdminCtrl
+ * @description In charge of the admin view.
+ */
 function AdminCtrl() {
-  var vm = this;
+    var vm = this
 }
 
 },{}],6:[function(require,module,exports){
-// app/controllers/LoginCtrl.js
+angular.module('webapp').controller('LoginCtrl', LoginCtrl)
 
 /**
-  * Login controller of the app
-**/
-
-angular.module('webapp').controller('LoginCtrl', LoginCtrl);
-
+ * @ngdoc controller
+ * @name webapp.controller:LoginCtrl
+ * @description In charge of the login view.
+ */
 function LoginCtrl(AuthService, NotificationsService, $location) {
-  var vm = this;
+    var vm = this
 
-  vm.user = {
-    email: "",
-    password: ""
-  }
+    /**
+     * @ngdoc property
+     * @name user
+     * @propertyOf webapp.controller:LoginCtrl
+     * @description The user model for the login form
+     */
+    vm.user = {
+        email: "",
+        password: ""
+    }
 
-  vm.login = function() {
-    AuthService.login(vm.user.email, vm.user.password, function(error) {
-      if (error) {
-        NotificationsService.error("Error during logging. Please verify your password.");
-      } else {
-        $location.path('/')
-      }
-    })
-  }
+    /**
+     * @ngdoc method
+     * @name login
+     * @methodOf webapp.controller:LoginCtrl
+     * @description Send the login request with the corresponding data to the AuthService.
+     * @example
+      ```javascript
+      loginCtrl.login()
+      ```
+     */
+    vm.login = function() {
+        AuthService.login(vm.user.email, vm.user.password, function(error) {
+            if (error) {
+                NotificationsService.error("Error during logging. Please verify your password.")
+            } else {
+                $location.path('/')
+            }
+        })
+    }
 
-  vm.signup = function() {
-    AuthService.signup(vm.user.email, vm.user.password, function(error) {
-      if (error) {
-        NotificationsService.error("Error during signing up. Please try again.");
-      } else {
-        vm.login(vm.user.email, vm.user.password)
-      }
-    })
-  }
+    /**
+     * @ngdoc method
+     * @name signup
+     * @methodOf webapp.controller:LoginCtrl
+     * @description Send the signup request with the corresponding data to the AuthService.
+     * @example
+      ```javascript
+      loginCtrl.signup()
+      ```
+     */
+    vm.signup = function() {
+        AuthService.signup(vm.user.email, vm.user.password, function(error) {
+            if (error) {
+                NotificationsService.error("Error during signing up. Please try again.")
+            } else {
+                vm.login(vm.user.email, vm.user.password)
+            }
+        })
+    }
 }
 
 },{}],7:[function(require,module,exports){
-// app/controllers/PlannerCtrl.js
-
-/**
- * Planner controller: in charge of the planner smartness
- **/
-
 angular.module('webapp').controller('PlannerCtrl', PlannerCtrl)
 
+/**
+ * @ngdoc controller
+ * @name webapp.controller:PlannerCtrl
+ * @description In charge of the planner view.
+ */
 function PlannerCtrl() {
     var vm = this
 }
 
 },{}],8:[function(require,module,exports){
-// app/controllers/ProfileCtrl.js
+angular.module('webapp').controller('ProfileCtrl', ProfileCtrl)
 
 /**
-  * Profile controller: ahndle profile updates on the go
-**/
-
-angular.module('webapp').controller('ProfileCtrl', ProfileCtrl);
-
+ * @ngdoc controller
+ * @name webapp.controller:ProfileCtrl
+ * @description In charge of the profile view.
+ */
 function ProfileCtrl(AuthService, $scope, $rootScope) {
-  var vm = this;
+    var vm = this
 }
 
 },{}],9:[function(require,module,exports){
-// app/controllers/SidebarCtrl.js
+angular.module('webapp').controller('SidebarCtrl', SidebarCtrl)
 
 /**
- * Sidebar controller: in charge of the sidebar responsivness
- **/
-
-angular.module('webapp').controller('SidebarCtrl', SidebarCtrl);
-
+ * @ngdoc controller
+ * @name webapp.controller:SidebarCtrl
+ * @description In charge of the sidebar view.
+ */
 function SidebarCtrl(AuthService, $location, $scope) {
-    var vm = this;
+    var vm = this
+        /**
+         * @ngdoc property
+         * @name isLogged
+         * @propertyOf webapp.controller:SidebarCtrl
+         * @description True if the user is logged False otherwise.
+         */
     vm.isLogged = AuthService.isConnected
 
+    /**
+     * @ngdoc method
+     * @name login
+     * @methodOf webapp.controller:SidebarCtrl
+     * @description Redirect to the login page.
+     * @example
+      ```javascript
+      sidebarCtrl.login()
+      ```
+     */
     vm.login = function() {
         $location.path('/login')
     }
 
+    /**
+     * @ngdoc method
+     * @name logout
+     * @methodOf webapp.controller:SidebarCtrl
+     * @description Send the logout request to the AuthService.
+     * @example
+      ```javascript
+      sidebarCtrl.logout()
+      ```
+     */
     vm.logout = function() {
         AuthService.logout()
         $location.path('/')
     }
 
+    /**
+     * @ngdoc method
+     * @name openAdmin
+     * @methodOf webapp.controller:SidebarCtrl
+     * @description Redirect to the admin page.
+     * @example
+      ```javascript
+      sidebarCtrl.openAdmin()
+      ```
+     */
     vm.openAdmin = function() {
-        $location.path('/admin')
-    }
-
+            $location.path('/admin')
+        }
+        /**
+         * @ngdoc method
+         * @name $on
+         * @methodOf webapp.controller:SidebarCtrl
+         * @description Listen for the onAuth event sent by the AuthService in order to update the isLogged property.
+         */
     $scope.$on('onAuth', function(event, args) {
         vm.isLogged = AuthService.isConnected
     })
 }
 
 },{}],10:[function(require,module,exports){
-// app/controllers/TopbarCtrl.js
+angular.module('webapp').controller('TopbarCtrl', TopbarCtrl)
 
 /**
-  * Sidebar controller: in charge of the sidebar responsivness
-**/
-
-angular.module('webapp').controller('TopbarCtrl', TopbarCtrl);
-
+ * @ngdoc controller
+ * @name webapp.controller:TopbarCtrl
+ * @description In charge of the topbar view.
+ */
 function TopbarCtrl($location) {
-  var vm = this;
+    var vm = this
 
-  vm.openProfile = function() {
-    $location.path('/profile')
-  }
+    /**
+     * @ngdoc method
+     * @name openProfile
+     * @methodOf webapp.controller:TopbarCtrl
+     * @description Redirect to the profile page.
+     * @example
+      ```javascript
+      topbarCtrl.openProfile()
+      ```
+     */
+    vm.openProfile = function() {
+        $location.path('/profile')
+    }
 
-  vm.goHome = function() {
-    $location.path('/')
-  }
+    /**
+     * @ngdoc method
+     * @name goHome
+     * @methodOf webapp.controller:TopbarCtrl
+     * @description Redirect to the home page.
+     * @example
+      ```javascript
+      topbarCtrl.goHome()
+      ```
+     */
+    vm.goHome = function() {
+        $location.path('/')
+    }
 }
 
 },{}],11:[function(require,module,exports){
@@ -232,30 +314,38 @@ function TopbarCtrl($location) {
   * Require all controllers
 **/
 
-require('./SidebarCtrl.js');
-require('./AdminCtrl.js');
-require('./LoginCtrl.js');
-require('./TopbarCtrl.js');
-require('./ProfileCtrl.js');
-require('./PlannerCtrl.js');
+require('./SidebarCtrl.js')
+require('./AdminCtrl.js')
+require('./LoginCtrl.js')
+require('./TopbarCtrl.js')
+require('./ProfileCtrl.js')
+require('./PlannerCtrl.js')
 
 },{"./AdminCtrl.js":5,"./LoginCtrl.js":6,"./PlannerCtrl.js":7,"./ProfileCtrl.js":8,"./SidebarCtrl.js":9,"./TopbarCtrl.js":10}],12:[function(require,module,exports){
 
 },{}],13:[function(require,module,exports){
-// app/run/Resolver.js
+angular.module('webapp').run(Resolver)
 
 /**
- * Resolver for routing
- **/
- angular.module('webapp').run(Resolver);
+ * @ngdoc object
+ * @name webapp.run:Resolver
+ * @description
+ * Handle routing event
+ */
+function Resolver($rootScope, $location) {
 
- function Resolver($rootScope, $location) {
-     $rootScope.$on("$routeChangeError", function(event, next, previous, error) {
-         if (error === "AUTH_REQUIRED") {
-             $location.path("/login");
-         }
-     })
- }
+    /**
+     * @ngdoc method
+     * @name $on
+     * @methodOf webapp.run:Resolver
+     * @description Listen for the $routeChangeError event sent by the Router when required an authentificated state on a route in order to redirect to the login page if the user is not logged in the app.
+     */
+    $rootScope.$on("$routeChangeError", function(event, next, previous, error) {
+        if (error === "AUTH_REQUIRED") {
+            $location.path("/login")
+        }
+    })
+}
 
 },{}],14:[function(require,module,exports){
 // app/run/index.js
@@ -267,38 +357,93 @@ require('./PlannerCtrl.js');
 require('./Resolver.js')
 
 },{"./Resolver.js":13}],15:[function(require,module,exports){
-// app/services/AuthService.js
+angular.module('webapp').factory('AuthService', AuthService)
 
 /**
- * Authentification service: in charge of the auth with Firebase
- **/
-
-angular.module('webapp').factory('AuthService', AuthService);
-
+ * @ngdoc service
+ * @name webapp.service:AuthService
+ * @description In charge of the authentification with Firebase.
+ */
 function AuthService($firebaseAuth, $firebaseObject, $rootScope) {
     var AuthService = {}
 
+    /**
+     * @ngdoc property
+     * @name _ref
+     * @propertyOf webapp.service:AuthService
+     * @description Reference to the Firebase database
+     */
     AuthService._ref = new Firebase("https://planner31.firebaseio.com/")
+
+    /**
+     * @ngdoc property
+     * @name _auth
+     * @propertyOf webapp.service:AuthService
+     * @description Authentification manager of the app
+     */
     AuthService._auth = $firebaseAuth(AuthService._ref)
-    AuthService._currentUserRef = null
+
+    /**
+     * @ngdoc property
+     * @name currentUser
+     * @propertyOf webapp.service:AuthService
+     * @description Current logged user
+     */
     AuthService.currentUser = null
+
+    /**
+     * @ngdoc property
+     * @name isConnected
+     * @propertyOf webapp.service:AuthService
+     * @description True if the user is logged False otherwise.
+     */
     AuthService.isConnected = false
 
+    /**
+     * @ngdoc method
+     * @name requireAuth
+     * @methodOf webapp.service:AuthService
+     * @description Returns a promise with the current authentication state if the user is authentificated but otherwise rejects the promise.
+     * @returns {Promise} requireAuth
+     * @example
+      ```javascript
+      AuthService.requireAuth()
+      ```
+      */
     AuthService.requireAuth = function() {
         return AuthService._auth.$requireAuth()
     }
 
+    /**
+     * @ngdoc method
+     * @name signup
+     * @methodOf webapp.service:AuthService
+     * @description Signup the user to Firebase
+     * @param {String} email - The user's email
+     * @param {String} password - The user's password
+     * @param {Callback} then(error) - The signup callback : if no error occurred then error is null.
+     * @example
+      ```javascript
+      AuthService.signup(email, password, function(error) {
+        if (error) {
+          // error...
+        } else {
+          // success...
+        }
+      })
+      ```
+      */
     AuthService.signup = function(email, password, then) {
         AuthService._auth.$createUser({
             email: email,
             password: password
         }).then(function(authData) {
-            AuthService._currentUserRef = AuthService._ref.child("users").child(authData.uid)
-            AuthService._currentUserRef.on("value", function(snapshot) {
-                AuthService._currentUserRef.set({
+            var ref = AuthService._ref.child("users").child(authData.uid)
+            ref.on("value", function(snapshot) {
+                ref.set({
                     email: email,
                     role: "user"
-                });
+                })
                 then()
             })
         }).catch(function(error) {
@@ -306,6 +451,25 @@ function AuthService($firebaseAuth, $firebaseObject, $rootScope) {
         })
     }
 
+    /**
+     * @ngdoc method
+     * @name login
+     * @methodOf webapp.service:AuthService
+     * @description Login the user to Firebase
+     * @param {String} email - The user's email
+     * @param {String} password - The user's password
+     * @param {Callback} then(error) - The login callback : if no error occurred then error is null.
+     * @example
+      ```javascript
+      AuthService.login(email, password, function(error) {
+        if (error) {
+          // error...
+        } else {
+          // success...
+        }
+      })
+      ```
+     */
     AuthService.login = function(email, password, then) {
         AuthService._auth.$authWithPassword({
             email: email,
@@ -317,26 +481,56 @@ function AuthService($firebaseAuth, $firebaseObject, $rootScope) {
         })
     }
 
+    /**
+     * @ngdoc method
+     * @name logout
+     * @methodOf webapp.service:AuthService
+     * @description Logout the user from Firebase.
+     * @example
+      ```javascript
+      AuthService.logout()
+      ```
+     */
     AuthService.logout = function() {
         AuthService._auth.$unauth()
     }
 
+    /**
+     * @ngdoc method
+     * @name _processAuth
+     * @methodOf webapp.service:AuthService
+     * @description Processing the user authentication by binding the currentUser to the root scope.
+     * @param {Object} authData - The user's data
+     */
     AuthService._processAuth = function(authData) {
-        AuthService._currentUserRef = AuthService._ref.child("users").child(authData.uid)
-        AuthService.currentUser = $firebaseObject(AuthService._currentUserRef)
+        var ref = AuthService._ref.child("users").child(authData.uid)
+        AuthService.currentUser = $firebaseObject(ref)
         AuthService.currentUser.$loaded().then(function() {
             AuthService.isConnected = true
             AuthService.currentUser.$bindTo($rootScope, "CurrentUser")
             AuthService._notifierAuth()
         })
     }
+
+    /**
+     * @ngdoc method
+     * @name _resetAuth
+     * @methodOf webapp.service:AuthService
+     * @description Reset the user authentication state.
+     */
     AuthService._resetAuth = function() {
-      AuthService._currentUserRef = null
-      AuthService.CurrentUser = null
-      AuthService.isConnected = false
-      AuthService._notifierAuth()
+        AuthService.CurrentUser = null
+        AuthService.isConnected = false
+        AuthService._notifierAuth()
     }
 
+    /**
+     * @ngdoc method
+     * @name $onAuth
+     * @methodOf webapp.service:AuthService
+     * @description Firebase event triggered on authentication state update. If authData is null then the user is disconnected.
+     * @param {Object} authData - The user's data
+     */
     AuthService._auth.$onAuth(function(authData) {
         if (authData) {
             AuthService._processAuth(authData)
@@ -345,6 +539,13 @@ function AuthService($firebaseAuth, $firebaseObject, $rootScope) {
         }
     })
 
+    /**
+     * @ngdoc event
+     * @name _notifierAuth
+     * @eventOf webapp.service:AuthService
+     * @eventType broadcast
+     * @description Notify the root scope of an authentication state update by broadcasting the onAuth event.
+     */
     AuthService._notifierAuth = function() {
         $rootScope.$broadcast('onAuth')
     }
@@ -353,34 +554,77 @@ function AuthService($firebaseAuth, $firebaseObject, $rootScope) {
 }
 
 },{}],16:[function(require,module,exports){
-// app/services/NotificationsService.js
+angular.module('webapp').factory('NotificationsService', NotificationsService)
 
 /**
-  * Notifications service: in charge of the showing notifications
-**/
+ * @ngdoc service
+ * @name webapp.service:NotificationsService
+ * @description In charge of showing notifications.
+ */
+function NotificationsService($mdToast) {
+    var NotificationsService = {}
 
-angular.module('webapp').factory('NotificationsService', NotificationsService);
+    /**
+     * @ngdoc method
+     * @name error
+     * @methodOf webapp.service:NotificationsService
+     * @description Show an error notification with a message.
+     * @param {String} message - The message
+     * @example
+      ```javascript
+      NotificationsService.error("Please verify your password...")
+      ```
+     */
+    NotificationsService.error = function(message) {
+        $mdToast.show($mdToast.simple().textContent(message).theme('error-toast'))
+    }
 
-function NotificationsService ($mdToast) {
-  var NotificationsService = {}
+    /**
+     * @ngdoc method
+     * @name success
+     * @methodOf webapp.service:NotificationsService
+     * @description Show a success notification with a message.
+     * @param {String} message - The message
+     * @example
+      ```javascript
+      NotificationsService.success("You got it !")
+      ```
+     */
+    NotificationsService.success = function(message) {
+        $mdToast.show($mdToast.simple().textContent(message).theme('success-toast'))
+    }
 
-  NotificationsService.error = function(message) {
-    $mdToast.show($mdToast.simple().textContent(message).theme('error-toast'));
-  }
+    /**
+     * @ngdoc method
+     * @name info
+     * @methodOf webapp.service:NotificationsService
+     * @description Show an info notification with a message.
+     * @param {String} message - The message
+     * @example
+      ```javascript
+      NotificationsService.info("5 new messages in your mailbox.")
+      ```
+     */
+    NotificationsService.info = function(message) {
+        $mdToast.show($mdToast.simple().textContent(message).theme('info-toast'))
+    }
 
-  NotificationsService.success = function(message) {
-    $mdToast.show($mdToast.simple().textContent(message).theme('success-toast'));
-  }
+    /**
+     * @ngdoc method
+     * @name warn
+     * @methodOf webapp.service:NotificationsService
+     * @description Show a warning notification with a message.
+     * @param {String} message - The message
+     * @example
+      ```javascript
+      NotificationsService.warn("This service is currently in Beta.")
+      ```
+     */
+    NotificationsService.warn = function(message) {
+        $mdToast.show($mdToast.simple().textContent(message).theme('warn-toast'))
+    }
 
-  NotificationsService.info = function(message) {
-    $mdToast.show($mdToast.simple().textContent(message).theme('info-toast'));
-  }
-
-  NotificationsService.warn = function(message) {
-    $mdToast.show($mdToast.simple().textContent(message).theme('warn-toast'));
-  }
-
-  return NotificationsService;
+    return NotificationsService
 }
 
 },{}],17:[function(require,module,exports){

@@ -1,19 +1,38 @@
-// app/controllers/TopbarCtrl.js
+angular.module('webapp').controller('TopbarCtrl', TopbarCtrl)
 
 /**
-  * Sidebar controller: in charge of the sidebar responsivness
-**/
-
-angular.module('webapp').controller('TopbarCtrl', TopbarCtrl);
-
+ * @ngdoc controller
+ * @name webapp.controller:TopbarCtrl
+ * @description In charge of the topbar view.
+ */
 function TopbarCtrl($location) {
-  var vm = this;
+    var vm = this
 
-  vm.openProfile = function() {
-    $location.path('/profile')
-  }
+    /**
+     * @ngdoc method
+     * @name openProfile
+     * @methodOf webapp.controller:TopbarCtrl
+     * @description Redirect to the profile page.
+     * @example
+      ```javascript
+      topbarCtrl.openProfile()
+      ```
+     */
+    vm.openProfile = function() {
+        $location.path('/profile')
+    }
 
-  vm.goHome = function() {
-    $location.path('/')
-  }
+    /**
+     * @ngdoc method
+     * @name goHome
+     * @methodOf webapp.controller:TopbarCtrl
+     * @description Redirect to the home page.
+     * @example
+      ```javascript
+      topbarCtrl.goHome()
+      ```
+     */
+    vm.goHome = function() {
+        $location.path('/')
+    }
 }

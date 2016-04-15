@@ -1,16 +1,16 @@
-// app/controllers/Theme.js
+angular.module('webapp').config(Theme)
 
 /**
- * Config app theme
- **/
-
-angular.module('webapp').config(Theme);
-
+ * @ngdoc object
+ * @name webapp.config:Theme
+ * @description
+ * To do...
+ */
 function Theme($mdThemingProvider) {
     $mdThemingProvider.theme('default')
         .primaryPalette('blue-grey')
         .accentPalette('blue')
-        .warnPalette('red');
+        .warnPalette('red')
 
     $mdThemingProvider.theme("error-toast")
     $mdThemingProvider.theme("success-toast")
