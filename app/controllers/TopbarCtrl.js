@@ -12,4 +12,8 @@ function TopbarCtrl($location) {
   vm.openProfile = function() {
     $location.path('/profile')
   }
+
+  vm.goHome = function() {
+    $location.path('/')
+  }
 }

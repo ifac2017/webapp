@@ -8,6 +8,11 @@ angular.module('webapp').config(Router);
 
 function Router($routeProvider) {
     $routeProvider
+        .when('/', {
+            templateUrl: 'views/planner.html',
+            controller: 'PlannerCtrl',
+            controllerAs: 'plannerCtrl'
+        })
         .when('/admin', {
             templateUrl: 'views/admin/home.html',
             controller: 'AdminCtrl',
@@ -34,6 +39,6 @@ function Router($routeProvider) {
             controllerAs: 'loginCtrl'
         })
         .otherwise({
-            redirectTo: '/admin'
+            redirectTo: '/'
         })
 }

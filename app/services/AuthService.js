@@ -42,7 +42,6 @@ function AuthService($firebaseAuth, $firebaseObject, $rootScope) {
             email: email,
             password: password
         }).then(function(authData) {
-            AuthService._processAuth(authData)
             then()
         }).catch(function(error) {
             then(error)
@@ -58,6 +57,7 @@ function AuthService($firebaseAuth, $firebaseObject, $rootScope) {
         AuthService.currentUser = $firebaseObject(AuthService._currentUserRef)
         AuthService.currentUser.$loaded().then(function() {
             AuthService.isConnected = true
+            AuthService.currentUser.$bindTo($rootScope, "CurrentUser")
             AuthService._notifierAuth()
         })
     }

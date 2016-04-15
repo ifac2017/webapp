@@ -19,7 +19,7 @@ require('./services')
 require('./filters')
 require('./controllers')
 
-},{"./config":4,"./controllers":10,"./filters":11,"./run":13,"./services":16,"angular-material":22,"angular-messages":24,"angular-route":26,"angularfire":30,"firebase":31}],2:[function(require,module,exports){
+},{"./config":4,"./controllers":11,"./filters":12,"./run":14,"./services":17,"angular-material":23,"angular-messages":25,"angular-route":27,"angularfire":31,"firebase":32}],2:[function(require,module,exports){
 // app/controllers/Router.js
 
 /**
@@ -30,6 +30,11 @@ angular.module('webapp').config(Router);
 
 function Router($routeProvider) {
     $routeProvider
+        .when('/', {
+            templateUrl: 'views/planner.html',
+            controller: 'PlannerCtrl',
+            controllerAs: 'plannerCtrl'
+        })
         .when('/admin', {
             templateUrl: 'views/admin/home.html',
             controller: 'AdminCtrl',
@@ -56,7 +61,7 @@ function Router($routeProvider) {
             controllerAs: 'loginCtrl'
         })
         .otherwise({
-            redirectTo: '/admin'
+            redirectTo: '/'
         })
 }
 
@@ -143,6 +148,19 @@ function LoginCtrl(AuthService, NotificationsService, $location) {
 }
 
 },{}],7:[function(require,module,exports){
+// app/controllers/PlannerCtrl.js
+
+/**
+ * Planner controller: in charge of the planner smartness
+ **/
+
+angular.module('webapp').controller('PlannerCtrl', PlannerCtrl)
+
+function PlannerCtrl() {
+    var vm = this
+}
+
+},{}],8:[function(require,module,exports){
 // app/controllers/ProfileCtrl.js
 
 /**
@@ -153,45 +171,40 @@ angular.module('webapp').controller('ProfileCtrl', ProfileCtrl);
 
 function ProfileCtrl(AuthService, $scope, $rootScope) {
   var vm = this;
-
-  if (AuthService.isConnected) {
-    AuthService.currentUser.$bindTo($scope, "profile")
-  }
-
-  $rootScope.$on('onAuth', function (event, args) {
-    AuthService.currentUser.$bindTo($scope, "profile")
-  })
-
 }
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 // app/controllers/SidebarCtrl.js
 
 /**
-  * Sidebar controller: in charge of the sidebar responsivness
-**/
+ * Sidebar controller: in charge of the sidebar responsivness
+ **/
 
 angular.module('webapp').controller('SidebarCtrl', SidebarCtrl);
 
 function SidebarCtrl(AuthService, $location, $scope) {
-  var vm = this;
-  vm.isLogged = AuthService.isConnected
-
-  vm.login = function() {
-    $location.path('/login')
-  }
-
-  vm.logout = function() {
-    AuthService.logout()
-    $location.path('/')
-  }
-
-  $scope.$on('onAuth', function (event, args) {
+    var vm = this;
     vm.isLogged = AuthService.isConnected
-  })
+
+    vm.login = function() {
+        $location.path('/login')
+    }
+
+    vm.logout = function() {
+        AuthService.logout()
+        $location.path('/')
+    }
+
+    vm.openAdmin = function() {
+        $location.path('/admin')
+    }
+
+    $scope.$on('onAuth', function(event, args) {
+        vm.isLogged = AuthService.isConnected
+    })
 }
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 // app/controllers/TopbarCtrl.js
 
 /**
@@ -206,9 +219,13 @@ function TopbarCtrl($location) {
   vm.openProfile = function() {
     $location.path('/profile')
   }
+
+  vm.goHome = function() {
+    $location.path('/')
+  }
 }
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 // app/controllers/index.js
 
 /**
@@ -220,10 +237,11 @@ require('./AdminCtrl.js');
 require('./LoginCtrl.js');
 require('./TopbarCtrl.js');
 require('./ProfileCtrl.js');
+require('./PlannerCtrl.js');
 
-},{"./AdminCtrl.js":5,"./LoginCtrl.js":6,"./ProfileCtrl.js":7,"./SidebarCtrl.js":8,"./TopbarCtrl.js":9}],11:[function(require,module,exports){
+},{"./AdminCtrl.js":5,"./LoginCtrl.js":6,"./PlannerCtrl.js":7,"./ProfileCtrl.js":8,"./SidebarCtrl.js":9,"./TopbarCtrl.js":10}],12:[function(require,module,exports){
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 // app/run/Resolver.js
 
 /**
@@ -239,7 +257,7 @@ require('./ProfileCtrl.js');
      })
  }
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 // app/run/index.js
 
 /**
@@ -248,7 +266,7 @@ require('./ProfileCtrl.js');
 
 require('./Resolver.js')
 
-},{"./Resolver.js":12}],14:[function(require,module,exports){
+},{"./Resolver.js":13}],15:[function(require,module,exports){
 // app/services/AuthService.js
 
 /**
@@ -293,7 +311,6 @@ function AuthService($firebaseAuth, $firebaseObject, $rootScope) {
             email: email,
             password: password
         }).then(function(authData) {
-            AuthService._processAuth(authData)
             then()
         }).catch(function(error) {
             then(error)
@@ -309,6 +326,7 @@ function AuthService($firebaseAuth, $firebaseObject, $rootScope) {
         AuthService.currentUser = $firebaseObject(AuthService._currentUserRef)
         AuthService.currentUser.$loaded().then(function() {
             AuthService.isConnected = true
+            AuthService.currentUser.$bindTo($rootScope, "CurrentUser")
             AuthService._notifierAuth()
         })
     }
@@ -334,7 +352,7 @@ function AuthService($firebaseAuth, $firebaseObject, $rootScope) {
     return AuthService
 }
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 // app/services/NotificationsService.js
 
 /**
@@ -365,7 +383,7 @@ function NotificationsService ($mdToast) {
   return NotificationsService;
 }
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 // app/services/index.js
 
 /**
@@ -375,7 +393,7 @@ function NotificationsService ($mdToast) {
 require('./AuthService.js')
 require('./NotificationsService.js')
 
-},{"./AuthService.js":14,"./NotificationsService.js":15}],17:[function(require,module,exports){
+},{"./AuthService.js":15,"./NotificationsService.js":16}],18:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.3
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -4492,11 +4510,11 @@ angular.module('ngAnimate', [])
 
 })(window, window.angular);
 
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 require('./angular-animate');
 module.exports = 'ngAnimate';
 
-},{"./angular-animate":17}],19:[function(require,module,exports){
+},{"./angular-animate":18}],20:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.3
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -4896,11 +4914,11 @@ ngAriaModule.directive('ngShow', ['$aria', function($aria) {
 
 })(window, window.angular);
 
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 require('./angular-aria');
 module.exports = 'ngAria';
 
-},{"./angular-aria":19}],21:[function(require,module,exports){
+},{"./angular-aria":20}],22:[function(require,module,exports){
 /*!
  * Angular Material Design
  * https://github.com/angular/material
@@ -29762,7 +29780,7 @@ angular.module("material.core").constant("$MD_THEME_CSS", "md-autocomplete.md-TH
 
 
 })(window, window.angular);;window.ngMaterial={version:{full: "1.0.7"}};
-},{}],22:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 // Should already be required, here for clarity
 require('angular');
 
@@ -29776,7 +29794,7 @@ require('./angular-material');
 // Export namespace
 module.exports = 'ngMaterial';
 
-},{"./angular-material":21,"angular":28,"angular-animate":18,"angular-aria":20}],23:[function(require,module,exports){
+},{"./angular-material":22,"angular":29,"angular-animate":19,"angular-aria":21}],24:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.3
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -30500,11 +30518,11 @@ function ngMessageDirectiveFactory() {
 
 })(window, window.angular);
 
-},{}],24:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 require('./angular-messages');
 module.exports = 'ngMessages';
 
-},{"./angular-messages":23}],25:[function(require,module,exports){
+},{"./angular-messages":24}],26:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.3
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -31528,11 +31546,11 @@ function ngViewFillContentFactory($compile, $controller, $route) {
 
 })(window, window.angular);
 
-},{}],26:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 require('./angular-route');
 module.exports = 'ngRoute';
 
-},{"./angular-route":25}],27:[function(require,module,exports){
+},{"./angular-route":26}],28:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.3
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -62247,11 +62265,11 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],28:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":27}],29:[function(require,module,exports){
+},{"./angular":28}],30:[function(require,module,exports){
 /*!
  * AngularFire is the officially supported AngularJS binding for Firebase. Firebase
  * is a full backend so you don't need servers to build your Angular app. AngularFire
@@ -64591,11 +64609,11 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
     }
 })();
 
-},{}],30:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 require('./dist/angularfire');
 module.exports = 'firebase';
 
-},{"./dist/angularfire":29}],31:[function(require,module,exports){
+},{"./dist/angularfire":30}],32:[function(require,module,exports){
 /*! @license Firebase v2.4.2
     License: https://www.firebase.com/terms/terms-of-service.html */
 (function() {var h,n=this;function p(a){return void 0!==a}function aa(){}function ba(a){a.yb=function(){return a.zf?a.zf:a.zf=new a}}
