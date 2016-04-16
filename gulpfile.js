@@ -3,7 +3,6 @@ var sass = require('gulp-ruby-sass')
 var connect = require('gulp-connect')
 var browserify = require('browserify')
 var source = require('vinyl-source-stream')
-var jsdoc = require('gulp-jsdoc3')
 var ngdoc = require('gulp-ngdocs')
 var options = {
     html5Mode: false,
@@ -38,20 +37,14 @@ gulp.task('sass', function() {
 })
 
 gulp.task('ngdoc', [], function() {
-    return gulp.src('app/**/*.js')
+    return gulp.src(['app/**/*.js', 'app/**/*.ngdoc'])
         .pipe(ngdoc.process(options))
         .pipe(gulp.dest('./docs'));
 });
 
-gulp.task('jsdoc', function(cb) {
-    gulp.src(['README.md', 'app/**/*.js'], {
-            read: false
-        })
-        .pipe(jsdoc(cb))
-});
-
 gulp.task('watch', function() {
     gulp.watch('app/**/*.js', ['browserify', 'ngdoc'])
+    gulp.watch('app/**/*.ngdoc', ['ngdoc'])
     gulp.watch('app/styles/**/*.scss', ['sass'])
 })
 
