@@ -4,16 +4,12 @@ var connect = require('gulp-connect')
 var browserify = require('browserify')
 var source = require('vinyl-source-stream')
 var ngdoc = require('gulp-ngdocs')
-var options = {
-    html5Mode: false,
-    startPage: '/api',
-    title: "IFAC2017 DEV DOC",
-}
 
 gulp.task('connect', function() {
     connect.server({
         root: 'public',
-        port: 4000
+        port: 4000,
+        livereload: true
     })
 })
 
@@ -37,15 +33,25 @@ gulp.task('sass', function() {
 })
 
 gulp.task('ngdoc', [], function() {
-    return gulp.src(['app/**/*.js', 'app/**/*.ngdoc'])
-        .pipe(ngdoc.process(options))
-        .pipe(gulp.dest('./docs'));
-});
+    return gulp.src(['./app/**/*.js', './app/**/*.ngdoc'])
+        .pipe(ngdoc.process({
+            html5Mode: false,
+            startPage: '/api',
+            title: "IFAC2017 DEV DOC",
+        }))
+        .pipe(gulp.dest('./docs'))
+})
+
+gulp.task('livereload', function() {
+    gulp.src('./public/**/*')
+        .pipe(connect.reload())
+})
 
 gulp.task('watch', function() {
-    gulp.watch('app/**/*.js', ['browserify', 'ngdoc'])
-    gulp.watch('app/**/*.ngdoc', ['ngdoc'])
-    gulp.watch('app/styles/**/*.scss', ['sass'])
+    gulp.watch('./app/**/*.js', ['browserify', 'ngdoc'])
+    gulp.watch(['./app/**/*.js', './app/**/*.ngdoc'], ['ngdoc'])
+    gulp.watch('./app/styles/**/*.scss', ['sass'])
+    gulp.watch('./public/**/*', ['livereload'])
 })
 
 gulp.task('default', ['connect', 'connectDoc', 'watch', 'browserify', 'sass', 'ngdoc'])
