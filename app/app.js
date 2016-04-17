@@ -13,7 +13,4 @@ require('angular-messages')
 
 angular.module('webapp', ['ngMaterial', 'firebase', 'ngRoute', 'ngMessages'])
 
-require('./config')
-require('./run')
-require('./services')
-require('./components')
+require('./**/*.js', {mode: 'expand'})

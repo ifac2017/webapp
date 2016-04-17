@@ -23,6 +23,7 @@ gulp.task('connectDoc', function() {
 
 gulp.task('browserify', function() {
     return browserify('./app/app.js')
+        .transform('require-globify')
         .bundle()
         .pipe(source('main.js'))
         .pipe(gulp.dest('./public/js/'))
