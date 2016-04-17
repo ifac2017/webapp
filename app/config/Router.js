@@ -12,7 +12,7 @@ function Router($routeProvider) {
             template: '<wa-planner layout="column"></wa-planner>',
         })
         .when('/admin', {
-            templateUrl: '<wa-admin layout="column"></wa-admin>',
+            template: '<wa-admin layout="column"></wa-admin>',
             resolve: {
                 "currentAuth": ["AuthService", function(AuthService) {
                     return AuthService.requireAuth()

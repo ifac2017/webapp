@@ -5,15 +5,16 @@ angular.module('webapp').controller('SidebarCtrl', SidebarCtrl)
  * @name webapp.controller:SidebarCtrl
  * @description In charge of the sidebar view.
  */
-function SidebarCtrl(AuthService, $location, $scope) {
+function SidebarCtrl(AuthService, $location) {
     var vm = this
-        /**
-         * @ngdoc property
-         * @name isLogged
-         * @propertyOf webapp.controller:SidebarCtrl
-         * @description True if the user is logged False otherwise.
-         */
-    vm.isLogged = AuthService.isConnected
+
+    /**
+     * @ngdoc property
+     * @name currentUser
+     * @propertyOf webapp.controller:SidebarCtrl
+     * @description Current logged user
+     */
+    vm.currentUser = AuthService.getCurrentUser()
 
     /**
      * @ngdoc method
@@ -55,15 +56,6 @@ function SidebarCtrl(AuthService, $location, $scope) {
       ```
      */
     vm.openAdmin = function() {
-            $location.path('/admin')
-        }
-        /**
-         * @ngdoc method
-         * @name $on
-         * @methodOf webapp.controller:SidebarCtrl
-         * @description Listen for the onAuth event sent by the AuthService in order to update the isLogged property.
-         */
-    $scope.$on('onAuth', function(event, args) {
-        vm.isLogged = AuthService.isConnected
-    })
+        $location.path('/admin')
+    }
 }

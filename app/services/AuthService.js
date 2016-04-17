@@ -5,7 +5,7 @@ angular.module('webapp').factory('AuthService', AuthService)
  * @name webapp.service:AuthService
  * @description In charge of the authentification with Firebase.
  */
-function AuthService($firebaseAuth, $firebaseObject, $rootScope) {
+function AuthService($firebaseAuth, $firebaseObject) {
     var AuthService = {}
 
     /**
@@ -26,19 +26,19 @@ function AuthService($firebaseAuth, $firebaseObject, $rootScope) {
 
     /**
      * @ngdoc property
-     * @name currentUser
+     * @name _currentUser
      * @propertyOf webapp.service:AuthService
      * @description Current logged user
      */
-    AuthService.currentUser = null
+    AuthService._currentUser = {
+        isLogged: false,
+        email: null,
+        role: null
+    }
 
-    /**
-     * @ngdoc property
-     * @name isConnected
-     * @propertyOf webapp.service:AuthService
-     * @description True if the user is logged False otherwise.
-     */
-    AuthService.isConnected = false
+    AuthService.getCurrentUser = function() {
+        return AuthService._currentUser;
+    }
 
     /**
      * @ngdoc method
@@ -138,35 +138,6 @@ function AuthService($firebaseAuth, $firebaseObject, $rootScope) {
 
     /**
      * @ngdoc method
-     * @name _processAuth
-     * @methodOf webapp.service:AuthService
-     * @description Processing the user authentication by binding the currentUser to the root scope.
-     * @param {Object} authData - The user's data
-     */
-    AuthService._processAuth = function(authData) {
-        var ref = AuthService._ref.child("users").child(authData.uid)
-        AuthService.currentUser = $firebaseObject(ref)
-        AuthService.currentUser.$loaded().then(function() {
-            AuthService.isConnected = true
-            AuthService.currentUser.$bindTo($rootScope, "CurrentUser")
-            AuthService._notifierAuth()
-        })
-    }
-
-    /**
-     * @ngdoc method
-     * @name _resetAuth
-     * @methodOf webapp.service:AuthService
-     * @description Reset the user authentication state.
-     */
-    AuthService._resetAuth = function() {
-        AuthService.CurrentUser = null
-        AuthService.isConnected = false
-        AuthService._notifierAuth()
-    }
-
-    /**
-     * @ngdoc method
      * @name $onAuth
      * @methodOf webapp.service:AuthService
      * @description Firebase event triggered on authentication state update. If authData is null then the user is disconnected.
@@ -174,22 +145,19 @@ function AuthService($firebaseAuth, $firebaseObject, $rootScope) {
      */
     AuthService._auth.$onAuth(function(authData) {
         if (authData) {
-            AuthService._processAuth(authData)
+            var ref = AuthService._ref.child("users").child(authData.uid)
+            var user = $firebaseObject(ref)
+            user.$loaded().then(function() {
+                AuthService._currentUser.email = user.email
+                AuthService._currentUser.isLogged = true
+                AuthService._currentUser.role = user.role
+            })
         } else {
-            AuthService._resetAuth()
+            AuthService._currentUser.email = null
+            AuthService._currentUser.isLogged = false
+            AuthService._currentUser.role = null
         }
     })
-
-    /**
-     * @ngdoc event
-     * @name _notifierAuth
-     * @eventOf webapp.service:AuthService
-     * @eventType broadcast
-     * @description Notify the root scope of an authentication state update by broadcasting the onAuth event.
-     */
-    AuthService._notifierAuth = function() {
-        $rootScope.$broadcast('onAuth')
-    }
 
     return AuthService
 }
