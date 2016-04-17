@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "clean": "rm -rf ./node_modules/*"
+    "clean": "rm -rf ./node_modules ./public ./sass-cache ./docs"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,7 @@
     "browserify": "^13.0.0",
     "gulp": "^3.9.1",
     "gulp-connect": "^3.2.2",
+    "gulp-flatten": "^0.2.0",
     "gulp-ngdocs": "^0.2.13",
     "gulp-ruby-sass": "^2.0.6",
     "vinyl-source-stream": "^1.1.0"

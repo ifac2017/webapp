@@ -5,6 +5,7 @@ angular.module('webapp').controller('LoginCtrl', LoginCtrl)
  * @name webapp.controller:LoginCtrl
  * @description In charge of the login view.
  */
+
 function LoginCtrl(AuthService, NotificationsService, $location) {
     var vm = this
 

@@ -4,12 +4,13 @@ var connect = require('gulp-connect')
 var browserify = require('browserify')
 var source = require('vinyl-source-stream')
 var ngdoc = require('gulp-ngdocs')
+var flatten = require('gulp-flatten')
 
 gulp.task('connect', function() {
     connect.server({
         root: 'public',
         port: 4000,
-        livereload: true
+        livereload: false
     })
 })
 
@@ -27,8 +28,14 @@ gulp.task('browserify', function() {
         .pipe(gulp.dest('./public/js/'))
 })
 
+gulp.task('flatten', function() {
+    gulp.src('./app/**/*.html')
+        .pipe(flatten())
+        .pipe(gulp.dest('./public'))
+})
+
 gulp.task('sass', function() {
-    return sass('./app/styles/style.scss')
+    return sass('./app/style.scss')
         .pipe(gulp.dest('./public/css/'))
 })
 
@@ -48,10 +55,11 @@ gulp.task('livereload', function() {
 })
 
 gulp.task('watch', function() {
-    gulp.watch('./app/**/*.js', ['browserify', 'ngdoc'])
-    gulp.watch(['./app/**/*.js', './app/**/*.ngdoc'], ['ngdoc'])
+    gulp.watch('./app/**/*.js', ['browserify']) //, 'ngdoc'])
+    gulp.watch('./app/**/*.html', ['flatten'])
+        //gulp.watch(['./app/**/*.js', './app/**/*.ngdoc'], ['ngdoc'])
     gulp.watch('./app/styles/**/*.scss', ['sass'])
-    gulp.watch('./public/**/*', ['livereload'])
+        //gulp.watch('./public/**/*', ['livereload'])
 })
 
-gulp.task('default', ['connect', 'connectDoc', 'watch', 'browserify', 'sass', 'ngdoc'])
+gulp.task('default', ['connect', 'watch', 'browserify', 'flatten', 'sass'])

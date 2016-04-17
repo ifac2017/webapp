@@ -9,14 +9,10 @@ angular.module('webapp').config(Router)
 function Router($routeProvider) {
     $routeProvider
         .when('/', {
-            templateUrl: 'views/planner.html',
-            controller: 'PlannerCtrl',
-            controllerAs: 'plannerCtrl'
+            template: '<wa-planner></wa-planner>',
         })
         .when('/admin', {
-            templateUrl: 'views/admin/home.html',
-            controller: 'AdminCtrl',
-            controllerAs: 'adminCtrl',
+            templateUrl: '<wa-admin></wa-admin>',
             resolve: {
                 "currentAuth": ["AuthService", function(AuthService) {
                     return AuthService.requireAuth()
@@ -24,9 +20,7 @@ function Router($routeProvider) {
             }
         })
         .when('/profile', {
-            templateUrl: 'views/profile.html',
-            controller: 'ProfileCtrl',
-            controllerAs: 'profileCtrl',
+            template: '<wa-profile></wa-profile>',
             resolve: {
                 "currentAuth": ["AuthService", function(AuthService) {
                     return AuthService.requireAuth()
@@ -34,9 +28,7 @@ function Router($routeProvider) {
             }
         })
         .when('/login', {
-            templateUrl: 'views/login.html',
-            controller: 'LoginCtrl',
-            controllerAs: 'loginCtrl'
+            template: '<wa-login></wa-login>'
         })
         .otherwise({
             redirectTo: '/'
