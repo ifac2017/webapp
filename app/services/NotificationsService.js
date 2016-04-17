@@ -1,4 +1,5 @@
 angular.module('webapp').factory('NotificationsService', NotificationsService)
+NotificationsService.$inject = ['$mdToast']
 
 /**
  * @ngdoc service

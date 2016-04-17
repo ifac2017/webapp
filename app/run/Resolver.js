@@ -1,4 +1,5 @@
 angular.module('webapp').run(Resolver)
+Resolver.$inject = ['$rootScope', '$location']
 
 /**
  * @ngdoc object

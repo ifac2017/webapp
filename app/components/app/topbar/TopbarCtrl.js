@@ -1,4 +1,5 @@
 angular.module('webapp').controller('TopbarCtrl', TopbarCtrl)
+TopbarCtrl.$inject = ['$location']
 
 /**
  * @ngdoc controller

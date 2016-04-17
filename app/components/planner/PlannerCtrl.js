@@ -1,4 +1,5 @@
 angular.module('webapp').controller('PlannerCtrl', PlannerCtrl)
+PlannerCtrl.$inject = []
 
 /**
  * @ngdoc controller

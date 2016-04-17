@@ -1,4 +1,5 @@
 angular.module('webapp').config(Router)
+Router.$inject = ['$routeProvider']
 
 /**
  * @ngdoc object

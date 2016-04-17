@@ -1,4 +1,5 @@
 angular.module('webapp').controller('AdminCtrl', AdminCtrl)
+AdminCtrl.$inject = []
 
 /**
  * @ngdoc controller

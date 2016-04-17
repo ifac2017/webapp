@@ -1,4 +1,5 @@
 angular.module('webapp').controller('ProfileCtrl', ProfileCtrl)
+ProfileCtrl.$inject = ['AuthService']
 
 /**
  * @ngdoc controller

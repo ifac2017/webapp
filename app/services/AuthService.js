@@ -1,4 +1,5 @@
 angular.module('webapp').factory('AuthService', AuthService)
+AuthService.$inject = ['$firebaseAuth', '$firebaseObject']
 
 /**
  * @ngdoc service

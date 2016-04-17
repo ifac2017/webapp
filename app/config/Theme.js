@@ -1,4 +1,5 @@
 angular.module('webapp').config(Theme)
+Theme.$inject = ['$mdThemingProvider']
 
 /**
  * @ngdoc object

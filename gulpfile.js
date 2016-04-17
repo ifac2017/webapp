@@ -22,8 +22,10 @@ gulp.task('connectDoc', function() {
 })
 
 gulp.task('browserify', function() {
-    return browserify('./app/app.js')
+    return browserify('./app/app.js', {debug:true})
         .transform('require-globify')
+        .transform('strictify')
+        //.plugin('minifyify', {map: 'map.json', output:'map.json'})
         .bundle()
         .pipe(source('main.js'))
         .pipe(gulp.dest('./public/js/'))

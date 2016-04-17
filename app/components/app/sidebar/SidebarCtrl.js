@@ -1,5 +1,5 @@
 angular.module('webapp').controller('SidebarCtrl', SidebarCtrl)
-
+SidebarCtrl.$inject = ['AuthService', '$location']
 /**
  * @ngdoc controller
  * @name webapp.controller:SidebarCtrl

@@ -1,4 +1,5 @@
 angular.module('webapp').controller('LoginCtrl', LoginCtrl)
+LoginCtrl.$inject = ['AuthService', 'NotificationsService', '$location']
 
 /**
  * @ngdoc controller
