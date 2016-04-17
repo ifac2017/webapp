@@ -59,7 +59,7 @@ gulp.task('watch', function() {
     gulp.watch('./app/**/*.js', ['browserify']) //, 'ngdoc'])
     gulp.watch('./app/**/*.html', ['flatten'])
         //gulp.watch(['./app/**/*.js', './app/**/*.ngdoc'], ['ngdoc'])
-    gulp.watch('./app/styles/**/*.scss', ['sass'])
+    gulp.watch('./app/**/*.scss', ['sass'])
         //gulp.watch('./public/**/*', ['livereload'])
 })
 

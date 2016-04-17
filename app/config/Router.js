@@ -9,10 +9,10 @@ angular.module('webapp').config(Router)
 function Router($routeProvider) {
     $routeProvider
         .when('/', {
-            template: '<wa-planner></wa-planner>',
+            template: '<wa-planner layout="column"></wa-planner>',
         })
         .when('/admin', {
-            templateUrl: '<wa-admin></wa-admin>',
+            templateUrl: '<wa-admin layout="column"></wa-admin>',
             resolve: {
                 "currentAuth": ["AuthService", function(AuthService) {
                     return AuthService.requireAuth()
@@ -20,7 +20,7 @@ function Router($routeProvider) {
             }
         })
         .when('/profile', {
-            template: '<wa-profile></wa-profile>',
+            template: '<wa-profile layout="column"></wa-profile>',
             resolve: {
                 "currentAuth": ["AuthService", function(AuthService) {
                     return AuthService.requireAuth()
@@ -28,7 +28,7 @@ function Router($routeProvider) {
             }
         })
         .when('/login', {
-            template: '<wa-login></wa-login>'
+            template: '<wa-login layout="column"></wa-login>'
         })
         .otherwise({
             redirectTo: '/'
