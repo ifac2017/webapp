@@ -6,5 +6,15 @@
  */
 angular.module('webapp').component('waProfile', {
     controller: 'ProfileCtrl',
-    templateUrl: 'profile.html'
+    templateUrl: 'profile.html',
+    $canActivate: ['AuthService', '$rootRouter', function(AuthService, $rootRouter) {
+        return AuthService.requireAuth()
+        .then(function(){
+          return true
+        })
+        .catch(function(error){
+          $rootRouter.navigate(['Login'])
+          return false
+        })
+    }]
 })

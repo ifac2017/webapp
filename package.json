@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "clean": "rm -rf ./node_modules ./public ./sass-cache ./docs"
+    "clean": "rm -rf ./node_modules ./public ./sass-cache ./docs",
+    "start": "mkdir -p ./public/js/ && cp ./node_modules/@angular/router/angular1/angular_1_router.js public/js/ && gulp"
   },
   "repository": {
     "type": "git",
@@ -26,12 +27,12 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
-    "angular": "^1.5.3",
+    "@angular/router": "^0.2.0",
+    "angular": "^1.5.5",
     "angular-animate": "^1.5.3",
     "angular-aria": "^1.5.3",
     "angular-material": "^1.0.6",
     "angular-messages": "^1.5.3",
-    "angular-route": "^1.5.3",
     "angularfire": "^1.2.0",
     "firebase": "^2.4.2"
   },

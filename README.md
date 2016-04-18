@@ -19,7 +19,7 @@ Be sure to have previous requirements installed on your computer.
 - Clone the repo on your computer (or download it as zip).
 - Open your terminal and go to the project directory.
 - Run `npm install`.
-- Run `gulp`, you should see the server starting in the terminal.
+- Run `npm start`, you should see the server starting in the terminal.
 - Go to `http://localhost:4000`.
 
 :smile: **Please feel free to fork this project and make pull requests !** :smile:

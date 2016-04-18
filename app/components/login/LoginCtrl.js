@@ -12,7 +12,6 @@ LoginCtrl.$inject = ['AuthService', 'NotificationsService', '$location']
 
 function LoginCtrl(AuthService, NotificationsService, $location) {
     var vm = this
-
     /**
      * @ngdoc property
      * @name user

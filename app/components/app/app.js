@@ -5,5 +5,11 @@
  * @description App component.
  */
 angular.module('webapp').component('waApp', {
-    templateUrl: 'app.html'
+    templateUrl: 'app.html',
+    $routeConfig: [
+      {path: '/', name:'Planner', component: 'waPlanner', useAsDefault: true},
+      {path: '/login', name:'Login', component: 'waLogin'},
+      {path: '/profile', name:'Profile', component: 'waProfile'},
+      {path: '/admin', name:'Admin', component: 'waAdmin'}
+    ]
 })
