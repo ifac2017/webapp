@@ -35,13 +35,13 @@ function LoginCtrl(AuthService, NotificationsService, $location) {
       ```
      */
     vm.login = function() {
-        AuthService.login(vm.user.email, vm.user.password, function(error) {
-            if (error) {
-                NotificationsService.error("Error during logging. Please verify your password.")
-            } else {
+        AuthService.login(vm.user.email, vm.user.password)
+            .then(function() {
                 $location.path('/')
-            }
-        })
+            })
+            .catch(function(error) {
+                NotificationsService.error("Error during logging. Please verify your password.")
+            })
     }
 
     /**
@@ -55,12 +55,12 @@ function LoginCtrl(AuthService, NotificationsService, $location) {
       ```
      */
     vm.signup = function() {
-        AuthService.signup(vm.user.email, vm.user.password, function(error) {
-            if (error) {
-                NotificationsService.error("Error during signing up. Please try again.")
-            } else {
+        AuthService.signup(vm.user.email, vm.user.password)
+            .then(function() {
                 vm.login(vm.user.email, vm.user.password)
-            }
-        })
+            })
+            .catch(function(error) {
+                NotificationsService.error("Error during signing up. Please try again.")
+            })
     }
 }

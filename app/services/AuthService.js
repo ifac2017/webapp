@@ -33,7 +33,7 @@ function AuthService($firebaseAuth, $firebaseObject, CurrentUser) {
      * @name requireAuth
      * @methodOf webapp.service:AuthService
      * @description Returns a promise with the current authentication state if the user is authentificated but otherwise rejects the promise.
-     * @returns {Promise} requireAuth
+     * @returns {Promise} the promise require auth
      * @example
       ```javascript
       AuthService.requireAuth()
@@ -50,33 +50,37 @@ function AuthService($firebaseAuth, $firebaseObject, CurrentUser) {
      * @description Signup the user to Firebase
      * @param {String} email - The user's email
      * @param {String} password - The user's password
-     * @param {Callback} then(error) - The signup callback : if no error occurred then error is null.
+     * @returns {Promise} the promise signup auth
      * @example
       ```javascript
-      AuthService.signup(email, password, function(error) {
-        if (error) {
-          // error...
-        } else {
-          // success...
-        }
+      ```javascript
+      AuthService.signup(vm.user.email, vm.user.password)
+      .then(function() {
+        // success...
+      })
+      .catch(function(error) {
+        // error...
       })
       ```
+      ```
       */
-    AuthService.signup = function(email, password, then) {
-        AuthService._auth.$createUser({
-            email: email,
-            password: password
-        }).then(function(authData) {
-            var ref = AuthService._ref.child("users").child(authData.uid)
-            ref.on("value", function(snapshot) {
-                ref.set({
-                    email: email,
-                    role: "user"
+    AuthService.signup = function(email, password) {
+        return new Promise(function(resolve, reject) {
+            AuthService._auth.$createUser({
+                email: email,
+                password: password
+            }).then(function(authData) {
+                var ref = AuthService._ref.child("users").child(authData.uid)
+                ref.on("value", function(snapshot) {
+                    ref.set({
+                        email: email,
+                        role: "user"
+                    })
+                    resolve()
                 })
-                then()
+            }).catch(function(error) {
+                reject(error)
             })
-        }).catch(function(error) {
-            then(error)
         })
     }
 
@@ -87,26 +91,22 @@ function AuthService($firebaseAuth, $firebaseObject, CurrentUser) {
      * @description Login the user to Firebase
      * @param {String} email - The user's email
      * @param {String} password - The user's password
-     * @param {Callback} then(error) - The login callback : if no error occurred then error is null.
+     * @returns {Promise} the promise login auth
      * @example
       ```javascript
-      AuthService.login(email, password, function(error) {
-        if (error) {
-          // error...
-        } else {
-          // success...
-        }
+      AuthService.login(vm.user.email, vm.user.password)
+      .then(function() {
+        // success...
+      })
+      .catch(function(error) {
+        // error...
       })
       ```
      */
-    AuthService.login = function(email, password, then) {
-        AuthService._auth.$authWithPassword({
+    AuthService.login = function(email, password) {
+        return AuthService._auth.$authWithPassword({
             email: email,
             password: password
-        }).then(function(authData) {
-            then()
-        }).catch(function(error) {
-            then(error)
         })
     }
 
