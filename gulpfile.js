@@ -9,12 +9,11 @@ var flatten = require('gulp-flatten')
 gulp.task('connect', function() {
     connect.server({
         root: 'public',
-        port: 4000,
-        livereload: false
+        port: 4000
     })
 })
 
-gulp.task('connectDoc', function() {
+gulp.task('connectDocs', function() {
     connect.server({
         root: 'docs',
         port: 4001
@@ -22,7 +21,7 @@ gulp.task('connectDoc', function() {
 })
 
 gulp.task('browserify', function() {
-    return browserify('./app/app.js', {debug:true})
+    return browserify('./app/app.js')
         .transform('require-globify')
         .transform('strictify')
         //.plugin('minifyify', {map: 'map.json', output:'map.json'})
@@ -52,17 +51,10 @@ gulp.task('ngdoc', [], function() {
         .pipe(gulp.dest('./docs'))
 })
 
-gulp.task('livereload', function() {
-    gulp.src('./public/**/*')
-        .pipe(connect.reload())
-})
-
 gulp.task('watch', function() {
-    gulp.watch('./app/**/*.js', ['browserify']) //, 'ngdoc'])
+    gulp.watch('./app/**/*.js', ['browserify'])
     gulp.watch('./app/**/*.html', ['flatten'])
-        //gulp.watch(['./app/**/*.js', './app/**/*.ngdoc'], ['ngdoc'])
     gulp.watch('./app/**/*.scss', ['sass'])
-        //gulp.watch('./public/**/*', ['livereload'])
 })
 
-gulp.task('default', ['connect', 'watch', 'browserify', 'flatten', 'sass'])
+gulp.task('default', ['connect', 'connectDocs', 'watch', 'browserify', 'ngdoc', 'flatten', 'sass'])

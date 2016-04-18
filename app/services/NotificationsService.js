@@ -5,6 +5,7 @@ NotificationsService.$inject = ['$mdToast']
  * @ngdoc service
  * @name webapp.service:NotificationsService
  * @description In charge of showing notifications.
+ * @requires $mdToast
  */
 function NotificationsService($mdToast) {
     var NotificationsService = {}

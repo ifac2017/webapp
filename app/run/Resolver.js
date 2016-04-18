@@ -4,6 +4,8 @@ Resolver.$inject = ['$rootScope', '$location']
 /**
  * @ngdoc object
  * @name webapp.run:Resolver
+ * @requires $rootScope
+ * @requires $location
  * @description
  * Handle routing event
  */

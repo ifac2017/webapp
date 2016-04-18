@@ -1,11 +1,14 @@
 angular.module('webapp').controller('SidebarCtrl', SidebarCtrl)
-SidebarCtrl.$inject = ['AuthService', '$location']
+SidebarCtrl.$inject = ['AuthService', 'CurrentUser', '$location']
 /**
  * @ngdoc controller
  * @name webapp.controller:SidebarCtrl
+ * @requires AuthService
+ * @requires CurrentUser
+ * @requires $location
  * @description In charge of the sidebar view.
  */
-function SidebarCtrl(AuthService, $location) {
+function SidebarCtrl(AuthService, CurrentUser, $location) {
     var vm = this
 
     /**
@@ -14,7 +17,7 @@ function SidebarCtrl(AuthService, $location) {
      * @propertyOf webapp.controller:SidebarCtrl
      * @description Current logged user
      */
-    vm.currentUser = AuthService.getCurrentUser()
+    vm.currentUser = CurrentUser
 
     /**
      * @ngdoc method

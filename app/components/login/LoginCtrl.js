@@ -4,6 +4,9 @@ LoginCtrl.$inject = ['AuthService', 'NotificationsService', '$location']
 /**
  * @ngdoc controller
  * @name webapp.controller:LoginCtrl
+ * @requires AuthService
+ * @requires NotificationsService
+ * @requires $location
  * @description In charge of the login view.
  */
 

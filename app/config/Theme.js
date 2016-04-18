@@ -4,6 +4,7 @@ Theme.$inject = ['$mdThemingProvider']
 /**
  * @ngdoc object
  * @name webapp.config:Theme
+ * @requires $mdThemingProvider
  * @description
  * To do...
  */

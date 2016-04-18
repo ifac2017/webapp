@@ -1,12 +1,15 @@
 angular.module('webapp').factory('AuthService', AuthService)
-AuthService.$inject = ['$firebaseAuth', '$firebaseObject']
+AuthService.$inject = ['$firebaseAuth', '$firebaseObject', 'CurrentUser']
 
 /**
  * @ngdoc service
  * @name webapp.service:AuthService
  * @description In charge of the authentification with Firebase.
+ * @requires $firebaseAuth
+ * @requires $firebaseObject
+ * @requires CurrentUser
  */
-function AuthService($firebaseAuth, $firebaseObject) {
+function AuthService($firebaseAuth, $firebaseObject, CurrentUser) {
     var AuthService = {}
 
     /**
@@ -24,22 +27,6 @@ function AuthService($firebaseAuth, $firebaseObject) {
      * @description Authentification manager of the app
      */
     AuthService._auth = $firebaseAuth(AuthService._ref)
-
-    /**
-     * @ngdoc property
-     * @name _currentUser
-     * @propertyOf webapp.service:AuthService
-     * @description Current logged user
-     */
-    AuthService._currentUser = {
-        isLogged: false,
-        email: null,
-        role: null
-    }
-
-    AuthService.getCurrentUser = function() {
-        return AuthService._currentUser;
-    }
 
     /**
      * @ngdoc method
@@ -149,14 +136,10 @@ function AuthService($firebaseAuth, $firebaseObject) {
             var ref = AuthService._ref.child("users").child(authData.uid)
             var user = $firebaseObject(ref)
             user.$loaded().then(function() {
-                AuthService._currentUser.email = user.email
-                AuthService._currentUser.isLogged = true
-                AuthService._currentUser.role = user.role
+                CurrentUser.create(user.email, user.role)
             })
         } else {
-            AuthService._currentUser.email = null
-            AuthService._currentUser.isLogged = false
-            AuthService._currentUser.role = null
+            CurrentUser.clear()
         }
     })
 

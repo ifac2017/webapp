@@ -4,6 +4,7 @@ TopbarCtrl.$inject = ['$location']
 /**
  * @ngdoc controller
  * @name webapp.controller:TopbarCtrl
+ * @requires $location
  * @description In charge of the topbar view.
  */
 function TopbarCtrl($location) {

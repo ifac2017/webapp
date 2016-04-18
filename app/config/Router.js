@@ -4,6 +4,7 @@ Router.$inject = ['$routeProvider']
 /**
  * @ngdoc object
  * @name webapp.config:Router
+ * @requires $routeProvider
  * @description
  * To do...
  */
