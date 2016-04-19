@@ -6,6 +6,9 @@
  */
 angular.module('webapp').component('waLogin', {
     controller: 'LoginCtrl',
+    bindings: {
+        $router: '<'
+    },
     templateUrl: ['$element', function($element) {
         angular.element($element).addClass('layout-column')
         return 'login.html'
