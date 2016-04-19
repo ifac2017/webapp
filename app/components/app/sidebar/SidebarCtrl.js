@@ -1,14 +1,14 @@
 angular.module('webapp').controller('SidebarCtrl', SidebarCtrl)
-SidebarCtrl.$inject = ['AuthService', 'CurrentUser', '$location']
+SidebarCtrl.$inject = ['AuthService', 'CurrentUser', '$rootRouter']
 /**
  * @ngdoc controller
  * @name webapp.controller:SidebarCtrl
  * @requires AuthService
  * @requires CurrentUser
- * @requires $location
+ * @requires $rootRouter
  * @description In charge of the sidebar view.
  */
-function SidebarCtrl(AuthService, CurrentUser, $location) {
+function SidebarCtrl(AuthService, CurrentUser, $rootRouter) {
     var vm = this
 
     /**
@@ -30,7 +30,7 @@ function SidebarCtrl(AuthService, CurrentUser, $location) {
       ```
      */
     vm.login = function() {
-        $location.path('/login')
+        $rootRouter.navigate(['Login'])
     }
 
     /**
@@ -45,7 +45,7 @@ function SidebarCtrl(AuthService, CurrentUser, $location) {
      */
     vm.logout = function() {
         AuthService.logout()
-        $location.path('/')
+        $rootRouter.navigate(['Planner'])
     }
 
     /**
@@ -59,6 +59,6 @@ function SidebarCtrl(AuthService, CurrentUser, $location) {
       ```
      */
     vm.openAdmin = function() {
-        $location.path('/admin')
+        $rootRouter.navigate(['Admin'])
     }
 }

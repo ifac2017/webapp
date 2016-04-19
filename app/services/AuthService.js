@@ -45,6 +45,56 @@ function AuthService($firebaseAuth, $firebaseObject, CurrentUser) {
 
     /**
      * @ngdoc method
+     * @name requireUnauth
+     * @methodOf webapp.service:AuthService
+     * @description Returns a promise accepted if the user is unauthentificated but otherwise rejects the promise.
+     * @returns {Promise} the promise require unauth
+     * @example
+      ```javascript
+      AuthService.requireUnauth()
+      ```
+      */
+    AuthService.requireUnauth = function() {
+        return new Promise(function(resolve, reject) {
+            AuthService._auth.$requireAuth()
+                .then(function() {
+                    reject("Already connected")
+                })
+                .catch(function() {
+                    resolve()
+                })
+        })
+    }
+
+    /**
+     * @ngdoc method
+     * @name requireAdminAuth
+     * @methodOf webapp.service:AuthService
+     * @description Returns a promise accepted if the user is authentificated and has admin role but otherwise rejects the promise.
+     * @returns {Promise} the promise require admin auth
+     * @example
+      ```javascript
+      AuthService.requireAdminAuth()
+      ```
+      */
+    AuthService.requireAdminAuth = function() {
+        return new Promise(function(resolve, reject) {
+            AuthService.requireAuth()
+                .then(function() {
+                    if (CurrentUser.role == "admin") {
+                        resolve()
+                    } else {
+                        reject("You are not an admin !")
+                    }
+                })
+                .catch(function(error) {
+                    reject(error)
+                })
+        })
+    }
+
+    /**
+     * @ngdoc method
      * @name signup
      * @methodOf webapp.service:AuthService
      * @description Signup the user to Firebase

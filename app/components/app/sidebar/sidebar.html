@@ -1,6 +1,6 @@
 <md-sidenav class="site-sidenav md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
     <md-content layout="column">
-        <md-button ng-if="$ctrl.currentUser.isLogged && $ctrl.currentUser.role == 'user'" ng-click="$ctrl.openAdmin()" class="md-raised md-accent">ADMIN ZONE</md-button>
+        <md-button ng-if="$ctrl.currentUser.isLogged && $ctrl.currentUser.isAdmin()" ng-click="$ctrl.openAdmin()" class="md-raised md-accent">ADMIN ZONE</md-button>
         <md-button ng-if="!$ctrl.currentUser.isLogged" ng-click="$ctrl.login()" class="md-raised md-warn">Login</md-button>
         <md-button ng-if="$ctrl.currentUser.isLogged" ng-click="$ctrl.logout()" class="md-raised md-warn">Logout</md-button>
         <md-button class="md-raised md-accent">Discover</md-button>

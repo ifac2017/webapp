@@ -8,7 +8,7 @@ angular.module('webapp').component('waAdmin', {
     controller: 'AdminCtrl',
     templateUrl: 'admin.html',
     $canActivate: ['AuthService', '$rootRouter', function(AuthService, $rootRouter) {
-        return AuthService.requireAuth()
+        return AuthService.requireAdminAuth()
         .then(function(){
           return true
         })

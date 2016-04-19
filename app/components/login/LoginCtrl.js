@@ -1,16 +1,16 @@
 angular.module('webapp').controller('LoginCtrl', LoginCtrl)
-LoginCtrl.$inject = ['AuthService', 'NotificationsService', '$location']
+LoginCtrl.$inject = ['AuthService', 'NotificationsService', '$rootRouter']
 
 /**
  * @ngdoc controller
  * @name webapp.controller:LoginCtrl
  * @requires AuthService
  * @requires NotificationsService
- * @requires $location
+ * @requires $rootRouter
  * @description In charge of the login view.
  */
 
-function LoginCtrl(AuthService, NotificationsService, $location) {
+function LoginCtrl(AuthService, NotificationsService, $rootRouter) {
     var vm = this
     /**
      * @ngdoc property
@@ -36,7 +36,7 @@ function LoginCtrl(AuthService, NotificationsService, $location) {
     vm.login = function() {
         AuthService.login(vm.user.email, vm.user.password)
             .then(function() {
-                $location.path('/')
+                $rootRouter.navigate(['Profile'])
             })
             .catch(function(error) {
                 NotificationsService.error("Error during logging. Please verify your password.")

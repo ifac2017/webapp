@@ -1,13 +1,13 @@
 angular.module('webapp').controller('TopbarCtrl', TopbarCtrl)
-TopbarCtrl.$inject = ['$location']
+TopbarCtrl.$inject = ['$rootRouter']
 
 /**
  * @ngdoc controller
  * @name webapp.controller:TopbarCtrl
- * @requires $location
+ * @requires $rootRouter
  * @description In charge of the topbar view.
  */
-function TopbarCtrl($location) {
+function TopbarCtrl($rootRouter) {
     var vm = this
 
     /**
@@ -21,7 +21,7 @@ function TopbarCtrl($location) {
       ```
      */
     vm.openProfile = function() {
-        $location.path('/profile')
+        $rootRouter.navigate(['Profile'])
     }
 
     /**
@@ -35,6 +35,6 @@ function TopbarCtrl($location) {
       ```
      */
     vm.goHome = function() {
-        $location.path('/')
+        $rootRouter.navigate(['Planner'])
     }
 }

@@ -65,5 +65,19 @@ function CurrentUser() {
         CurrentUser.email = null
     }
 
+    /**
+     * @ngdoc method
+     * @name isAdmin
+     * @methodOf webapp.service:CurrentUser
+     * @description True if the user has the admin role False otherwise
+     * @example
+      ```javascript
+      CurrentUser.isAdmin()
+      ```
+      */
+    CurrentUser.isAdmin = function() {
+      return CurrentUser.role == "admin"
+    }
+
     return CurrentUser
 }
