@@ -13,11 +13,9 @@ angular.module('webapp').component('waLogin', {
     $canActivate: ['AuthService', '$rootRouter', function(AuthService, $rootRouter) {
         return AuthService.requireUnauth()
             .then(function() {
-              console.log("then")
                 return true
             })
             .catch(function(error) {
-              console.log("catch")
                 $rootRouter.navigate(['Planner'])
                 return false
             })
