@@ -5,15 +5,12 @@ $info: #3498db;
 $error: #e74c3c;
 $success: #2ecc71;
 $warn: #e67e22;
-
 /***********/
 /** Icons **/
 /***********/
-
 body {
-  overflow: hidden;
+    overflow: hidden;
 }
-
 /***************************************/
 /** hide page until Angular is loaded **/
 /***************************************/
@@ -25,11 +22,9 @@ body {
 [x-ng-cloak] {
     display: none !important;
 }
-
 /******************/
 /** toast themes **/
 /******************/
-
 md-toast.md-success-toast-theme {
     .md-toast-content {
         background-color: $info;
@@ -53,7 +48,6 @@ md-toast.md-warn-toast-theme {
 /*************/
 /** Toolbar **/
 /*************/
-
 md-toolbar h3 {
     margin: auto;
     font-weight: 500;
@@ -61,11 +55,9 @@ md-toolbar h3 {
 md-toolbar a h3 {
     font-size: 36px;
 }
-
 /***********/
 /** Icons **/
 /***********/
-
 /* Rules for sizing the icon. */
 .material-icons.md-18 {
     font-size: 18px;
@@ -96,7 +88,16 @@ md-toolbar a h3 {
 .material-icons.md-light.md-inactive {
     color: rgba(255, 255, 255, 0.3);
 }
-
+/* Rules for FAB button with icon */
 .wa-icon-button {
-  padding: 8px;
+    padding: 8px;
+}
+
+/*************/
+/** SLIDERS **/
+/*************/
+
+/* Rules to remove dots in discrete slider */
+.md-track-ticks canvas {
+    display: none;
 }
