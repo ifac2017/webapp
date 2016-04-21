@@ -40,7 +40,19 @@ function AuthService($firebaseAuth, $firebaseObject, CurrentUser) {
       ```
       */
     AuthService.requireAuth = function() {
-        return AuthService._auth.$requireAuth()
+        return new Promise(function(resolve, reject) {
+            AuthService._auth.$waitForAuth()
+                .then(function(authData) {
+                    if (authData) {
+                        resolve(authData)
+                    } else {
+                        reject("error requireAuth")
+                    }
+                })
+                .catch(function(error) {
+                    reject(error)
+                })
+        })
     }
 
     /**
@@ -56,7 +68,7 @@ function AuthService($firebaseAuth, $firebaseObject, CurrentUser) {
       */
     AuthService.requireUnauth = function() {
         return new Promise(function(resolve, reject) {
-            AuthService._auth.$requireAuth()
+            AuthService.requireAuth()
                 .then(function() {
                     reject("Already connected")
                 })
@@ -80,12 +92,14 @@ function AuthService($firebaseAuth, $firebaseObject, CurrentUser) {
     AuthService.requireAdminAuth = function() {
         return new Promise(function(resolve, reject) {
             AuthService.requireAuth()
-                .then(function() {
-                    if (CurrentUser.role == "admin") {
-                        resolve()
-                    } else {
-                        reject("You are not an admin !")
-                    }
+                .then(function(authData) {
+                    AuthService._createCurrentUser(authData.uid).then(function() {
+                        if (CurrentUser.role == "admin") {
+                            resolve()
+                        } else {
+                            reject("You are not an admin !")
+                        }
+                    })
                 })
                 .catch(function(error) {
                     reject(error)
@@ -183,15 +197,34 @@ function AuthService($firebaseAuth, $firebaseObject, CurrentUser) {
      */
     AuthService._auth.$onAuth(function(authData) {
         if (authData) {
-            var ref = AuthService._ref.child("users").child(authData.uid)
-            var user = $firebaseObject(ref)
-            user.$loaded().then(function() {
-                CurrentUser.create(user.email, user.role)
-            })
+            AuthService._createCurrentUser(authData.uid)
         } else {
             CurrentUser.clear()
         }
     })
+
+    /**
+     * @ngdoc method
+     * @name $_createCurrentUser
+     * @methodOf webapp.service:AuthService
+     * @description create the current user
+     * @param {Object} uid - The user's Firebase id
+     * @returns {Promise} the promise when user is locally created
+     */
+    AuthService._createCurrentUser = function(uid) {
+        return new Promise(function(resolve, reject) {
+            if (!CurrentUser.isLogged) {
+                var ref = AuthService._ref.child("users").child(uid)
+                var user = $firebaseObject(ref)
+                user.$loaded().then(function() {
+                    CurrentUser.create(user.email, user.role)
+                    resolve()
+                })
+            } else {
+                resolve()
+            }
+        })
+    }
 
     return AuthService
 }
