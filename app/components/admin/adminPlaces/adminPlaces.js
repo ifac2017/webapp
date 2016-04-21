@@ -11,7 +11,8 @@ angular.module('webapp').component('waAdminPlaces', {
     },
     $routeConfig: [
       {path: '/', name:'AdminPlacesDashboard', component: 'waAdminPlacesDashboard', useAsDefault: true},
-      {path: '/create', name:'AdminPlacesCreate', component: 'waAdminPlacesCreate'}
+      {path: '/create', name:'AdminPlacesCreate', component: 'waAdminPlacesCreate'},
+      {path: '/:okay', name:'AdminPlacesDashboardAfterCreate', component: 'waAdminPlacesDashboard'}
     ],
     templateUrl: ['$element', function($element) {
         angular.element($element).addClass('layout-column')

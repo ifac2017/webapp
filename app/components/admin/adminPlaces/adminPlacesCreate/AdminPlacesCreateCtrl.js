@@ -1,12 +1,12 @@
 angular.module('webapp').controller('AdminPlacesCreateCtrl', AdminPlacesCreateCtrl)
-AdminPlacesCreateCtrl.$inject = []
+AdminPlacesCreateCtrl.$inject = ['PlacesService']
 
 /**
  * @ngdoc controller
  * @name webapp.controller:AdminPlacesCreateCtrl
  * @description In charge of the admin places creation view.
  */
-function AdminPlacesCreateCtrl() {
+function AdminPlacesCreateCtrl(PlacesService) {
     var vm = this
 
     vm.titleName = "Add new place"
@@ -20,5 +20,15 @@ function AdminPlacesCreateCtrl() {
       address: null,
       floor: null,
       maxCapacity: null
+    }
+
+    vm.addPlace = function() {
+      PlacesService.addPlace(vm.place)
+      .then(function(){
+        vm.$router.navigate(['AdminPlacesDashboardAfterCreate', {okay:true}])
+      })
+      .catch(function(){
+        vm.$router.navigate(['AdminPlacesDashboardAfterCreate', {okay:false}])
+      })
     }
 }

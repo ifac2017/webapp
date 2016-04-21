@@ -3,7 +3,7 @@
     <md-content layout-padding>
         <form name="loginForm">
             <md-input-container class="md-block">
-                <input type="text" name="name" placeholder="Place name" ng-model="$ctrl.place.speaker" required>
+                <input type="text" name="name" placeholder="Place name" ng-model="$ctrl.place.name" required>
             </md-input-container>
             <md-input-container class="md-block">
                 <input type="text" name="address" placeholder="Place address" ng-model="$ctrl.place.address" required>
@@ -15,7 +15,7 @@
                 <input type="number" name="maxCapacity" placeholder="Maximum Capacity" ng-model="$ctrl.place.maxCapacity" required>
             </md-input-container>
             <md-input-container class="md-block">
-                <md-button class="md-raised md-accent" ng-click="">Create !</md-button>
+                <md-button class="md-raised md-accent" ng-click="$ctrl.addPlace()">Create !</md-button>
             </md-input-container>
         </form>
     </md-content>

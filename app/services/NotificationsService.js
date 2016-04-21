@@ -22,7 +22,7 @@ function NotificationsService($mdToast) {
       ```
      */
     NotificationsService.error = function(message) {
-        $mdToast.show($mdToast.simple().textContent(message).theme('error-toast'))
+        $mdToast.show($mdToast.simple().position("top right").textContent(message).theme('error-toast'))
     }
 
     /**
@@ -37,7 +37,7 @@ function NotificationsService($mdToast) {
       ```
      */
     NotificationsService.success = function(message) {
-        $mdToast.show($mdToast.simple().textContent(message).theme('success-toast'))
+        $mdToast.show($mdToast.simple().position("top right").textContent(message).theme('success-toast'))
     }
 
     /**
@@ -52,7 +52,7 @@ function NotificationsService($mdToast) {
       ```
      */
     NotificationsService.info = function(message) {
-        $mdToast.show($mdToast.simple().textContent(message).theme('info-toast'))
+        $mdToast.show($mdToast.simple().position("top right").textContent(message).theme('info-toast'))
     }
 
     /**
@@ -67,7 +67,7 @@ function NotificationsService($mdToast) {
       ```
      */
     NotificationsService.warn = function(message) {
-        $mdToast.show($mdToast.simple().textContent(message).theme('warn-toast'))
+        $mdToast.show($mdToast.simple().position("top right").textContent(message).theme('warn-toast'))
     }
 
     return NotificationsService

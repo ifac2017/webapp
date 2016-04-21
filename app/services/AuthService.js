@@ -18,7 +18,7 @@ function AuthService($firebaseAuth, $firebaseObject, CurrentUser) {
      * @propertyOf webapp.service:AuthService
      * @description Reference to the Firebase database
      */
-    AuthService._ref = new Firebase("https://planner31.firebaseio.com/")
+    AuthService._ref = new Firebase("https://ifac2017.firebaseio.com/")
 
     /**
      * @ngdoc property
