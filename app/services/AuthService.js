@@ -205,7 +205,7 @@ function AuthService($firebaseAuth, $firebaseObject, CurrentUser) {
 
     /**
      * @ngdoc method
-     * @name $_createCurrentUser
+     * @name _createCurrentUser
      * @methodOf webapp.service:AuthService
      * @description create the current user
      * @param {Object} uid - The user's Firebase id
