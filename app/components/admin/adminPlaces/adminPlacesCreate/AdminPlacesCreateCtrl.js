@@ -19,7 +19,7 @@ function AdminPlacesCreateCtrl(PlacesService) {
       name: null,
       address: null,
       floor: null,
-      maxCapacity: null
+      maxCapacity: 100
     }
 
     vm.addPlace = function() {
