@@ -94,7 +94,7 @@ function AuthService($firebaseAuth, $firebaseObject, CurrentUser) {
             AuthService.requireAuth()
                 .then(function(authData) {
                     AuthService._createCurrentUser(authData.uid).then(function() {
-                        if (CurrentUser.role == "admin") {
+                        if (CurrentUser.role === "admin") {
                             resolve()
                         } else {
                             reject("You are not an admin !")

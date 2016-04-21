@@ -25,10 +25,10 @@ function AdminPlacesCreateCtrl(PlacesService) {
     vm.addPlace = function() {
       PlacesService.addPlace(vm.place)
       .then(function(){
-        vm.$router.navigate(['AdminPlacesDashboardAfterCreate', {okay:true}])
+        vm.$router.navigate(['AdminPlacesDashboardAfterCreate', {creationOkay:true}])
       })
       .catch(function(){
-        vm.$router.navigate(['AdminPlacesDashboardAfterCreate', {okay:false}])
+        vm.$router.navigate(['AdminPlacesDashboardAfterCreate', {creationOkay:false}])
       })
     }
 }

@@ -76,7 +76,7 @@ function CurrentUser() {
       ```
       */
     CurrentUser.isAdmin = function() {
-      return CurrentUser.role == "admin"
+      return CurrentUser.role === "admin"
     }
 
     return CurrentUser
