@@ -14,4 +14,12 @@ function AdminConferencesCreateCtrl() {
     vm.backAction = function() {
       vm.$router.navigate(['AdminConferencesDashboard'])
     }
+
+    vm.conference = {
+      date: new Date(),
+      place: "",
+      speaker: "",
+      duration: null,
+      topic: ""
+    }
 }

@@ -6,7 +6,10 @@
  */
 angular.module('webapp').component('waAdmin', {
     controller: 'AdminCtrl',
-    templateUrl: 'admin.html',
+    templateUrl: ['$element', function($element) {
+        angular.element($element).addClass('layout-column')
+        return 'admin.html'
+    }],
     $routeConfig: [
       {path: '/', name:'AdminDashboard', component: 'waAdminDashboard', useAsDefault: true},
       {path: '/conferences/...', name:'AdminConferences', component: 'waAdminConferences'}

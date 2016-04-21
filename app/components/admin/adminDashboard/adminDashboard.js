@@ -9,7 +9,10 @@ angular.module('webapp').component('waAdminDashboard', {
     bindings: {
         $router: '<'
     },
-    templateUrl: 'adminDashboard.html',
+    templateUrl: ['$element', function($element) {
+        angular.element($element).addClass('layout-column')
+        return 'adminDashboard.html'
+    }],
     $canActivate: ['AuthService', '$rootRouter', function(AuthService, $rootRouter) {
         return AuthService.requireAdminAuth()
             .then(function() {

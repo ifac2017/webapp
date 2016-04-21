@@ -1,3 +1,23 @@
 <div layout="column">
-  <wa-breadcrump title-name="$ctrl.titleName" back-name="$ctrl.backName" back-action="$ctrl.backAction()"></wa-breadcrump>
+    <wa-breadcrump title-name="$ctrl.titleName" back-name="$ctrl.backName" back-action="$ctrl.backAction()"></wa-breadcrump>
+    <md-content layout-padding>
+        <form name="loginForm">
+            <md-input-container class="md-block">
+                <input type="text" name="speaker" placeholder="Speaker name" ng-model="$ctrl.conference.speaker" required>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <input type="text" name="place" placeholder="Place address" ng-model="$ctrl.conference.place" required>
+            </md-input-container>
+            <md-input-container flex class="md-block">
+                <input type="number" name="duration" placeholder="Duration" ng-model="$ctrl.conference.duration" required>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <input type="text" name="topic" placeholder="Topic" ng-model="$ctrl.conference.topic" required>
+            </md-input-container>
+            <md-datepicker md-placeholder="Enter date" ng-model="$ctrl.conference.date"></md-datepicker>
+            <md-input-container class="md-block">
+                <md-button class="md-raised md-accent" ng-click="$ctrl.login()">Create !</md-button>
+            </md-input-container>
+        </form>
+    </md-content>
 </div>

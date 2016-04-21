@@ -6,7 +6,10 @@
  */
 angular.module('webapp').component('waAdminConferencesCreate', {
     controller: 'AdminConferencesCreateCtrl',
-    templateUrl: 'adminConferencesCreate.html',
+    templateUrl: ['$element', function($element) {
+        angular.element($element).addClass('layout-column')
+        return 'adminConferencesCreate.html'
+    }],
     bindings: {
         $router: '<'
     },

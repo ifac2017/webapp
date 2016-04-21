@@ -13,7 +13,10 @@ angular.module('webapp').component('waAdminConferences', {
       {path: '/', name:'AdminConferencesDashboard', component: 'waAdminConferencesDashboard', useAsDefault: true},
       {path: '/create', name:'AdminConferencesCreate', component: 'waAdminConferencesCreate'}
     ],
-    templateUrl: 'adminConferences.html',
+    templateUrl: ['$element', function($element) {
+        angular.element($element).addClass('layout-column')
+        return 'adminConferences.html'
+    }],
     $canActivate: ['AuthService', '$rootRouter', function(AuthService, $rootRouter) {
         return AuthService.requireAdminAuth()
         .then(function(){
