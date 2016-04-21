@@ -1,12 +1,12 @@
 angular.module('webapp').controller('AdminPlacesDashboardCtrl', AdminPlacesDashboardCtrl)
-AdminPlacesDashboardCtrl.$inject = ['NotificationsService']
+AdminPlacesDashboardCtrl.$inject = ['NotificationsService', 'PlacesService']
 
 /**
  * @ngdoc controller
  * @name webapp.controller:AdminPlacesDashboardCtrl
  * @description In charge of the admin places dashboard view.
  */
-function AdminPlacesDashboardCtrl(NotificationsService) {
+function AdminPlacesDashboardCtrl(NotificationsService, PlacesService) {
     var vm = this
 
     vm.titleName = "Places Dashboard"
@@ -14,6 +14,8 @@ function AdminPlacesDashboardCtrl(NotificationsService) {
     vm.backAction = function() {
         vm.$router.parent.navigate(['AdminDashboard'])
     }
+
+    vm.places = PlacesService.places
 
     vm.goToPlacesCreate = function() {
         vm.$router.navigate(['AdminPlacesCreate'])

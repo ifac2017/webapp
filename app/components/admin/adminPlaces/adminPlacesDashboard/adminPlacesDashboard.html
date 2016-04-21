@@ -1,7 +1,24 @@
 <div layout="column">
     <wa-breadcrump title-name="$ctrl.titleName" back-name="$ctrl.backName" back-action="$ctrl.backAction()"></wa-breadcrump>
     <div layout="row">
-      <span flex></span>
+        <md-content layout="row" flex layout-wrap>
+            <md-card ng-repeat="place in $ctrl.places">
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">{{place.name}}</span>
+                        <span class="md-subhead">{{place.address}}</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content layout="row" layout-align="space-between">
+                    <div class="card-media">
+                        <!-- here the map -->
+                    </div>
+                </md-card-content>
+                <md-card-actions layout="row" layout-align="end">
+                    <md-button>Delete</md-button>
+                </md-card-actions>
+            </md-card>
+        </md-content>
         <md-button class="md-fab wa-icon-button" ng-click="$ctrl.goToPlacesCreate()">
             <md-tooltip md-direction="left">
                 Add new place
