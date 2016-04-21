@@ -9,7 +9,9 @@ AdminDashboardCtrl.$inject = []
 function AdminDashboardCtrl() {
     var vm = this
 
+    vm.titleName = "Admin Dashboard"
+
     vm.goToConferences = function() {
-      vm.$router.navigate(['AdminConferences']);
+      vm.$router.navigate(['AdminConferences'])
     }
 }

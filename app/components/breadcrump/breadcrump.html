@@ -1,0 +1,12 @@
+<div layout="row" layout-align="center center">
+    <div ng-if="$ctrl.backName" layout="column" layout-align="center center">
+        <md-button class="md-icon-button" ng-click="$ctrl.backAction()">
+            <i class="material-icons md-24">arrow_back</i>
+        </md-button>
+        <span class="md-caption">{{$ctrl.backName}}</span>
+    </div>
+    <span flex></span>
+    <h2 ng-if="$ctrl.titleName" class="md-title">{{$ctrl.titleName}}</h2>
+    <span flex></span>
+</div>
+<md-divider></md-divider>

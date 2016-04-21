@@ -6,6 +6,7 @@
  */
 angular.module('webapp').component('waApp', {
     templateUrl: 'app.html',
+    controller: 'AppCtrl',
     $routeConfig: [
       {path: '/', name:'Planner', component: 'waPlanner', useAsDefault: true},
       {path: '/login', name:'Login', component: 'waLogin'},

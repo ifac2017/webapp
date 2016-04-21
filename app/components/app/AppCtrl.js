@@ -1,4 +1,4 @@
-angular.module('webapp').controller('PlannerCtrl', AppCtrl)
+angular.module('webapp').controller('AppCtrl', AppCtrl)
 AppCtrl.$inject = []
 
 /**
@@ -8,4 +8,5 @@ AppCtrl.$inject = []
  */
 function AppCtrl() {
     var vm = this
+    vm.teub = 'aa'
 }

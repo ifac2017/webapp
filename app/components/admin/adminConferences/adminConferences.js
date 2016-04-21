@@ -6,6 +6,13 @@
  */
 angular.module('webapp').component('waAdminConferences', {
     controller: 'AdminConferencesCtrl',
+    bindings: {
+        $router: '<'
+    },
+    $routeConfig: [
+      {path: '/', name:'AdminConferencesDashboard', component: 'waAdminConferencesDashboard', useAsDefault: true},
+      {path: '/create', name:'AdminConferencesCreate', component: 'waAdminConferencesCreate'}
+    ],
     templateUrl: 'adminConferences.html',
     $canActivate: ['AuthService', '$rootRouter', function(AuthService, $rootRouter) {
         return AuthService.requireAdminAuth()

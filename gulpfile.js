@@ -9,7 +9,8 @@ var flatten = require('gulp-flatten')
 gulp.task('connect', function() {
     connect.server({
         root: 'public',
-        port: 4000
+        port: 4000,
+        livereload: true
     })
 })
 
@@ -34,11 +35,13 @@ gulp.task('flatten', function() {
     gulp.src('./app/**/*.html')
         .pipe(flatten())
         .pipe(gulp.dest('./public'))
+        .pipe(connect.reload())
 })
 
 gulp.task('sass', function() {
     return sass('./app/style.scss')
         .pipe(gulp.dest('./public/css/'))
+        .pipe(connect.reload())
 })
 
 gulp.task('ngdoc', [], function() {
