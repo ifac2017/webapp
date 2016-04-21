@@ -17,9 +17,9 @@ function AdminConferencesCreateCtrl() {
 
     vm.conference = {
       date: new Date(),
-      place: "",
-      speaker: "",
+      place: null,
+      speaker: null,
       duration: null,
-      topic: ""
+      topic: null
     }
 }

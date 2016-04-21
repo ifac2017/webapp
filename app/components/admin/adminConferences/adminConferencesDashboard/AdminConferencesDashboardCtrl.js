@@ -4,7 +4,7 @@ AdminConferencesDashboardCtrl.$inject = []
 /**
  * @ngdoc controller
  * @name webapp.controller:AdminConferencesCreateCtrl
- * @description In charge of the admin conferences creation view.
+ * @description In charge of the admin conferences dashboard view.
  */
 function AdminConferencesDashboardCtrl() {
     var vm = this
