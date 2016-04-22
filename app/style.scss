@@ -92,12 +92,19 @@ md-toolbar a h3 {
 .wa-icon-button {
     padding: 8px;
 }
-
 /*************/
 /** SLIDERS **/
 /*************/
-
 /* Rules to remove dots in discrete slider */
 .md-track-ticks canvas {
     display: none;
 }
+.wa-icon-text-button {
+    .material-icons {
+        position: relative;
+        top: 7px;
+    }
+}
+
+@import "components/sidebar/sidebar";
+@import "components/admin/adminPlaces/adminPlacesCard/adminPlacesCard";

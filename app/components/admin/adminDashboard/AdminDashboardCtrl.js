@@ -15,7 +15,15 @@ function AdminDashboardCtrl() {
       vm.$router.navigate(['AdminConferences'])
     }
 
+    vm.goToConferencesCreate = function() {
+      vm.$router.navigate(['AdminConferences', 'AdminConferencesCreate'])
+    }
+
     vm.goToPlaces = function() {
       vm.$router.navigate(['AdminPlaces'])
+    }
+
+    vm.goToPlacesCreate = function() {
+      vm.$router.navigate(['AdminPlaces', 'AdminPlacesCreate'])
     }
 }

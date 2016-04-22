@@ -24,22 +24,8 @@ function TopbarCtrl($rootRouter, $mdSidenav) {
         $rootRouter.navigate(['Profile'])
     }
 
-    /**
-     * @ngdoc method
-     * @name goHome
-     * @methodOf webapp.controller:TopbarCtrl
-     * @description Redirect to the home page.
-     * @example
-      ```javascript
-      topbarCtrl.goHome()
-      ```
-     */
-    vm.goHome = function() {
-        $rootRouter.navigate(['Planner'])
-    }
-
     vm.toggleSideMenu = function() {
-        $mdSidenav('left').toggle();
+        $mdSidenav('left').toggle()
     }
 
 }

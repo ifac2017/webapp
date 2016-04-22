@@ -1,5 +1,5 @@
 angular.module('webapp').controller('SidebarCtrl', SidebarCtrl)
-SidebarCtrl.$inject = ['AuthService', 'CurrentUser', '$rootRouter']
+SidebarCtrl.$inject = ['AuthService', 'CurrentUser', '$rootRouter', '$mdSidenav']
 /**
  * @ngdoc controller
  * @name webapp.controller:SidebarCtrl
@@ -8,7 +8,7 @@ SidebarCtrl.$inject = ['AuthService', 'CurrentUser', '$rootRouter']
  * @requires $rootRouter
  * @description In charge of the sidebar view.
  */
-function SidebarCtrl(AuthService, CurrentUser, $rootRouter) {
+function SidebarCtrl(AuthService, CurrentUser, $rootRouter, $mdSidenav) {
     var vm = this
 
     /**
@@ -31,6 +31,7 @@ function SidebarCtrl(AuthService, CurrentUser, $rootRouter) {
      */
     vm.login = function() {
         $rootRouter.navigate(['Login'])
+        $mdSidenav('left').toggle()
     }
 
     /**
@@ -46,6 +47,7 @@ function SidebarCtrl(AuthService, CurrentUser, $rootRouter) {
     vm.logout = function() {
         AuthService.logout()
         $rootRouter.navigate(['Planner'])
+        $mdSidenav('left').toggle()
     }
 
     /**
@@ -60,5 +62,21 @@ function SidebarCtrl(AuthService, CurrentUser, $rootRouter) {
      */
     vm.openAdmin = function() {
         $rootRouter.navigate(['Admin'])
+        $mdSidenav('left').toggle()
+    }
+
+    /**
+     * @ngdoc method
+     * @name goHome
+     * @methodOf webapp.controller:SidebarCtrl
+     * @description Redirect to the home page.
+     * @example
+      ```javascript
+      sidebarCtrl.goHome()
+      ```
+     */
+    vm.goHome = function() {
+        $rootRouter.navigate(['Planner'])
+        $mdSidenav('left').toggle()
     }
 }

@@ -1,4 +1,4 @@
-<md-card style="width:400px;">
+<md-card>
     <md-card-title>
         <md-card-title-text>
             <span class="md-headline">{{$ctrl.place.name}}</span>
@@ -7,7 +7,7 @@
     </md-card-title>
     <md-card-content layout="column">
         <div class="card-media">
-            <ng-map zoom="15" center="{{$ctrl.place.address}}" disable-default-u-i="true" style="height: 200px;"></ng-map>
+            <ng-map zoom="15" center="{{$ctrl.place.address}}" disable-default-u-i="true"></ng-map>
         </div>
         <md-slider-container layout="row" layout-align="center center">
             <i class="material-icons md-24">event_seat</i>
