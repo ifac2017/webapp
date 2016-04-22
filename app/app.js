@@ -8,8 +8,9 @@ require('angular-material')
 require('angularfire')
 require('firebase')
 require('angular-messages')
+require('ngmap')
 
-angular.module('webapp', ['ngMaterial', 'firebase', 'ngMessages', 'ngComponentRouter'])
+angular.module('webapp', ['ngMaterial', 'firebase', 'ngMessages', 'ngComponentRouter', 'ngMap'])
 .value('$routerRootComponent', 'waApp')
 
 require('./**/*.js', {mode: 'expand'})

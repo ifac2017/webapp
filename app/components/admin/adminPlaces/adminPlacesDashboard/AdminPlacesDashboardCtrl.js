@@ -22,10 +22,10 @@ function AdminPlacesDashboardCtrl(NotificationsService, PlacesService) {
     }
 
     vm.$routerOnActivate = function(next) {
-      if (next.params.creationOkay === true) {
-        NotificationsService.success('The place has been well created!')
-      } else if (next.params.creationOkay === false) {
-        NotificationsService.error('An error occured during the creation! Please try again...')
-      }
+        if (next.params.creationOkay === true) {
+            NotificationsService.success('The place has been well created!')
+        } else if (next.params.creationOkay === false) {
+            NotificationsService.error('An error occured during the creation! Please try again...')
+        }
     }
 }
