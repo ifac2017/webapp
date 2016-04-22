@@ -1,11 +1,17 @@
 $sidebarBackground: rgb(96,125,139);
-
 wa-sidebar {
-  background-color:$sidebarBackground;
+    background-color: $sidebarBackground;
     md-sidenav {
         background-color: inherit;
         md-content {
             background-color: inherit;
         }
+    }
+    md-sidenav,
+    md-sidenav.md-closed.md-locked-open-add-active,
+    md-sidenav.md-locked-open {
+        min-width: 250px !important;
+        width: 250px !important;
+        max-width: 250px !important;
     }
 }
