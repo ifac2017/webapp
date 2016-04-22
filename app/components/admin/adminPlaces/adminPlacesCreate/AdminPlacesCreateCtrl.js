@@ -12,23 +12,23 @@ function AdminPlacesCreateCtrl(PlacesService) {
     vm.titleName = "Add new place"
     vm.backName = "Places Dashboard"
     vm.backAction = function() {
-      vm.$router.navigate(['AdminPlacesDashboard'])
+        vm.$router.navigate(['AdminPlacesDashboard'])
     }
 
     vm.place = {
-      name: null,
-      address: null,
-      floor: null,
-      maxCapacity: 100
+        name: null,
+        address: null,
+        floor: null,
+        maxCapacity: 100
     }
 
     vm.addPlace = function() {
-      PlacesService.addPlace(vm.place)
-      .then(function(){
-        vm.$router.navigate(['AdminPlacesDashboardAfterCreate', {creationOkay:"true"}])
-      })
-      .catch(function(){
-        vm.$router.navigate(['AdminPlacesDashboardAfterCreate', {creationOkay:"false"}])
-      })
+        PlacesService.addPlace(vm.place)
+            .then(function() {
+                vm.$router.navigate(['AdminPlacesDashboardData', {
+                    data: "creationOkay"
+                }])
+            })
+            .catch(function() {})
     }
 }

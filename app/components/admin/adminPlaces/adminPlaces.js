@@ -10,9 +10,10 @@ angular.module('webapp').component('waAdminPlaces', {
         $router: '<'
     },
     $routeConfig: [
-      {path: '/', name:'AdminPlacesDashboard', component: 'waAdminPlacesDashboard', useAsDefault: true},
+      {path: '/', name:'AdminPlacesDashboard', component: 'waAdminPlacesDashboard'},
+      {path: '/:data', name:'AdminPlacesDashboardData', component: 'waAdminPlacesDashboard'},
       {path: '/create', name:'AdminPlacesCreate', component: 'waAdminPlacesCreate'},
-      {path: '/:creationOkay', name:'AdminPlacesDashboardAfterCreate', component: 'waAdminPlacesDashboard'}
+      {path: '/edit/:id', name:'AdminPlacesEdit', component: 'waAdminPlacesEdit'}
     ],
     templateUrl: ['$element', function($element) {
         angular.element($element).addClass('layout-column')

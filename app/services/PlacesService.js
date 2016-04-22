@@ -27,5 +27,23 @@ function PlacesService($firebaseArray) {
         PlacesService.places.$remove(place)
     }
 
+    PlacesService.loadArray = function() {
+        return new Promise(function(resolve, reject) {
+            PlacesService.places.$loaded().then(function() {
+                resolve()
+            }).catch(function() {
+                reject()
+            })
+        })
+    }
+
+    PlacesService.getPlaceById = function(id) {
+        return PlacesService.places.$getRecord(id)
+    }
+
+    PlacesService.savePlace = function(place) {
+      return PlacesService.places.$save(place)
+    }
+
     return PlacesService
 }
