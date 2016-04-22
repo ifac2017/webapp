@@ -2,7 +2,7 @@
  * @ngdoc directive
  * @name webapp.directive:wa-admin-places
  * @restrict E
- * @description Admin conferences manager component.
+ * @description Admin places manager component.
  */
 angular.module('webapp').component('waAdminPlaces', {
     controller: 'AdminPlacesCtrl',
