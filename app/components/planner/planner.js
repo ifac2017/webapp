@@ -6,5 +6,8 @@
  */
 angular.module('webapp').component('waPlanner', {
     controller: 'PlannerCtrl',
-    templateUrl: 'planner.html'
+    templateUrl: ['$element', function($element) {
+        angular.element($element).addClass('layout-column')
+        return 'planner.html'
+    }]
 })

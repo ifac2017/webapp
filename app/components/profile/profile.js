@@ -6,7 +6,10 @@
  */
 angular.module('webapp').component('waProfile', {
     controller: 'ProfileCtrl',
-    templateUrl: 'profile.html',
+    templateUrl: ['$element', function($element) {
+        angular.element($element).addClass('layout-column')
+        return 'profile.html'
+    }],
     $canActivate: ['AuthService', '$rootRouter', function(AuthService, $rootRouter) {
         return AuthService.requireAuth()
         .then(function(){

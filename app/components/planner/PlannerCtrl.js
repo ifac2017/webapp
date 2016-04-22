@@ -8,4 +8,6 @@ PlannerCtrl.$inject = []
  */
 function PlannerCtrl() {
     var vm = this
+
+    vm.titleName = "Planner"
 }
