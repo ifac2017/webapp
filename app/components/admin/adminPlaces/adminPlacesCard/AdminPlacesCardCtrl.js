@@ -15,7 +15,7 @@ function AdminPlacesCardCtrl(PlacesService, $mdDialog) {
             .ariaLabel('Lucky day')
             .targetEvent(event)
             .ok('Yes remove!')
-            .cancel('X')
+            .cancel('Cancel')
         $mdDialog.show(confirm).then(function() {
             PlacesService.removePlace(vm.place)
         })
