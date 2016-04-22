@@ -1,5 +1,5 @@
 angular.module('webapp').controller('TopbarCtrl', TopbarCtrl)
-TopbarCtrl.$inject = ['$rootRouter']
+TopbarCtrl.$inject = ['$rootRouter', '$mdSidenav']
 
 /**
  * @ngdoc controller
@@ -7,7 +7,7 @@ TopbarCtrl.$inject = ['$rootRouter']
  * @requires $rootRouter
  * @description In charge of the topbar view.
  */
-function TopbarCtrl($rootRouter) {
+function TopbarCtrl($rootRouter, $mdSidenav) {
     var vm = this
 
     /**
@@ -37,4 +37,9 @@ function TopbarCtrl($rootRouter) {
     vm.goHome = function() {
         $rootRouter.navigate(['Planner'])
     }
+
+    vm.toggleSideMenu = function() {
+        $mdSidenav('left').toggle();
+    }
+
 }
