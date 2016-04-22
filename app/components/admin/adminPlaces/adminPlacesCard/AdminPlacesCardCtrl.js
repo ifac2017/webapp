@@ -11,8 +11,8 @@ function AdminPlacesCardCtrl(PlacesService, $mdDialog) {
 
     vm.removePlace = function(event) {
         var confirm = $mdDialog.confirm()
-            .title('Would you like to delete your place?')
-            .ariaLabel('Lucky day')
+            .title('Would you like to delete this place?')
+            .ariaLabel('Remove place')
             .targetEvent(event)
             .ok('Yes remove!')
             .cancel('Cancel')
