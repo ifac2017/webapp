@@ -14,12 +14,20 @@
                     <div class="card-media">
                         <ng-map zoom="15" center="{{place.address}}" disable-default-u-i="true" style="height: 200px;"></ng-map>
                     </div>
-                    <md-slider-container flex layout="row" layout-align="center center">
-                      <span class="md-subhead" layout-padding>Remaining seats: {{place.availableCapacity}}/{{place.maxCapacity}}</span>
-                        <md-slider flex ng-model="place.availableCapacity" ng-disabled="true" ng-readonly="true" aria-label="capacity"></md-slider>
+                    <md-slider-container layout="row" layout-align="center center">
+                        <i class="material-icons md-24">event_seat</i>
+                        <span layout-padding>Remaining seats:
+                            {{place.availableCapacity}}/{{place.maxCapacity}}</span>
+                        <md-slider flex ng-model="place.availableCapacity" step="1" min="0" max="{{place.maxCapacity}}" md-discrete ng-disabled="true" ng-readonly="true" aria-label="capacity"></md-slider>
                     </md-slider-container>
                 </md-card-content>
                 <md-card-actions layout="row" layout-align="end">
+                    <md-button class="md-icon-button">
+                        <md-tooltip md-direction="top">
+                            Edit the place
+                        </md-tooltip>
+                        <i class="material-icons md-24">edit</i>
+                    </md-button>
                     <md-button class="md-icon-button">
                         <md-tooltip md-direction="top">
                             Delete the place
