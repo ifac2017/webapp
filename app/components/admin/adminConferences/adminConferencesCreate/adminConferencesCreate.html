@@ -3,18 +3,26 @@
     <md-content layout-padding>
         <form name="loginForm">
             <md-input-container class="md-block">
-                <input type="text" name="speaker" placeholder="Speaker name" ng-model="$ctrl.conference.speaker" required>
+                <input type="text" name="name" placeholder="Name" ng-model="$ctrl.session.name" required>
             </md-input-container>
+
+            <div class="row">
+                <span>Date:</span>
+                <md-datepicker md-placeholder="Enter date" ng-model="$ctrl.session.date"></md-datepicker>
+            </div>
+
+            <md-slider-container layout="row" layout-align="center center">
+                <md-input-container class="md-block">
+                    <input type="number" name="floor" placeholder="Duration (min)" ng-model="$ctrl.session.duration" required>
+                </md-input-container>
+                <md-slider flex md-discrete step="5" min="0" max="240" ng-model="$ctrl.session.duration" aria-label="duration"></md-slider>
+            </md-slider-container>
+
             <md-input-container class="md-block">
-                <input type="text" name="place" placeholder="Place address" ng-model="$ctrl.conference.place" required>
+                <label>Abstract</label>
+                <textarea ng-model="$ctrl.session.abstract" md-maxlength="500" rows="5"></textarea>
             </md-input-container>
-            <md-input-container flex class="md-block">
-                <input type="number" name="duration" placeholder="Duration" ng-model="$ctrl.conference.duration" required>
-            </md-input-container>
-            <md-input-container class="md-block">
-                <input type="text" name="topic" placeholder="Topic" ng-model="$ctrl.conference.topic" required>
-            </md-input-container>
-            <md-datepicker md-placeholder="Enter date" ng-model="$ctrl.conference.date"></md-datepicker>
+
             <md-input-container class="md-block">
                 <md-button class="md-raised md-accent" ng-click="">Create !</md-button>
             </md-input-container>

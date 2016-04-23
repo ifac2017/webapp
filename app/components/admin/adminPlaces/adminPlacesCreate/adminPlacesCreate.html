@@ -3,12 +3,12 @@
     <md-content layout-padding>
         <form name="loginForm">
             <md-input-container class="md-block">
-                <input type="text" name="name" placeholder="Place name" ng-model="$ctrl.place.name" required>
+                <input type="text" name="name" placeholder="Name" ng-model="$ctrl.place.name" required>
             </md-input-container>
             <md-input-container class="md-block">
-                <input type="text" name="address" placeholder="Place address" ng-model="$ctrl.place.address" required>
+                <input type="text" name="address" placeholder="Address" ng-model="$ctrl.place.address" required>
             </md-input-container>
-            <md-input-container flex class="md-block">
+            <!--<md-input-container flex class="md-block">
                 <input type="number" name="floor" placeholder="Floor" ng-model="$ctrl.place.floor" required>
             </md-input-container>
             <md-slider-container layout="row" layout-align="center center">
@@ -16,7 +16,7 @@
                   <input type="number" name="floor" placeholder="Maximum Capacity" ng-model="$ctrl.place.maxCapacity" required>
               </md-input-container>
                 <md-slider flex md-discrete step="1" min="0" max="500" ng-model="$ctrl.place.maxCapacity" aria-label="maxCapacity"></md-slider>
-            </md-slider-container>
+            </md-slider-container>-->
             <md-input-container class="md-block">
                 <md-button class="md-raised md-accent" ng-click="$ctrl.addPlace()">Create !</md-button>
             </md-input-container>

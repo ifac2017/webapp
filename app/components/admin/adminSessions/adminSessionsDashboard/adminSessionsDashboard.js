@@ -1,20 +1,18 @@
 /**
  * @ngdoc directive
- * @name webapp.directive:wa-admin
+ * @name webapp.directive:wa-admin-sessions-dashboard
  * @restrict E
- * @description Admin component.
+ * @description Admin sessions dashboard manager component.
  */
-angular.module('webapp').component('waAdmin', {
-    controller: 'AdminCtrl',
+angular.module('webapp').component('waAdminSessionsDashboard', {
+    controller: 'AdminSessionsDashboardCtrl',
     templateUrl: ['$element', function($element) {
         angular.element($element).addClass('layout-column')
-        return 'admin.html'
+        return 'adminSessionsDashboard.html'
     }],
-    $routeConfig: [
-      {path: '/', name:'AdminDashboard', component: 'waAdminDashboard', useAsDefault: true},
-      {path: '/sessions/...', name:'AdminSessions', component: 'waAdminSessions'},
-      {path: '/places/...', name:'AdminPlaces', component: 'waAdminPlaces'}
-    ],
+    bindings: {
+        $router: '<'
+    },
     $canActivate: ['AuthService', '$rootRouter', function(AuthService, $rootRouter) {
         return AuthService.requireAdminAuth()
         .then(function(){

@@ -11,12 +11,12 @@ function AdminDashboardCtrl() {
 
     vm.titleName = "Admin Dashboard"
 
-    vm.goToConferences = function() {
-      vm.$router.navigate(['AdminConferences'])
+    vm.goToSessions = function() {
+      vm.$router.navigate(['AdminSessions'])
     }
 
-    vm.goToConferencesCreate = function() {
-      vm.$router.navigate(['AdminConferences', 'AdminConferencesCreate'])
+    vm.goToSessionsCreate = function() {
+      vm.$router.navigate(['AdminSessions', 'AdminSessionsCreate'])
     }
 
     vm.goToPlaces = function() {

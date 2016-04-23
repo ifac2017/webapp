@@ -1,14 +1,14 @@
 /**
  * @ngdoc directive
- * @name webapp.directive:wa-admin-conferences-dashboard
+ * @name webapp.directive:wa-admin-sessions-create
  * @restrict E
- * @description Admin conferences dashboard manager component.
+ * @description Admin sessions creation manager component.
  */
-angular.module('webapp').component('waAdminConferencesDashboard', {
-    controller: 'AdminConferencesDashboardCtrl',
+angular.module('webapp').component('waAdminSessionsCreate', {
+    controller: 'AdminSessionsCreateCtrl',
     templateUrl: ['$element', function($element) {
         angular.element($element).addClass('layout-column')
-        return 'adminConferencesDashboard.html'
+        return 'adminSessionsCreate.html'
     }],
     bindings: {
         $router: '<'

@@ -1,0 +1,24 @@
+<div layout="column">
+    <wa-breadcrump title-name="$ctrl.titleName" back-name="$ctrl.backName" back-action="$ctrl.backAction()"></wa-breadcrump>
+    <md-content layout-padding>
+        <form name="loginForm">
+            <md-input-container class="md-block">
+                <input type="text" name="name" placeholder="Name" ng-model="$ctrl.session.name" required>
+            </md-input-container>
+            <div layout-gt-xs="row" class="md-inline-form">
+                <md-datepicker md-placeholder="Date" ng-model="$ctrl.session.date"></md-datepicker>
+                <md-input-container flex class="md-block md-icon-float">
+                    <md-icon md-font-icon="fa fa-search"></md-icon>
+                    <input type="time" name="start_time" placeholder="Start time" ng-model="$ctrl.session.start_time" required>
+                </md-input-container>
+                <md-input-container flex class="md-block md-icon-float">
+                    <md-icon md-font-icon="fa fa-search"></md-icon>
+                    <input type="time" name="end_time" placeholder="End time" ng-model="$ctrl.session.end_time" required>
+                </md-input-container>
+            </div>
+            <md-input-container class="md-block">
+                <md-button class="md-raised md-accent" ng-click="$ctrl.addSession()">Create !</md-button>
+            </md-input-container>
+        </form>
+    </md-content>
+</div>

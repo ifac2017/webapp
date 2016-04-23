@@ -2,9 +2,9 @@
     <wa-breadcrump title-name="$ctrl.titleName"></wa-breadcrump>
     <div layout="row">
         <md-content flex layout-padding>
-            <md-button class="md-raised wa-icon-text-button" ng-click="$ctrl.goToConferences()">
+            <md-button class="md-raised wa-icon-text-button" ng-click="$ctrl.goToSessions()">
               <i class="material-icons md-24">chat</i>
-              <span>Manage conferences</span>
+              <span>Manage sessions</span>
             </md-button>
             <md-button class="md-raised wa-icon-text-button">
               <i class="material-icons md-24">person</i>
@@ -26,13 +26,13 @@
                 </md-button>
             </md-fab-trigger>
             <md-fab-actions>
-                <md-button aria-label="add conference" class="md-fab md-raised md-mini wa-icon-button" ng-click="$ctrl.goToConferencesCreate()">
+                <md-button aria-label="add session" class="md-fab md-raised md-mini wa-icon-button" ng-click="$ctrl.goToSessionsCreate()">
                     <md-tooltip md-direction="left">
-                        Add a new conference
+                        Add a new session
                     </md-tooltip>
                     <i class="material-icons md-24">chat</i>
                 </md-button>
-                <md-button aria-label="add conference" class="md-fab md-raised md-mini wa-icon-button" ng-click="$ctrl.goToPlacesCreate()">
+                <md-button aria-label="add place" class="md-fab md-raised md-mini wa-icon-button" ng-click="$ctrl.goToPlacesCreate()">
                     <md-tooltip md-direction="left">
                         Add a new place
                     </md-tooltip>

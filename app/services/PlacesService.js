@@ -16,10 +16,7 @@ function PlacesService($firebaseArray) {
     PlacesService.addPlace = function(place) {
         return PlacesService.places.$add({
             name: place.name,
-            address: place.address,
-            floor: place.floor,
-            maxCapacity: place.maxCapacity,
-            availableCapacity: place.maxCapacity
+            address: place.address
         })
     }
 

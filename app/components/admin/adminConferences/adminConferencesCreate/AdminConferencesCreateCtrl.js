@@ -10,16 +10,19 @@ function AdminConferencesCreateCtrl() {
     var vm = this
 
     vm.titleName = "Add new conference"
-    vm.backName = "Conferences Dashboard"
+    vm.backName = "Sessions Dashboard"
     vm.backAction = function() {
-      vm.$router.navigate(['AdminConferencesDashboard'])
+      vm.$router.navigate(['AdminSessionsDashboard'])
     }
 
     vm.conference = {
-      date: new Date(),
-      place: null,
-      speaker: null,
-      duration: null,
-      topic: null
+      start_time: null,
+      end_time: null,
+      place: Place,
+      room: null,
+      speakers: [],
+      session: null,
+      abstract: null,
+      name: null,
     }
 }
