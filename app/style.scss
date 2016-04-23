@@ -92,13 +92,7 @@ md-toolbar a h3 {
 .wa-icon-button {
     padding: 8px;
 }
-/*************/
-/** SLIDERS **/
-/*************/
-/* Rules to remove dots in discrete slider */
-.md-track-ticks canvas {
-    display: none;
-}
+
 .wa-icon-text-button {
     .material-icons {
         position: relative;
@@ -114,7 +108,16 @@ md-toolbar a h3 {
 }
 
 md-input-container.md-icon-float>md-icon {
+  left: 7px;
   @include vertical-align();
+}
+
+/*************/
+/** SLIDERS **/
+/*************/
+/* Rules to remove dots in discrete slider */
+.md-track-ticks canvas {
+    display: none;
 }
 
 @import "components/sidebar/sidebar";
