@@ -5,6 +5,13 @@ wa-sidebar {
         background-color: inherit;
         md-content {
             background-color: inherit;
+            button {
+                margin: 0 !important;
+                background-color: rgba(0, 0, 0, 0.1) !important;
+                height: 48px !important;
+                color: white !important;
+                font-size: 15px !important;
+            }
         }
     }
     md-sidenav,
