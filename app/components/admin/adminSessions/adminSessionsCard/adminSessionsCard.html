@@ -1,0 +1,38 @@
+<md-card>
+    <md-card-title>
+        <md-card-title-text>
+            <span class="md-headline">{{$ctrl.session.name}}</span>
+        </md-card-title-text>
+    </md-card-title>
+    <md-divider></md-divider>
+    <md-card-content layout-padding layout="column">
+        <div layout="row" layout-align="center center">
+            <md-icon class="material-icons md-24">date_range</md-icon>
+            <span flex>
+                {{$ctrl.start_date | amDateFormat:'dddd, MMMM Do YYYY'}}</span>
+        </div>
+        <div layout="row" layout-align="center center">
+            <md-icon class="material-icons md-24">access_time</md-icon>
+            <span flex>
+                From
+                <span class="md-body-2">{{$ctrl.start_date | amDateFormat:'HH:mm'}}</span>
+                until
+                <span class="md-body-2">{{$ctrl.end_date | amDateFormat:'HH:mm'}}</span>
+            </span>
+        </div>
+    </md-card-content>
+    <md-card-actions layout="row" layout-align="end">
+        <md-button class="md-icon-button" ng-click="$ctrl.editSession()">
+            <md-tooltip md-direction="top">
+                Edit the session
+            </md-tooltip>
+            <i class="material-icons md-24">edit</i>
+        </md-button>
+        <md-button class="md-icon-button" ng-click="$ctrl.removeSession()">
+            <md-tooltip md-direction="top">
+                Delete the session
+            </md-tooltip>
+            <i class="material-icons md-24">delete</i>
+        </md-button>
+    </md-card-actions>
+</md-card>

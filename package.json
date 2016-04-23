@@ -33,8 +33,10 @@
     "angular-aria": "^1.5.3",
     "angular-material": "^1.0.6",
     "angular-messages": "^1.5.3",
+    "angular-moment": "^1.0.0-beta.5",
     "angularfire": "^1.2.0",
     "firebase": "^2.4.2",
+    "moment": "^2.13.0",
     "ngmap": "^1.17.1"
   },
   "bugs": {

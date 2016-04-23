@@ -1,12 +1,12 @@
 angular.module('webapp').controller('AdminSessionsDashboardCtrl', AdminSessionsDashboardCtrl)
-AdminSessionsDashboardCtrl.$inject = ['NotificationsService']
+AdminSessionsDashboardCtrl.$inject = ['NotificationsService', 'SessionsService']
 
 /**
  * @ngdoc controller
  * @name webapp.controller:AdminSessionsCreateCtrl
  * @description In charge of the admin sessions dashboard view.
  */
-function AdminSessionsDashboardCtrl(NotificationsService) {
+function AdminSessionsDashboardCtrl(NotificationsService, SessionsService) {
     var vm = this
 
     vm.titleName = "Sessions Dashboard"
@@ -14,6 +14,8 @@ function AdminSessionsDashboardCtrl(NotificationsService) {
     vm.backAction = function() {
       vm.$router.parent.navigate(['AdminDashboard'])
     }
+
+    vm.sessions = SessionsService.sessions
 
     vm.goToSessionsCreate = function() {
       vm.$router.navigate(['AdminSessionsCreate'])

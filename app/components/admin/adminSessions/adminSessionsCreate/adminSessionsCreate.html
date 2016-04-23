@@ -2,11 +2,15 @@
     <wa-breadcrump title-name="$ctrl.titleName" back-name="$ctrl.backName" back-action="$ctrl.backAction()"></wa-breadcrump>
     <md-content layout-padding>
         <form name="loginForm">
-            <md-input-container class="md-block">
-                <input type="text" name="name" placeholder="Name" ng-model="$ctrl.session.name" required>
-            </md-input-container>
+
             <div layout-gt-xs="row" class="md-inline-form">
+                <md-input-container flex class="md-block">
+                    <input type="text" name="name" placeholder="Name" ng-model="$ctrl.session.name" required>
+                </md-input-container>
                 <md-datepicker md-placeholder="Date" ng-model="$ctrl.session.date"></md-datepicker>
+
+            </div>
+            <div layout-gt-xs="row">
                 <md-input-container flex class="md-block md-icon-float">
                     <md-icon class="material-icons md-24">access_time</md-icon>
                     <input type="time" name="start_time" placeholder="Start time" ng-model="$ctrl.session.start_time" required>
