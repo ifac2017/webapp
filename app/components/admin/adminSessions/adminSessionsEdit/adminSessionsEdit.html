@@ -6,21 +6,20 @@
                 <md-input-container flex class="md-block">
                     <input type="text" name="name" placeholder="Name" ng-model="$ctrl.session.name" required>
                 </md-input-container>
-                <md-datepicker md-placeholder="Date" ng-model="$ctrl.session.date"></md-datepicker>
-
+                <md-datepicker md-placeholder="Date" ng-model="$ctrl.date"></md-datepicker>
             </div>
             <div layout-gt-xs="row">
                 <md-input-container flex class="md-block md-icon-float">
                     <md-icon class="material-icons md-24">access_time</md-icon>
-                    <input type="time" name="start_time" placeholder="Start time" ng-model="$ctrl.session.start_time" required>
+                    <input type="time" name="start_time" placeholder="Start time" ng-model="$ctrl.start_time" required>
                 </md-input-container>
                 <md-input-container flex class="md-block md-icon-float">
                     <md-icon class="material-icons md-24">access_time</md-icon>
-                    <input type="time" name="end_time" placeholder="End time" ng-model="$ctrl.session.end_time" required>
+                    <input type="time" name="end_time" placeholder="End time" ng-model="$ctrl.end_time" required>
                 </md-input-container>
             </div>
             <md-input-container class="md-block">
-                <md-button class="md-raised md-accent" ng-click="$ctrl.addSession()">Create !</md-button>
+                <md-button class="md-raised md-accent" ng-click="$ctrl.editSession()">Edit !</md-button>
             </md-input-container>
         </form>
     </md-content>

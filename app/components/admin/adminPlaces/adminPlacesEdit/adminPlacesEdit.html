@@ -2,7 +2,7 @@
     <wa-breadcrump title-name="$ctrl.titleName" back-name="$ctrl.backName" back-action="$ctrl.backAction()"></wa-breadcrump>
     <md-content layout-padding>
         <ng-map zoom="15" center="{{$ctrl.place.address}}" disable-default-u-i="true"></ng-map>
-        <form name="loginForm">
+        <form>
             <md-input-container class="md-block">
                 <input type="text" name="name" placeholder="Name" ng-model="$ctrl.place.name" required>
             </md-input-container>

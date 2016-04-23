@@ -9,15 +9,15 @@
         <div layout="row" layout-align="center center">
             <md-icon class="material-icons md-24">date_range</md-icon>
             <span flex>
-                {{$ctrl.start_date | amDateFormat:'dddd, MMMM Do YYYY'}}</span>
+                {{$ctrl.session.date | amDateFormat:'dddd, MMMM Do YYYY'}}</span>
         </div>
         <div layout="row" layout-align="center center">
             <md-icon class="material-icons md-24">access_time</md-icon>
             <span flex>
                 From
-                <span class="md-body-2">{{$ctrl.start_date | amDateFormat:'HH:mm'}}</span>
+                <span class="md-body-2">{{$ctrl.session.start_time | amDateFormat:'HH:mm'}}</span>
                 until
-                <span class="md-body-2">{{$ctrl.end_date | amDateFormat:'HH:mm'}}</span>
+                <span class="md-body-2">{{$ctrl.session.end_time | amDateFormat:'HH:mm'}}</span>
             </span>
         </div>
     </md-card-content>

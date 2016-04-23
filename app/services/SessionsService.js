@@ -16,19 +16,10 @@ function SessionsService($firebaseArray) {
     SessionsService.addSession = function(session) {
         return SessionsService.sessions.$add({
             name: session.name,
-            start_datetime: SessionsService.getTimeFrom(session.date, session.start_time),
-            end_datetime: SessionsService.getTimeFrom(session.date, session.end_time)
+            date: session.date.getTime(),
+            start_time: session.start_time.getTime(),
+            end_time: session.end_time.getTime()
         })
-    }
-
-    SessionsService.getTimeFrom = function(date, time) {
-        return new Date(
-            date.getFullYear(),
-            date.getMonth(),
-            date.getDate(),
-            time.getHours(),
-            time.getMinutes()
-        ).getTime()
     }
 
     SessionsService.removeSession = function(session) {

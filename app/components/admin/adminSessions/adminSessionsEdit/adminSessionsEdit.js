@@ -1,26 +1,26 @@
 /**
  * @ngdoc directive
- * @name webapp.directive:wa-admin-places-edit
+ * @name webapp.directive:wa-admin-sessions-edit
  * @restrict E
- * @description Admin places edition manager component.
+ * @description Admin sessions edition manager component.
  */
-angular.module('webapp').component('waAdminPlacesEdit', {
-    controller: 'AdminPlacesEditCtrl',
+angular.module('webapp').component('waAdminSessionsEdit', {
+    controller: 'AdminSessionsEditCtrl',
     templateUrl: ['$element', function($element) {
         angular.element($element).addClass('layout-column')
-        return 'adminPlacesEdit.html'
+        return 'adminSessionsEdit.html'
     }],
     bindings: {
         $router: '<'
     },
-    $canActivate: ['AuthService', 'PlacesService', '$rootRouter', function(AuthService, PlacesService, $rootRouter) {
+    $canActivate: ['AuthService', 'SessionsService', '$rootRouter', function(AuthService, SessionsService, $rootRouter) {
         return AuthService.requireAdminAuth()
             .then(function() {
-                PlacesService.loadArray().then(function() {
+                SessionsService.loadArray().then(function() {
                         return true
                     })
                     .catch(function(error) {
-                        $rootRouter.navigate(['Admin', 'AdminPlaces'])
+                        $rootRouter.navigate(['Admin', 'AdminSessions'])
                         return false
                     })
             })
