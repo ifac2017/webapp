@@ -1,0 +1,9 @@
+{
+  "firebase": "ifac2017",
+  "public": "public",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}
