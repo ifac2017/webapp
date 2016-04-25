@@ -1,25 +1,24 @@
 <div layout="column">
     <wa-breadcrump title-name="$ctrl.titleName"></wa-breadcrump>
-    <div layout="row">
-        <md-content flex layout-padding>
-            <md-button class="md-raised wa-icon-text-button" ng-click="$ctrl.goToSessions()">
-                <i class="material-icons md-24">chat</i>
-                <span>Manage sessions</span>
-            </md-button>
-            <md-button class="md-raised wa-icon-text-button">
-                <i class="material-icons md-24">person</i>
-                <span>Manage users</span>
-            </md-button>
-            <md-button class="md-raised wa-icon-text-button" ng-click="$ctrl.goToPlaces()">
-                <i class="material-icons md-24">place</i>
-                <span>Manage places</span>
-            </md-button>
-            <md-button class="md-raised wa-icon-text-button">
-                <i class="material-icons md-24">event</i>
-                <span>Manage the event</span>
-            </md-button>
-        </md-content>
-        <md-fab-speed-dial md-direction="down" class="md-scale" md-open="fabOpen" ng-mouseenter="fabOpen=true" ng-mouseleave="fabOpen=false">
+    <md-content flex layout-padding>
+        <md-button class="md-raised wa-icon-text-button" ng-click="$ctrl.goToSessions()">
+            <i class="material-icons md-24">chat</i>
+            <span>Manage sessions</span>
+        </md-button>
+        <md-button class="md-raised wa-icon-text-button">
+            <i class="material-icons md-24">person</i>
+            <span>Manage users</span>
+        </md-button>
+        <md-button class="md-raised wa-icon-text-button" ng-click="$ctrl.goToPlaces()">
+            <i class="material-icons md-24">place</i>
+            <span>Manage places</span>
+        </md-button>
+        <md-button class="md-raised wa-icon-text-button">
+            <i class="material-icons md-24">event</i>
+            <span>Manage the event</span>
+        </md-button>
+    </md-content>
+    <!--<md-fab-speed-dial md-direction="down" class="md-scale" md-open="fabOpen" ng-mouseenter="fabOpen=true" ng-mouseleave="fabOpen=false">
             <md-fab-trigger>
                 <md-button aria-label="menu" class="md-fab wa-icon-button">
                     <i class="material-icons md-24">add</i>
@@ -39,6 +38,5 @@
                     <i class="material-icons md-24">place</i>
                 </md-button>
             </md-fab-actions>
-        </md-fab-speed-dial>
-    </div>
+        </md-fab-speed-dial>-->
 </div>
