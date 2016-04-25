@@ -1,8 +1,11 @@
 <md-list-item class="md-3-line">
     <div class="md-list-item-text" layout="column">
         <h3>{{$ctrl.session.name}}</h3>
-        <h4>{{session.date | amDateFormat:'dddd, MMMM Do YYYY'}}</h4>
-        <p>From {{$ctrl.session.start_time | amDateFormat:'HH:mm'}} until {{$ctrl.session.end_time | amDateFormat:'HH:mm'}}</p>
+        <h4>{{$ctrl.session.date | amDateFormat:'dddd, MMMM Do YYYY'}}</h4>
+        <p>From
+            {{$ctrl.session.start_time | amDateFormat:'HH:mm'}}
+            until
+            {{$ctrl.session.end_time | amDateFormat:'HH:mm'}}</p>
     </div>
     <span flex></span>
     <md-button class="md-icon-button" ng-click="$ctrl.onAdd()">
