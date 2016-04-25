@@ -1,12 +1,12 @@
 angular.module('webapp').controller('AdminSessionsConferencesCreateCtrl', AdminSessionsConferencesCreateCtrl)
-AdminSessionsConferencesCreateCtrl.$inject = ['SessionsService']
+AdminSessionsConferencesCreateCtrl.$inject = ['ConferencesService', 'SessionsService']
 
 /**
  * @ngdoc controller
  * @name webapp.controller:AdminSessionsConferencesCreateCtrl
  * @description In charge of the admin sessions conferences creation view.
  */
-function AdminSessionsConferencesCreateCtrl(SessionsService) {
+function AdminSessionsConferencesCreateCtrl(ConferencesService, SessionsService) {
     var vm = this
 
     vm.titleName = "Add new conference"
@@ -31,14 +31,14 @@ function AdminSessionsConferencesCreateCtrl(SessionsService) {
           name:'Gautier Delorme',
           origin: 'INSA Toulouse'
         }],
-        session: null,
+        sessionId: null,
         abstract: null
     }
 
     vm.$routerOnActivate = function(next, prev) {
         vm.session = SessionsService.getSessionById(next.params.id)
         vm.conference.date = new Date(vm.session.date)
-        vm.conference.session = vm.session.$id
+        vm.conference.sessionId = vm.session.$id
         vm.conference.start_time = new Date(vm.session.start_time)
         vm.conference.end_time = new Date(vm.session.end_time)
     }
@@ -51,6 +51,12 @@ function AdminSessionsConferencesCreateCtrl(SessionsService) {
     }
 
     vm.addConference = function() {
-
+      ConferencesService.addConference(vm.conference)
+          .then(function() {
+              vm.$router.navigate(['AdminSessionsDashboardData', {
+                  data: "creationOkay"
+              }])
+          })
+          .catch(function() {})
     }
 }
