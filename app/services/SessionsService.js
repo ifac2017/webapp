@@ -44,5 +44,21 @@ function SessionsService($firebaseArray) {
         return SessionsService.sessions.$save(session)
     }
 
+    SessionsService.addConferenceTo = function(session, conference) {
+        if (!session.conferences) {
+            session.conferences = []
+        }
+        session.conferences.push(conference)
+        return SessionsService.saveSession(session)
+
+        /*var ref = SessionsService._ref.child(session.$id)
+        ref.on("value", function(snapshot) {
+            ref.set({
+                conferences: email
+            })
+            resolve()
+        })*/
+    }
+
     return SessionsService
 }
