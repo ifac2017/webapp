@@ -34,7 +34,9 @@
                         <input type="text" name="room" placeholder="Room" ng-model="$ctrl.conference.room" required>
                     </md-input-container>
                     <md-input-container flex class="md-block">
-                        <input type="text" name="place" placeholder="Place" ng-model="$ctrl.conference.place" required>
+                        <md-select placeholder="Place" ng-model="$ctrl.conference.place">
+                            <md-option ng-repeat="place in $ctrl.places" ng-value="place">{{place.name}}</md-option>
+                        </md-select>
                     </md-input-container>
                 </div>
             </div>
@@ -51,11 +53,17 @@
                         <md-button class="md-accent" ng-click="$ctrl.addSpeaker()">Add !</md-button>
                     </md-input-container>
                     <div layout="column" flex>
-                        <span class="md-body-2">Speakers:</span>
+                        <span ng-if="$ctrl.conference.speakers.length" class="md-body-2">Speakers:</span>
                         <ul>
                             <li ng-repeat="speaker in $ctrl.conference.speakers">{{speaker.name}}
                                 <span class="md-caption">-
                                     {{speaker.origin}}</span>
+                                <md-button class="md-icon-button" ng-click="$ctrl.removeSpeaker(speaker)">
+                                    <md-tooltip md-direction="top">
+                                        Remove speaker
+                                    </md-tooltip>
+                                    <i class="material-icons md-18">remove_circle_outline</i>
+                                </md-button>
                             </li>
                         </ul>
                     </div>

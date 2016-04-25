@@ -1,12 +1,12 @@
 angular.module('webapp').controller('AdminSessionsConferencesCreateCtrl', AdminSessionsConferencesCreateCtrl)
-AdminSessionsConferencesCreateCtrl.$inject = ['ConferencesService', 'SessionsService', 'Conference', 'Speaker']
+AdminSessionsConferencesCreateCtrl.$inject = ['ConferencesService', 'SessionsService', 'Conference', 'Speaker', 'PlacesService']
 
 /**
  * @ngdoc controller
  * @name webapp.controller:AdminSessionsConferencesCreateCtrl
  * @description In charge of the admin sessions conferences creation view.
  */
-function AdminSessionsConferencesCreateCtrl(ConferencesService, SessionsService, Conference, Speaker) {
+function AdminSessionsConferencesCreateCtrl(ConferencesService, SessionsService, Conference, Speaker, PlacesService) {
     var vm = this
 
     vm.titleName = "Add new conference"
@@ -18,6 +18,8 @@ function AdminSessionsConferencesCreateCtrl(ConferencesService, SessionsService,
     vm.speaker = Speaker
 
     vm.conference = Conference
+
+    vm.places = PlacesService.places
 
     vm.$routerOnActivate = function(next, prev) {
         vm.session = SessionsService.getSessionById(next.params.id)
@@ -32,6 +34,10 @@ function AdminSessionsConferencesCreateCtrl(ConferencesService, SessionsService,
       vm.conference.speakers.push(speaker)
       vm.speaker.name = null
       vm.speaker.origin = null
+    }
+
+    vm.removeSpeaker = function(speaker) {
+      vm.conference.speakers.splice(vm.conference.speakers.indexOf(speaker), 1)
     }
 
     vm.addConference = function() {
