@@ -2,24 +2,22 @@
     <wa-breadcrump title-name="$ctrl.titleName" back-name="$ctrl.backName" back-action="$ctrl.backAction()"></wa-breadcrump>
     <md-content layout-padding>
         <form>
-            <md-input-container class="md-block">
-                <input type="text" name="name" placeholder="Name" ng-model="$ctrl.place.name" required>
-            </md-input-container>
-            <md-input-container class="md-block">
-                <input type="text" name="address" placeholder="Address" ng-model="$ctrl.place.address" required>
-            </md-input-container>
-            <!--<md-input-container flex class="md-block">
-                <input type="number" name="floor" placeholder="Floor" ng-model="$ctrl.place.floor" required>
-            </md-input-container>
-            <md-slider-container layout="row" layout-align="center center">
-              <md-input-container>
-                  <input type="number" name="floor" placeholder="Maximum Capacity" ng-model="$ctrl.place.maxCapacity" required>
-              </md-input-container>
-                <md-slider flex md-discrete step="1" min="0" max="500" ng-model="$ctrl.place.maxCapacity" aria-label="maxCapacity"></md-slider>
-            </md-slider-container>-->
-            <md-input-container class="md-block">
-                <md-button class="md-raised md-accent" ng-click="$ctrl.addPlace()">Create !</md-button>
-            </md-input-container>
+            <div layout-padding>
+                <span class="md-heading">General information</span>
+                <div layout-gt-xs="row" class="md-inline-form">
+                    <md-input-container flex class="md-block">
+                        <input type="text" name="name" placeholder="Name" ng-model="$ctrl.place.name" required>
+                    </md-input-container>
+                    <md-input-container flex class="md-block">
+                        <input type="text" name="address" placeholder="Address" ng-model="$ctrl.place.address" required>
+                    </md-input-container>
+                </div>
+            </div>
+            <div layout-padding>
+                <md-input-container class="md-block">
+                    <md-button class="md-raised md-accent" ng-click="$ctrl.addPlace()">Create !</md-button>
+                </md-input-container>
+            </div>
         </form>
     </md-content>
 </div>

@@ -68,9 +68,11 @@
                     <textarea ng-model="$ctrl.session.abstract" md-maxlength="500" rows="5"></textarea>
                 </md-input-container>
             </div>
-            <md-input-container class="md-block">
-                <md-button class="md-raised md-accent" ng-click="$ctrl.addConference()">Create !</md-button>
-            </md-input-container>
+            <div layout-padding>
+                <md-input-container class="md-block">
+                    <md-button class="md-raised md-accent" ng-click="$ctrl.addConference()">Create !</md-button>
+                </md-input-container>
+            </div>
         </form>
     </md-content>
 </div>
