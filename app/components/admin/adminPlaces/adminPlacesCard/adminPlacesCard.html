@@ -3,7 +3,7 @@
         <h3>{{$ctrl.place.name}}</h3>
         <h4>{{$ctrl.place.address}}</h4>
     </div>
-    <div layout-padding flex>
+    <div hide show-gt-xs layout-padding flex>
         <ng-map id="placesMap" zoom="15" center="{{$ctrl.place.address}}" disable-default-u-i="true"></ng-map>
     </div>
     <md-button class="md-icon-button" ng-click="$ctrl.onEdit()">
