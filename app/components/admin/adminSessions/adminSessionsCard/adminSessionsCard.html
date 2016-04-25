@@ -1,31 +1,43 @@
 <md-list-item class="md-3-line">
-    <div class="md-list-item-text" layout="column">
-        <h3>{{$ctrl.session.name}}</h3>
-        <h4>{{$ctrl.session.date | amDateFormat:'dddd, MMMM Do YYYY'}}</h4>
-        <p>From
-            {{$ctrl.session.start_time | amDateFormat:'HH:mm'}}
-            until
-            {{$ctrl.session.end_time | amDateFormat:'HH:mm'}}</p>
+    <div flex layout="column">
+        <div flex layout="row">
+            <div class="md-list-item-text" layout="column">
+                <h3>{{$ctrl.session.name}}</h3>
+                <h4>{{$ctrl.session.date | amDateFormat:'dddd, MMMM Do YYYY'}}</h4>
+                <p>From
+                    {{$ctrl.session.start_time | amDateFormat:'HH:mm'}}
+                    until
+                    {{$ctrl.session.end_time | amDateFormat:'HH:mm'}}</p>
+            </div>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="$ctrl.toggleConferences()">
+                <md-tooltip md-direction="top">
+                    Toggle conferences
+                </md-tooltip>
+                <i class="material-icons md-24">list</i>
+            </md-button>
+            <md-button class="md-icon-button" ng-click="$ctrl.onAdd()">
+                <md-tooltip md-direction="top">
+                    Add a conference
+                </md-tooltip>
+                <i class="material-icons md-24">add</i>
+            </md-button>
+            <md-button class="md-icon-button" ng-click="$ctrl.onEdit()">
+                <md-tooltip md-direction="top">
+                    Edit the session
+                </md-tooltip>
+                <i class="material-icons md-24">edit</i>
+            </md-button>
+            <md-button class="md-icon-button" ng-click="$ctrl.removeSession()">
+                <md-tooltip md-direction="top">
+                    Delete the session
+                </md-tooltip>
+                <i class="material-icons md-24">delete</i>
+            </md-button>
+        </div>
+        <ul ng-if="$ctrl.showConferences">
+            <li ng-repeat="conference in $ctrl.conferences">{{conference.name}}</li>
+        </ul>
     </div>
-    <span flex></span>
-    
-    <md-button class="md-icon-button" ng-click="$ctrl.onAdd()">
-        <md-tooltip md-direction="top">
-            Add a conference
-        </md-tooltip>
-        <i class="material-icons md-24">add</i>
-    </md-button>
-    <md-button class="md-icon-button" ng-click="$ctrl.onEdit()">
-        <md-tooltip md-direction="top">
-            Edit the session
-        </md-tooltip>
-        <i class="material-icons md-24">edit</i>
-    </md-button>
-    <md-button class="md-icon-button" ng-click="$ctrl.removeSession()">
-        <md-tooltip md-direction="top">
-            Delete the session
-        </md-tooltip>
-        <i class="material-icons md-24">delete</i>
-    </md-button>
     <md-divider ng-if="!$ctrl.$last"></md-divider>
 </md-list-item>
