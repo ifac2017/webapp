@@ -11,15 +11,17 @@ function AdminPlacesDashboardCtrl(NotificationsService, PlacesService) {
 
     vm.titleName = "Places Dashboard"
     vm.backName = "Admin Dashboard"
+    vm.textAction = "Add a new place"
+    vm.iconAction = "add"
+    vm.action = function() {
+        vm.$router.navigate(['AdminPlacesCreate'])
+    }
+
     vm.backAction = function() {
         vm.$router.parent.navigate(['AdminDashboard'])
     }
 
     vm.places = PlacesService.places
-
-    vm.goToPlacesCreate = function() {
-        vm.$router.navigate(['AdminPlacesCreate'])
-    }
 
     vm.editPlace = function(place) {
         vm.$router.navigate(['AdminPlacesEdit', {

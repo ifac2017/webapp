@@ -9,6 +9,9 @@ angular.module('webapp').component('waBreadcrump', {
     bindings: {
       titleName: '<',
       backName: '<',
+      textAction: '<',
+      iconAction: '<',
+      action: '&',
       backAction: '&'
     },
     templateUrl: 'breadcrump.html'
