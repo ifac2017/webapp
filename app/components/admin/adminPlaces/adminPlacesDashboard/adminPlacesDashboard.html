@@ -1,8 +1,10 @@
 <div layout="column">
     <wa-breadcrump title-name="$ctrl.titleName" back-name="$ctrl.backName" back-action="$ctrl.backAction()"></wa-breadcrump>
     <div layout="row">
-        <md-content flex layout="row" layout-wrap>
-            <wa-admin-places-card ng-repeat="place in $ctrl.places" place="place" on-edit="$ctrl.editPlace(place)"></wa-admin-places-card>
+        <md-content flex layout="column" layout-padding>
+            <md-list flex>
+                <wa-admin-places-card ng-repeat="place in $ctrl.places" place="place" on-edit="$ctrl.editPlace(place)"></wa-admin-places-card>
+            </md-list>
         </md-content>
         <md-button class="md-fab wa-icon-button" ng-click="$ctrl.goToPlacesCreate()">
             <md-tooltip md-direction="left">

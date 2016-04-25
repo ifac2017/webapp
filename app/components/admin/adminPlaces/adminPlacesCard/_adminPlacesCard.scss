@@ -1,8 +1,5 @@
 wa-admin-places-card {
-    md-card {
-        width: 400px;
-        ng-map {
-            height: 200px;
-        }
+    ng-map {
+        height: 100px;
     }
 }
