@@ -2,29 +2,63 @@
     <wa-breadcrump title-name="$ctrl.titleName" back-name="$ctrl.backName" back-action="$ctrl.backAction()"></wa-breadcrump>
     <md-content layout-padding>
         <form>
-            <md-input-container class="md-block">
-                <input type="text" name="name" placeholder="Name" ng-model="$ctrl.session.name" required>
-            </md-input-container>
-
-            <div class="row">
-                <span>Date:</span>
-                <md-datepicker md-placeholder="Enter date" ng-model="$ctrl.session.date"></md-datepicker>
+            <div layout-padding>
+                <span class="md-heading">General information</span>
+                <div layout-gt-xs="row" class="md-inline-form">
+                    <md-input-container flex class="md-block">
+                        <input type="text" name="name" placeholder="Name" ng-model="$ctrl.conference.name" required>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <input type="text" name="name" placeholder="Session" ng-model="$ctrl.session.name" disabled>
+                    </md-input-container>
+                    <md-datepicker md-placeholder="Date" ng-model="$ctrl.conference.date" disabled></md-datepicker>
+                </div>
             </div>
-
-            <md-slider-container layout="row" layout-align="center center">
+            <div layout-padding>
+                <span class="md-heading">Scheduling</span>
+                <div layout-gt-xs="row">
+                    <md-input-container flex class="md-block md-icon-float">
+                        <md-icon class="material-icons md-24">access_time</md-icon>
+                        <input type="time" name="start_time" placeholder="Start time" ng-model="$ctrl.conference.start_time" required>
+                    </md-input-container>
+                    <md-input-container flex class="md-block md-icon-float">
+                        <md-icon class="material-icons md-24">access_time</md-icon>
+                        <input type="time" name="end_time" placeholder="End time" ng-model="$ctrl.conference.end_time" required>
+                    </md-input-container>
+                </div>
+            </div>
+            <div layout-padding>
+                <span class="md-heading">Speakers</span>
+                <div layout-gt-xs="row">
+                    <md-input-container class="md-block md-icon-float">
+                        <input type="text" name="start_time" placeholder="Speaker's name" ng-model="$ctrl.speaker.name">
+                    </md-input-container>
+                    <md-input-container class="md-block md-icon-float">
+                        <input type="text" name="end_time" placeholder="Speaker's origin" ng-model="$ctrl.speaker.origin">
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <md-button class="md-accent" ng-click="$ctrl.addSpeaker()">Add !</md-button>
+                    </md-input-container>
+                    <div layout="column" flex>
+                        <span class="md-body-2">Speakers:</span>
+                        <ul>
+                            <li ng-repeat="speaker in $ctrl.conference.speakers">{{speaker.name}}
+                                <span class="md-caption">-
+                                    {{speaker.origin}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div layout-padding>
+                <span class="md-heading">Facultative information</span>
                 <md-input-container class="md-block">
-                    <input type="number" name="floor" placeholder="Duration (min)" ng-model="$ctrl.session.duration" required>
+                    <label>Abstract</label>
+                    <textarea ng-model="$ctrl.session.abstract" md-maxlength="500" rows="5"></textarea>
                 </md-input-container>
-                <md-slider flex md-discrete step="5" min="0" max="240" ng-model="$ctrl.session.duration" aria-label="duration"></md-slider>
-            </md-slider-container>
-
+            </div>
             <md-input-container class="md-block">
-                <label>Abstract</label>
-                <textarea ng-model="$ctrl.session.abstract" md-maxlength="500" rows="5"></textarea>
-            </md-input-container>
-
-            <md-input-container class="md-block">
-                <md-button class="md-raised md-accent" ng-click="">Create !</md-button>
+                <md-button class="md-raised md-accent" ng-click="$ctrl.addConference()">Create !</md-button>
             </md-input-container>
         </form>
     </md-content>

@@ -13,14 +13,20 @@ angular.module('webapp').component('waAdminSessionsConferencesCreate', {
     bindings: {
         $router: '<'
     },
-    $canActivate: ['AuthService', '$rootRouter', function(AuthService, $rootRouter) {
+    $canActivate: ['AuthService', 'SessionsService', '$rootRouter', function(AuthService, SessionsService, $rootRouter) {
         return AuthService.requireAdminAuth()
-        .then(function(){
-          return true
-        })
-        .catch(function(error){
-          $rootRouter.navigate(['Login'])
-          return false
-        })
+            .then(function() {
+                SessionsService.loadArray().then(function() {
+                        return true
+                    })
+                    .catch(function(error) {
+                        $rootRouter.navigate(['Admin', 'AdminSessions'])
+                        return false
+                    })
+            })
+            .catch(function(error) {
+                $rootRouter.navigate(['Login'])
+                return false
+            })
     }]
 })
