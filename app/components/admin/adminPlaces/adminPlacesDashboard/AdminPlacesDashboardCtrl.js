@@ -21,6 +21,12 @@ function AdminPlacesDashboardCtrl(NotificationsService, PlacesService) {
         vm.$router.navigate(['AdminPlacesCreate'])
     }
 
+    vm.editPlace = function(place) {
+        vm.$router.navigate(['AdminPlacesEdit', {
+            id: place.$id
+        }])
+    }
+
     vm.$routerOnActivate = function(next) {
         if (next.params.data === "creationOkay") {
             NotificationsService.success('The place has been well created!')

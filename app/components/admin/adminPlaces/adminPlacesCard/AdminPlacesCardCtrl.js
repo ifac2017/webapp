@@ -1,12 +1,12 @@
 angular.module('webapp').controller('AdminPlacesCardCtrl', AdminPlacesCardCtrl)
-AdminPlacesCardCtrl.$inject = ['PlacesService', '$mdDialog', '$rootRouter']
+AdminPlacesCardCtrl.$inject = ['PlacesService', '$mdDialog']
 
 /**
  * @ngdoc controller
  * @name webapp.controller:AdminPlacesCardCtrl
  * @description In charge of the admin places card view.
  */
-function AdminPlacesCardCtrl(PlacesService, $mdDialog, $rootRouter) {
+function AdminPlacesCardCtrl(PlacesService, $mdDialog) {
     var vm = this
 
     vm.removePlace = function(event) {
@@ -19,11 +19,5 @@ function AdminPlacesCardCtrl(PlacesService, $mdDialog, $rootRouter) {
         $mdDialog.show(confirm).then(function() {
             PlacesService.removePlace(vm.place)
         })
-    }
-
-    vm.editPlace = function() {
-        $rootRouter.navigate(['Admin', 'AdminPlaces', 'AdminPlacesEdit', {
-            id: vm.place.$id
-        }])
     }
 }

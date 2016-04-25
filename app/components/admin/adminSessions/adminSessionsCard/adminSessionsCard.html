@@ -22,7 +22,13 @@
         </div>
     </md-card-content>
     <md-card-actions layout="row" layout-align="end">
-        <md-button class="md-icon-button" ng-click="$ctrl.editSession()">
+        <md-button class="md-icon-button" ng-click="$ctrl.onAdd()">
+            <md-tooltip md-direction="top">
+                Add a conference
+            </md-tooltip>
+            <i class="material-icons md-24">add</i>
+        </md-button>
+        <md-button class="md-icon-button" ng-click="$ctrl.onEdit()">
             <md-tooltip md-direction="top">
                 Edit the session
             </md-tooltip>

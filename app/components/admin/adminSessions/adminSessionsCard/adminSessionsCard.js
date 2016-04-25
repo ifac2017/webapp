@@ -8,7 +8,9 @@ angular.module('webapp').component('waAdminSessionsCard', {
     controller: 'AdminSessionsCardCtrl',
     bindings: {
         $router: '<',
-        session: '<'
+        session: '<',
+        onEdit: '&',
+        onAdd: '&'
     },
     templateUrl: ['$element', function($element) {
         angular.element($element).addClass('layout-column')

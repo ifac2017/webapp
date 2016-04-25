@@ -8,7 +8,8 @@ angular.module('webapp').component('waAdminPlacesCard', {
     controller: 'AdminPlacesCardCtrl',
     bindings: {
         $router: '<',
-        place: '<'
+        place: '<',
+        onEdit: '&'
     },
     templateUrl: ['$element', function($element) {
         angular.element($element).addClass('layout-column')

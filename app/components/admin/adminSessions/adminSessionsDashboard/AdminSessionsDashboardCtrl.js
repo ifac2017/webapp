@@ -21,6 +21,18 @@ function AdminSessionsDashboardCtrl(NotificationsService, SessionsService) {
       vm.$router.navigate(['AdminSessionsCreate'])
     }
 
+    vm.editSession = function(session) {
+      vm.$router.navigate(['AdminSessionsEdit', {
+          id: session.$id
+      }])
+    }
+
+    vm.addConference = function(session) {
+      vm.$router.navigate(['AdminSessionsConferencesCreate', {
+          id: session.$id
+      }])
+    }
+
     vm.$routerOnActivate = function(next) {
         if (next.params.data === "creationOkay") {
             NotificationsService.success('The session has been well created!')

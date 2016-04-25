@@ -1,12 +1,12 @@
 angular.module('webapp').controller('AdminSessionsCardCtrl', AdminSessionsCardCtrl)
-AdminSessionsCardCtrl.$inject = ['SessionsService', '$mdDialog', '$rootRouter']
+AdminSessionsCardCtrl.$inject = ['SessionsService', '$mdDialog']
 
 /**
  * @ngdoc controller
  * @name webapp.controller:AdminSessionsCardCtrl
  * @description In charge of the admin sessions card view.
  */
-function AdminSessionsCardCtrl(SessionsService, $mdDialog, $rootRouter) {
+function AdminSessionsCardCtrl(SessionsService, $mdDialog) {
     var vm = this
 
     vm.removeSession = function(event) {
@@ -19,11 +19,5 @@ function AdminSessionsCardCtrl(SessionsService, $mdDialog, $rootRouter) {
         $mdDialog.show(confirm).then(function() {
             SessionsService.removeSession(vm.session)
         })
-    }
-
-    vm.editSession = function() {
-        $rootRouter.navigate(['Admin', 'AdminSessions', 'AdminSessionsEdit', {
-            id: vm.session.$id
-        }])
     }
 }
