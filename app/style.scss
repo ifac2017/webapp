@@ -92,23 +92,21 @@ md-toolbar a h3 {
 .wa-icon-button {
     padding: 8px;
 }
-
 .wa-icon-text-button {
     .material-icons {
         position: relative;
         top: 7px;
     }
 }
-
 @mixin vertical-align {
     top: 50%;
     -webkit-transform: translateY(-100%);
     -ms-transform: translateY(-100%);
     transform: translateY(-100%);
 }
-
-md-input-container.md-icon-float>md-icon {
-  @include vertical-align();
+md-input-container.md-icon-float > md-icon {
+    @include vertical-align();
+    color: rgba(0,0,0,0.54);
 }
 
 /*************/
@@ -118,7 +116,6 @@ md-input-container.md-icon-float>md-icon {
 .md-track-ticks canvas {
     display: none;
 }
-
 @import "components/sidebar/sidebar";
 @import "components/admin/adminPlaces/adminPlacesCard/adminPlacesCard";
 @import "components/admin/adminSessions/adminSessionsCard/adminSessionsCard";
