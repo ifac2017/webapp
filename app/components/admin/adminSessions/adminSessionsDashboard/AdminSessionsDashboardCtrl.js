@@ -31,7 +31,7 @@ function AdminSessionsDashboardCtrl(NotificationsService, SessionsService) {
     }
 
     vm.addConference = function(session) {
-      vm.$router.navigate(['AdminSessionsConferencesCreate', {
+      vm.$router.navigate(['AdminSessionsConferences', {
           id: session.$id
       }])
     }

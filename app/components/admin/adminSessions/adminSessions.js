@@ -13,9 +13,8 @@ angular.module('webapp').component('waAdminSessions', {
       {path: '/', name:'AdminSessionsDashboard', component: 'waAdminSessionsDashboard', useAsDefault: true},
       {path: '/:data', name:'AdminSessionsDashboardData', component: 'waAdminSessionsDashboard'},
       {path: '/create', name:'AdminSessionsCreate', component: 'waAdminSessionsCreate'},
-      {path: '/edit/:id', name:'AdminSessionsEdit', component: 'waAdminSessionsEdit'},
-      {path: 'conferences/create/:id', name:'AdminSessionsConferencesCreate', component: 'waAdminSessionsConferencesCreate'},
-      {path: 'conferences/edit/:id', name:'AdminSessionsConferencesEdit', component: 'waAdminSessionsConferencesEdit'}
+      {path: '/:id/edit', name:'AdminSessionsEdit', component: 'waAdminSessionsEdit'},
+      {path: '/:id/conferences/...', name:'AdminSessionsConferences', component: 'waAdminSessionsConferences'}
     ],
     templateUrl: ['$element', function($element) {
         angular.element($element).addClass('layout-column')

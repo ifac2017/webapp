@@ -12,7 +12,7 @@ function AdminSessionsConferencesCreateCtrl(ConferencesService, SessionsService,
     vm.titleName = "Add new conference"
     vm.backName = "Sessions Dashboard"
     vm.backAction = function() {
-        vm.$router.navigate(['AdminSessionsDashboard'])
+        vm.$router.parent.parent.navigate(['AdminSessionsDashboard'])
     }
 
     vm.speaker = Speaker
@@ -22,7 +22,8 @@ function AdminSessionsConferencesCreateCtrl(ConferencesService, SessionsService,
     vm.places = PlacesService.places
 
     vm.$routerOnActivate = function(next, prev) {
-        vm.session = SessionsService.getSessionById(next.params.id)
+        var sessionId = vm.$router.parent.parent._currentInstruction.component.params.id
+        vm.session = SessionsService.getSessionById(sessionId)
         vm.conference.date = new Date(vm.session.date)
         vm.conference.sessionId = vm.session.$id
         vm.conference.start_time = new Date(vm.session.start_time)
@@ -30,23 +31,23 @@ function AdminSessionsConferencesCreateCtrl(ConferencesService, SessionsService,
     }
 
     vm.addSpeaker = function() {
-      var speaker = angular.copy(vm.speaker)
-      vm.conference.speakers.push(speaker)
-      vm.speaker.name = null
-      vm.speaker.institution = null
+        var speaker = angular.copy(vm.speaker)
+        vm.conference.speakers.push(speaker)
+        vm.speaker.name = null
+        vm.speaker.institution = null
     }
 
     vm.removeSpeaker = function(speaker) {
-      vm.conference.speakers.splice(vm.conference.speakers.indexOf(speaker), 1)
+        vm.conference.speakers.splice(vm.conference.speakers.indexOf(speaker), 1)
     }
 
     vm.addConference = function() {
-      ConferencesService.addConference(vm.conference, vm.session)
-          .then(function() {
-              vm.$router.navigate(['AdminSessionsDashboardData', {
-                  data: "creationConferenceOkay"
-              }])
-          })
-          .catch(function() {})
+        ConferencesService.addConference(vm.conference, vm.session)
+            .then(function() {
+                vm.$router.parent.parent.navigate(['AdminSessionsDashboardData', {
+                    data: "creationConferenceOkay"
+                }])
+            })
+            .catch(function() {})
     }
 }

@@ -13,7 +13,7 @@ angular.module('webapp').component('waAdminPlaces', {
       {path: '/', name:'AdminPlacesDashboard', component: 'waAdminPlacesDashboard', useAsDefault: true},
       {path: '/:data', name:'AdminPlacesDashboardData', component: 'waAdminPlacesDashboard'},
       {path: '/create', name:'AdminPlacesCreate', component: 'waAdminPlacesCreate'},
-      {path: '/edit/:id', name:'AdminPlacesEdit', component: 'waAdminPlacesEdit'}
+      {path: '/:id/edit', name:'AdminPlacesEdit', component: 'waAdminPlacesEdit'}
     ],
     templateUrl: ['$element', function($element) {
         angular.element($element).addClass('layout-column')
