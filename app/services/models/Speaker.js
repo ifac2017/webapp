@@ -9,6 +9,6 @@ Speaker.$inject = []
 function Speaker() {
     return {
       name: null,
-      origin: null
+      institution: null
     }
 }

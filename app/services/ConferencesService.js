@@ -19,7 +19,7 @@ function ConferencesService(SessionsService, $firebaseArray) {
             date: conference.date.getTime(),
             start_time: conference.start_time.getTime(),
             end_time: conference.end_time.getTime(),
-            place: conference.place,
+            placeId: conference.placeId,
             room: conference.room,
             speakers: conference.speakers,
             sessionId: conference.sessionId,

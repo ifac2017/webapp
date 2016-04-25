@@ -40,7 +40,7 @@ function AdminSessionsDashboardCtrl(NotificationsService, SessionsService) {
         if (next.params.data === "creationSessionOkay") {
             NotificationsService.success('The session has been well created!')
         } else if (next.params.data === "creationConferenceOkay") {
-            NotificationsService.success('The session has been well created!')
+            NotificationsService.success('The conference has been well created!')
         } else if (next.params.data === "editionOkay") {
             NotificationsService.success('The session has been well edited!')
         }

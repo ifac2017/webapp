@@ -34,8 +34,8 @@
                         <input type="text" name="room" placeholder="Room" ng-model="$ctrl.conference.room" required>
                     </md-input-container>
                     <md-input-container flex class="md-block">
-                        <md-select placeholder="Place" ng-model="$ctrl.conference.place">
-                            <md-option ng-repeat="place in $ctrl.places" ng-value="place">{{place.name}}</md-option>
+                        <md-select placeholder="Place" ng-model="$ctrl.conference.placeId">
+                            <md-option ng-repeat="place in $ctrl.places" ng-value="place.$id">{{place.name}}</md-option>
                         </md-select>
                     </md-input-container>
                 </div>
@@ -47,7 +47,7 @@
                         <input type="text" name="start_time" placeholder="Speaker's name" ng-model="$ctrl.speaker.name">
                     </md-input-container>
                     <md-input-container class="md-block md-icon-float">
-                        <input type="text" name="end_time" placeholder="Speaker's origin" ng-model="$ctrl.speaker.origin">
+                        <input type="text" name="end_time" placeholder="Speaker's institution" ng-model="$ctrl.speaker.institution">
                     </md-input-container>
                     <md-input-container class="md-block">
                         <md-button class="md-accent" ng-click="$ctrl.addSpeaker()">Add !</md-button>
@@ -57,7 +57,7 @@
                         <ul>
                             <li ng-repeat="speaker in $ctrl.conference.speakers">{{speaker.name}}
                                 <span class="md-caption">-
-                                    {{speaker.origin}}</span>
+                                    {{speaker.institution}}</span>
                                 <md-button class="md-icon-button" ng-click="$ctrl.removeSpeaker(speaker)">
                                     <md-tooltip md-direction="top">
                                         Remove speaker
@@ -73,7 +73,7 @@
                 <span class="md-heading">Facultative information</span>
                 <md-input-container class="md-block">
                     <label>Abstract</label>
-                    <textarea ng-model="$ctrl.session.abstract" md-maxlength="500" rows="5"></textarea>
+                    <textarea ng-model="$ctrl.conference.abstract" md-maxlength="500" rows="5"></textarea>
                 </md-input-container>
             </div>
             <div layout-padding>

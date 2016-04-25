@@ -33,7 +33,7 @@ function AdminSessionsConferencesCreateCtrl(ConferencesService, SessionsService,
       var speaker = angular.copy(vm.speaker)
       vm.conference.speakers.push(speaker)
       vm.speaker.name = null
-      vm.speaker.origin = null
+      vm.speaker.institution = null
     }
 
     vm.removeSpeaker = function(speaker) {

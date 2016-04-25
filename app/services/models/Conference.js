@@ -12,7 +12,7 @@ function Conference() {
         date: null,
         start_time: null,
         end_time: null,
-        place: null,
+        placeId: null,
         room: null,
         speakers: [],
         sessionId: null,
