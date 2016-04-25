@@ -9,6 +9,7 @@ AdminPlacesDashboardCtrl.$inject = ['NotificationsService', 'PlacesService']
 function AdminPlacesDashboardCtrl(NotificationsService, PlacesService) {
     var vm = this
 
+    // breadcrump
     vm.titleName = "Places Dashboard"
     vm.backName = "Admin Dashboard"
     vm.textAction = "Add a new place"
@@ -16,11 +17,11 @@ function AdminPlacesDashboardCtrl(NotificationsService, PlacesService) {
     vm.action = function() {
         vm.$router.navigate(['AdminPlacesCreate'])
     }
-
     vm.backAction = function() {
         vm.$router.parent.navigate(['AdminDashboard'])
     }
-
+    // end breadcrump
+    
     vm.places = PlacesService.places
 
     vm.editPlace = function(place) {

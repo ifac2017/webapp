@@ -9,17 +9,20 @@ AdminSessionsDashboardCtrl.$inject = ['NotificationsService', 'SessionsService']
 function AdminSessionsDashboardCtrl(NotificationsService, SessionsService) {
     var vm = this
 
+    // breadcrump
     vm.titleName = "Sessions Dashboard"
     vm.backName = "Admin Dashboard"
+    vm.textAction = "Add a new session"
+    vm.iconAction = "add"
+    vm.action = function() {
+        vm.$router.navigate(['AdminSessionsCreate'])
+    }
     vm.backAction = function() {
       vm.$router.parent.navigate(['AdminDashboard'])
     }
+    // end breadcrump
 
     vm.sessions = SessionsService.sessions
-
-    vm.goToSessionsCreate = function() {
-      vm.$router.navigate(['AdminSessionsCreate'])
-    }
 
     vm.editSession = function(session) {
       vm.$router.navigate(['AdminSessionsEdit', {
