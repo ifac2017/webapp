@@ -8,6 +8,7 @@ angular.module('webapp').component('waAdminSessionsCard', {
     controller: 'AdminSessionsCardCtrl',
     bindings: {
         $router: '<',
+        $last: '<',
         session: '<',
         onEdit: '&',
         onAdd: '&'

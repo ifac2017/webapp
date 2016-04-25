@@ -8,6 +8,7 @@
             {{$ctrl.session.end_time | amDateFormat:'HH:mm'}}</p>
     </div>
     <span flex></span>
+    
     <md-button class="md-icon-button" ng-click="$ctrl.onAdd()">
         <md-tooltip md-direction="top">
             Add a conference
@@ -26,5 +27,5 @@
         </md-tooltip>
         <i class="material-icons md-24">delete</i>
     </md-button>
-    <md-divider ng-if="!$last"></md-divider>
+    <md-divider ng-if="!$ctrl.$last"></md-divider>
 </md-list-item>

@@ -8,6 +8,7 @@ angular.module('webapp').component('waAdminPlacesCard', {
     controller: 'AdminPlacesCardCtrl',
     bindings: {
         $router: '<',
+        $last: '<',
         place: '<',
         onEdit: '&'
     },
