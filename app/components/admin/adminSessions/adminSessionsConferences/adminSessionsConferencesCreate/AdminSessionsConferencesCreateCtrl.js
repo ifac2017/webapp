@@ -38,7 +38,7 @@ function AdminSessionsConferencesCreateCtrl(ConferencesService, SessionsService,
       ConferencesService.addConference(vm.conference, vm.session)
           .then(function() {
               vm.$router.navigate(['AdminSessionsDashboardData', {
-                  data: "creationOkay"
+                  data: "creationConferenceOkay"
               }])
           })
           .catch(function() {})

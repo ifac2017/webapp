@@ -37,7 +37,9 @@ function AdminSessionsDashboardCtrl(NotificationsService, SessionsService) {
     }
 
     vm.$routerOnActivate = function(next) {
-        if (next.params.data === "creationOkay") {
+        if (next.params.data === "creationSessionOkay") {
+            NotificationsService.success('The session has been well created!')
+        } else if (next.params.data === "creationConferenceOkay") {
             NotificationsService.success('The session has been well created!')
         } else if (next.params.data === "editionOkay") {
             NotificationsService.success('The session has been well edited!')

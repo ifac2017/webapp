@@ -21,7 +21,7 @@ function AdminSessionsCreateCtrl(SessionsService, Session) {
         SessionsService.addSession(vm.session)
             .then(function() {
                 vm.$router.navigate(['AdminSessionsDashboardData', {
-                    data: "creationOkay"
+                    data: "creationSessionOkay"
                 }])
             })
             .catch(function() {})
