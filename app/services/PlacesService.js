@@ -25,13 +25,7 @@ function PlacesService($firebaseArray) {
     }
 
     PlacesService.loadArray = function() {
-        return new Promise(function(resolve, reject) {
-            PlacesService.places.$loaded().then(function() {
-                resolve()
-            }).catch(function() {
-                reject()
-            })
-        })
+        return PlacesService.places.$loaded()
     }
 
     PlacesService.getPlaceById = function(id) {

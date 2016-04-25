@@ -14,26 +14,18 @@ function ConferencesService(SessionsService, $firebaseArray) {
     ConferencesService.conferences = $firebaseArray(ConferencesService._ref)
 
     ConferencesService.addConference = function(conference, session) {
-        return new Promise(function(resolve, reject) {
-            ConferencesService.conferences.$add({
-                name: conference.name,
-                date: conference.date.getTime(),
-                start_time: conference.start_time.getTime(),
-                end_time: conference.end_time.getTime(),
-                place: conference.place,
-                room: conference.room,
-                speakers: conference.speakers,
-                sessionId: conference.sessionId,
-                abstract: conference.abstract
-            }).then(function(ref) {
-                SessionsService.addConferenceTo(session, ref.key()).then(function() {
-                    resolve()
-                }).catch(function() {
-                    reject()
-                })
-            }).catch(function() {
-                reject()
-            })
+        return ConferencesService.conferences.$add({
+            name: conference.name,
+            date: conference.date.getTime(),
+            start_time: conference.start_time.getTime(),
+            end_time: conference.end_time.getTime(),
+            place: conference.place,
+            room: conference.room,
+            speakers: conference.speakers,
+            sessionId: conference.sessionId,
+            abstract: conference.abstract
+        }).then(function(ref) {
+            return SessionsService.addConferenceTo(session, ref.key())
         })
     }
 
@@ -42,13 +34,7 @@ function ConferencesService(SessionsService, $firebaseArray) {
     }
 
     ConferencesService.loadArray = function() {
-        return new Promise(function(resolve, reject) {
-            ConferencesService.conferences.$loaded().then(function() {
-                resolve()
-            }).catch(function() {
-                reject()
-            })
-        })
+        return ConferencesService.conferences.$loaded()
     }
 
     ConferencesService.getConferenceById = function(id) {

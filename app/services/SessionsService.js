@@ -27,13 +27,7 @@ function SessionsService($firebaseArray) {
     }
 
     SessionsService.loadArray = function() {
-        return new Promise(function(resolve, reject) {
-            SessionsService.sessions.$loaded().then(function() {
-                resolve()
-            }).catch(function() {
-                reject()
-            })
-        })
+        return SessionsService.sessions.$loaded()
     }
 
     SessionsService.getSessionById = function(id) {
@@ -50,14 +44,6 @@ function SessionsService($firebaseArray) {
         }
         session.conferences.push(conference)
         return SessionsService.saveSession(session)
-
-        /*var ref = SessionsService._ref.child(session.$id)
-        ref.on("value", function(snapshot) {
-            ref.set({
-                conferences: email
-            })
-            resolve()
-        })*/
     }
 
     return SessionsService
