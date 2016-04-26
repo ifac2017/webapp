@@ -7,7 +7,7 @@ Conference.$inject = []
  * @description Represents a conference
  */
 function Conference() {
-    return {
+    var Conference = {
         name: null,
         date: null,
         start_time: null,
@@ -18,4 +18,18 @@ function Conference() {
         sessionId: null,
         abstract: null
     }
+
+    Conference.reset = function() {
+      Conference.name = null
+      Conference.date = null
+      Conference.start_time = null
+      Conference.end_time = null
+      Conference.placeId = null
+      Conference.room = null
+      Conference.speakers = []
+      Conference.sessionId = null
+      Conference.abstract = null
+    }
+
+    return Conference
 }

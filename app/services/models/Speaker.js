@@ -7,8 +7,15 @@ Speaker.$inject = []
  * @description Represents a speaker
  */
 function Speaker() {
-    return {
-      name: null,
-      institution: null
+    var Speaker = {
+        name: null,
+        institution: null
     }
+
+    Speaker.reset = function() {
+      Speaker.name = null
+      Speaker.institution = null
+    }
+
+    return Speaker
 }

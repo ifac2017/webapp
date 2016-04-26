@@ -7,8 +7,15 @@ Place.$inject = []
  * @description Represents a place
  */
 function Place() {
-    return {
+    var Place = {
         name: null,
         address: null
     }
+
+    Place.reset = function() {
+      Place.name = null
+      Place.address = null
+    }
+
+    return Place
 }

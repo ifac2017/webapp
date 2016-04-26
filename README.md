@@ -29,7 +29,6 @@ Be sure to have previous requirements installed on your computer.
 - Firebase rules
 - Admin forms validation
 - add a 404 page
-- merge model into services
 - Code refactoring (always...)
 
 ## License

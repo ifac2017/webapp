@@ -1,15 +1,17 @@
 angular.module('webapp').factory('SessionsService', SessionsService)
-SessionsService.$inject = ['SessionsConferencesService']
+SessionsService.$inject = ['SessionsConferencesService', 'Session']
 
 /**
  * @ngdoc service
  * @name webapp.service:SessionsService
  * @description In charge of sessions management.
  */
-function SessionsService(SessionsConferencesService) {
+function SessionsService(SessionsConferencesService, Session) {
     var SessionsService = {}
 
     SessionsService.sessions = SessionsConferencesService.sessions
+
+    SessionsService.Model = Session
 
     SessionsService.addSession = function(session) {
         return SessionsService.sessions.$add({

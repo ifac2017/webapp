@@ -1,12 +1,12 @@
 angular.module('webapp').controller('AdminSessionsCreateCtrl', AdminSessionsCreateCtrl)
-AdminSessionsCreateCtrl.$inject = ['SessionsService', 'Session']
+AdminSessionsCreateCtrl.$inject = ['SessionsService']
 
 /**
  * @ngdoc controller
  * @name webapp.controller:AdminSessionsCreateCtrl
  * @description In charge of the admin sessions creation view.
  */
-function AdminSessionsCreateCtrl(SessionsService, Session) {
+function AdminSessionsCreateCtrl(SessionsService) {
     var vm = this
 
     vm.titleName = "Add new session"
@@ -15,7 +15,7 @@ function AdminSessionsCreateCtrl(SessionsService, Session) {
         vm.$router.navigate(['AdminSessionsDashboard'])
     }
 
-    vm.session = Session
+    vm.session = SessionsService.Model
 
     vm.addSession = function() {
         SessionsService.addSession(vm.session)
@@ -25,5 +25,9 @@ function AdminSessionsCreateCtrl(SessionsService, Session) {
                 }])
             })
             .catch(function() {})
+    }
+
+    vm.$routerOnActivate = function(next, prev) {
+        SessionsService.Model.reset()
     }
 }

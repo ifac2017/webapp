@@ -1,17 +1,19 @@
 angular.module('webapp').factory('PlacesService', PlacesService)
-PlacesService.$inject = ['$firebaseArray']
+PlacesService.$inject = ['$firebaseArray', 'Place']
 
 /**
  * @ngdoc service
  * @name webapp.service:PlacesService
  * @description In charge of places management.
  */
-function PlacesService($firebaseArray) {
+function PlacesService($firebaseArray, Place) {
     var PlacesService = {}
 
     PlacesService._ref = new Firebase("https://ifac2017.firebaseio.com/places")
 
     PlacesService.places = $firebaseArray(PlacesService._ref)
+
+    PlacesService.Model = Place
 
     PlacesService.addPlace = function(place) {
         return PlacesService.places.$add({

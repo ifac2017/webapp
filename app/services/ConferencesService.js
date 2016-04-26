@@ -1,15 +1,17 @@
 angular.module('webapp').factory('ConferencesService', ConferencesService)
-ConferencesService.$inject = ['SessionsService', 'SessionsConferencesService']
+ConferencesService.$inject = ['SessionsService', 'SessionsConferencesService', 'Conference']
 
 /**
  * @ngdoc service
  * @name webapp.service:ConferencesService
  * @description In charge of conferences management.
  */
-function ConferencesService(SessionsService, SessionsConferencesService) {
+function ConferencesService(SessionsService, SessionsConferencesService, Conference) {
     var ConferencesService = {}
 
     ConferencesService.conferences = SessionsConferencesService.conferences
+
+    ConferencesService.Model = Conference
 
     ConferencesService.addConference = function(conference, session) {
         return ConferencesService.conferences.$add({
