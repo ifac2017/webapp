@@ -28,6 +28,8 @@ Be sure to have previous requirements installed on your computer.
 - Profile view (with list of user's conferences)
 - Firebase rules
 - Admin forms validation
+- add a 404 page
+- merge model into services
 - Code refactoring (always...)
 
 ## License
