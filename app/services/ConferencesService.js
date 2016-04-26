@@ -1,17 +1,15 @@
 angular.module('webapp').factory('ConferencesService', ConferencesService)
-ConferencesService.$inject = ['SessionsService', '$firebaseArray']
+ConferencesService.$inject = ['SessionsService', 'SessionsConferencesService']
 
 /**
  * @ngdoc service
  * @name webapp.service:ConferencesService
  * @description In charge of conferences management.
  */
-function ConferencesService(SessionsService, $firebaseArray) {
+function ConferencesService(SessionsService, SessionsConferencesService) {
     var ConferencesService = {}
 
-    ConferencesService._ref = new Firebase("https://ifac2017.firebaseio.com/conferences")
-
-    ConferencesService.conferences = $firebaseArray(ConferencesService._ref)
+    ConferencesService.conferences = SessionsConferencesService.conferences
 
     ConferencesService.addConference = function(conference, session) {
         return ConferencesService.conferences.$add({
@@ -30,7 +28,7 @@ function ConferencesService(SessionsService, $firebaseArray) {
     }
 
     ConferencesService.removeConference = function(conference) {
-        ConferencesService.conferences.$remove(conference)
+        SessionsConferencesService.removeConference(conference)
     }
 
     ConferencesService.loadArray = function() {
@@ -38,7 +36,7 @@ function ConferencesService(SessionsService, $firebaseArray) {
     }
 
     ConferencesService.getConferenceById = function(id) {
-        return ConferencesService.conferences.$getRecord(id)
+        return SessionsConferencesService.getConferenceById(id)
     }
 
     ConferencesService.saveConference = function(conference) {

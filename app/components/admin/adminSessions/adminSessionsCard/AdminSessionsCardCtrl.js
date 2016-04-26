@@ -36,7 +36,6 @@ function AdminSessionsCardCtrl(SessionsService, ConferencesService, $mdDialog) {
             for (var i = 0; i < vm.session.conferences.length; i++) {
                 vm.conferences.push(ConferencesService.getConferenceById(vm.session.conferences[i]))
             }
-            console.log(vm.conferences)
         }
     }
 

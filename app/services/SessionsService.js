@@ -1,17 +1,15 @@
 angular.module('webapp').factory('SessionsService', SessionsService)
-SessionsService.$inject = ['$firebaseArray']
+SessionsService.$inject = ['SessionsConferencesService']
 
 /**
  * @ngdoc service
  * @name webapp.service:SessionsService
  * @description In charge of sessions management.
  */
-function SessionsService($firebaseArray) {
+function SessionsService(SessionsConferencesService) {
     var SessionsService = {}
 
-    SessionsService._ref = new Firebase("https://ifac2017.firebaseio.com/sessions")
-
-    SessionsService.sessions = $firebaseArray(SessionsService._ref)
+    SessionsService.sessions = SessionsConferencesService.sessions
 
     SessionsService.addSession = function(session) {
         return SessionsService.sessions.$add({
@@ -23,7 +21,7 @@ function SessionsService($firebaseArray) {
     }
 
     SessionsService.removeSession = function(session) {
-        SessionsService.sessions.$remove(session)
+        SessionsConferencesService.removeSession(session)
     }
 
     SessionsService.loadArray = function() {
