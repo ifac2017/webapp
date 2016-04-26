@@ -1,0 +1,86 @@
+<div layout="column">
+    <wa-breadcrump title-name="$ctrl.titleName" back-name="$ctrl.backName" back-action="$ctrl.backAction()"></wa-breadcrump>
+    <md-content layout-padding>
+        <form>
+            <div layout-padding>
+                <span class="md-heading">General information</span>
+                <div layout-gt-xs="row" class="md-inline-form">
+                    <md-input-container flex class="md-block">
+                        <input type="text" name="name" placeholder="Name" ng-model="$ctrl.conference.name" required>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <input type="text" name="name" placeholder="Session" ng-model="$ctrl.session.name" disabled>
+                    </md-input-container>
+                    <md-datepicker md-placeholder="Date" ng-model="$ctrl.date" disabled></md-datepicker>
+                </div>
+            </div>
+            <div layout-padding>
+                <span class="md-heading">Scheduling</span>
+                <div layout-gt-xs="row">
+                    <md-input-container flex class="md-block md-icon-float">
+                        <md-icon class="material-icons md-24">access_time</md-icon>
+                        <input type="time" name="start_time" placeholder="Start time" ng-model="$ctrl.start_time" required>
+                    </md-input-container>
+                    <md-input-container flex class="md-block md-icon-float">
+                        <md-icon class="material-icons md-24">access_time</md-icon>
+                        <input type="time" name="end_time" placeholder="End time" ng-model="$ctrl.end_time" required>
+                    </md-input-container>
+                </div>
+            </div>
+            <div layout-padding>
+                <span class="md-heading">Place</span>
+                <div layout-gt-xs="row" class="md-inline-form">
+                    <md-input-container flex class="md-block">
+                        <input type="text" name="room" placeholder="Room" ng-model="$ctrl.conference.room" required>
+                    </md-input-container>
+                    <md-input-container flex class="md-block">
+                        <md-select placeholder="Place" ng-model="$ctrl.conference.placeId">
+                            <md-option ng-repeat="place in $ctrl.places" ng-value="place.$id">{{place.name}}</md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+            </div>
+            <div layout-padding>
+                <span class="md-heading">Speakers</span>
+                <div layout-gt-xs="row">
+                    <md-input-container class="md-block md-icon-float">
+                        <input type="text" name="start_time" placeholder="Speaker's name" ng-model="$ctrl.speaker.name">
+                    </md-input-container>
+                    <md-input-container class="md-block md-icon-float">
+                        <input type="text" name="end_time" placeholder="Speaker's institution" ng-model="$ctrl.speaker.institution">
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <md-button class="md-accent" ng-click="$ctrl.addSpeaker()">Add !</md-button>
+                    </md-input-container>
+                    <div layout="column" flex>
+                        <span ng-if="$ctrl.conference.speakers.length" class="md-body-2">Speakers:</span>
+                        <ul>
+                            <li ng-repeat="speaker in $ctrl.conference.speakers">{{speaker.name}}
+                                <span class="md-caption">-
+                                    {{speaker.institution}}</span>
+                                <md-button class="md-icon-button" ng-click="$ctrl.removeSpeaker(speaker)">
+                                    <md-tooltip md-direction="top">
+                                        Remove speaker
+                                    </md-tooltip>
+                                    <i class="material-icons md-18">remove_circle_outline</i>
+                                </md-button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div layout-padding>
+                <span class="md-heading">Facultative information</span>
+                <md-input-container class="md-block">
+                    <label>Abstract</label>
+                    <textarea ng-model="$ctrl.conference.abstract" md-maxlength="500" rows="5"></textarea>
+                </md-input-container>
+            </div>
+            <div layout-padding>
+                <md-input-container class="md-block">
+                    <md-button class="md-raised md-accent" ng-click="$ctrl.editConference()">Edit !</md-button>
+                </md-input-container>
+            </div>
+        </form>
+    </md-content>
+</div>

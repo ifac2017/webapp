@@ -18,22 +18,30 @@ function AdminSessionsDashboardCtrl(NotificationsService, SessionsService) {
         vm.$router.navigate(['AdminSessionsCreate'])
     }
     vm.backAction = function() {
-      vm.$router.parent.navigate(['AdminDashboard'])
-    }
-    // end breadcrump
+            vm.$router.parent.navigate(['AdminDashboard'])
+        }
+        // end breadcrump
 
     vm.sessions = SessionsService.sessions
 
     vm.editSession = function(session) {
-      vm.$router.navigate(['AdminSessionsEdit', {
-          id: session.$id
-      }])
+        vm.$router.navigate(['AdminSessionsEdit', {
+            id: session.$id
+        }])
     }
 
     vm.addConference = function(session) {
-      vm.$router.navigate(['AdminSessionsConferences', {
-          id: session.$id
-      }])
+        vm.$router.navigate(['AdminSessionsConferences', {
+            id: session.$id
+        }])
+    }
+
+    vm.editConference = function(session, conference) {
+        vm.$router.navigate(['AdminSessionsConferences', {
+            id: session.$id
+        }, 'AdminSessionsConferencesEdit', {
+            id: conference.$id
+        }])
     }
 
     vm.$routerOnActivate = function(next) {
@@ -41,8 +49,10 @@ function AdminSessionsDashboardCtrl(NotificationsService, SessionsService) {
             NotificationsService.success('The session has been well created!')
         } else if (next.params.data === "creationConferenceOkay") {
             NotificationsService.success('The conference has been well created!')
-        } else if (next.params.data === "editionOkay") {
+        } else if (next.params.data === "editionSessionOkay") {
             NotificationsService.success('The session has been well edited!')
+        } else if (next.params.data === "editionConferenceOkay") {
+            NotificationsService.success('The conference has been well edited!')
         }
     }
 }

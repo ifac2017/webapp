@@ -29,7 +29,7 @@ function AdminSessionsEditCtrl(SessionsService) {
         SessionsService.saveSession(vm.session)
             .then(function() {
                 vm.$router.navigate(['AdminSessionsDashboardData', {
-                    data: "editionOkay"
+                    data: "editionSessionOkay"
                 }])
             })
             .catch(function() {})

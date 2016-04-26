@@ -15,7 +15,7 @@ angular.module('webapp').component('waAdminSessionsConferences', {
         component: 'waAdminSessionsConferencesCreate',
         useAsDefault: true
     }, {
-        path: '/edit/:idConference',
+        path: '/edit/:id',
         name: 'AdminSessionsConferencesEdit',
         component: 'waAdminSessionsConferencesEdit'
     }],

@@ -49,7 +49,7 @@
                         <span class="md-caption"><md-icon class="material-icons md-18">place</md-icon> {{conference.room}}</span>
                 </div>
                 <span flex></span>
-                <md-button class="md-icon-button" ng-click="">
+                <md-button class="md-icon-button" ng-click="$ctrl.onEditConference()($ctrl.session, conference)">
                     <md-tooltip md-direction="top">
                         Edit the conference
                     </md-tooltip>

@@ -11,6 +11,7 @@ angular.module('webapp').component('waAdminSessionsCard', {
         $last: '<',
         session: '<',
         onEdit: '&',
+        onEditConference: '&',
         onAdd: '&'
     },
     templateUrl: ['$element', function($element) {
