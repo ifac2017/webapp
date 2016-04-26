@@ -26,12 +26,18 @@ function SessionsConferencesService($firebaseArray) {
         SessionsConferencesService.sessions.$remove(session)
     }
 
-    SessionsConferencesService.removeConference = function(conference) {
+    SessionsConferencesService.removeConference = function(conference, session) {
+        session.conferences.splice(session.conferences.indexOf(conference.$id), 1)
+        SessionsConferencesService.saveSession(session)
         SessionsConferencesService.conferences.$remove(conference)
     }
 
     SessionsConferencesService.getConferenceById = function(id) {
         return SessionsConferencesService.conferences.$getRecord(id)
+    }
+
+    SessionsConferencesService.saveSession = function(session) {
+        return SessionsConferencesService.sessions.$save(session)
     }
 
     return SessionsConferencesService

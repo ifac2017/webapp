@@ -35,9 +35,35 @@
                 <i class="material-icons md-24">delete</i>
             </md-button>
         </div>
-        <ul ng-if="$ctrl.showConferences">
-            <li ng-repeat="conference in $ctrl.conferences">{{conference.name}}</li>
-        </ul>
+        <md-list ng-if="$ctrl.showConferences && $ctrl.conferences.length">
+            <md-list-item ng-repeat="conference in $ctrl.conferences" class="md-1-line">
+                <md-icon class="material-icons md-18">chat</md-icon>
+                <p>{{conference.name}}</p>
+                <div layout="column">
+                    <span class="md-caption">
+                      <md-icon class="material-icons md-18">access_time</md-icon>
+                      From
+                        {{conference.start_time | amDateFormat:'HH:mm'}}
+                        until
+                        {{conference.end_time | amDateFormat:'HH:mm'}}</span>
+                        <span class="md-caption"><md-icon class="material-icons md-18">place</md-icon> {{conference.room}}</span>
+                </div>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="">
+                    <md-tooltip md-direction="top">
+                        Edit the conference
+                    </md-tooltip>
+                    <i class="material-icons md-18">edit</i>
+                </md-button>
+                <md-button class="md-icon-button" ng-click="$ctrl.removeConference(conference)">
+                    <md-tooltip md-direction="top">
+                        Delete the conference
+                    </md-tooltip>
+                    <i class="material-icons md-18">delete</i>
+                </md-button>
+                <md-divider ng-if="!$last"></md-divider>
+            </md-list-item>
+        </md-list>
     </div>
     <md-divider ng-if="!$ctrl.$last"></md-divider>
 </md-list-item>

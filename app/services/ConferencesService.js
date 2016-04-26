@@ -27,8 +27,8 @@ function ConferencesService(SessionsService, SessionsConferencesService) {
         })
     }
 
-    ConferencesService.removeConference = function(conference) {
-        SessionsConferencesService.removeConference(conference)
+    ConferencesService.removeConference = function(conference, session) {
+        SessionsConferencesService.removeConference(conference, session)
     }
 
     ConferencesService.loadArray = function() {

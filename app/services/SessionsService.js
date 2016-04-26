@@ -33,7 +33,7 @@ function SessionsService(SessionsConferencesService) {
     }
 
     SessionsService.saveSession = function(session) {
-        return SessionsService.sessions.$save(session)
+        return SessionsConferencesService.saveSession(session)
     }
 
     SessionsService.addConferenceTo = function(session, conference) {

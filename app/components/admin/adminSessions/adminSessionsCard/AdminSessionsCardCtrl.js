@@ -20,6 +20,20 @@ function AdminSessionsCardCtrl(SessionsService, ConferencesService, $mdDialog) {
             SessionsService.removeSession(vm.session)
         })
     }
+
+    vm.removeConference = function(conference, event) {
+        var confirm = $mdDialog.confirm()
+            .title('Would you like to delete this conference?')
+            .ariaLabel('Remove conference')
+            .targetEvent(event)
+            .ok('Yes remove!')
+            .cancel('Cancel')
+        $mdDialog.show(confirm).then(function() {
+            ConferencesService.removeConference(conference, vm.session)
+            vm.conferences.splice(vm.conferences.indexOf(conference), 1)
+        })
+    }
+
     vm.conferences = []
     vm.showConferences = false
 
