@@ -10,7 +10,7 @@
                     -
                     {{timeslot.end_time | amDateFormat:'HH:mm'}}</h4>
                     <md-divider></md-divider>
-                    <p ng-repeat="session in $ctrl.sessions | filter:{ start_time: timeslot.start_time.getTime()}:true">{{session.name}}</p>
+                    <md-button flex ng-repeat="session in $ctrl.sessions | filter:{ start_time: timeslot.start_time.getTime()}:true">{{session.name}}</md-button>
             </div>
         </div>
     </md-content>
