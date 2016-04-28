@@ -8,7 +8,7 @@
                     <md-input-container flex class="md-block">
                         <input type="text" name="name" placeholder="Name" ng-model="$ctrl.session.name" required>
                     </md-input-container>
-                    <md-datepicker md-placeholder="Date" ng-model="$ctrl.session.date"></md-datepicker>
+                    <md-datepicker md-placeholder="Date" ng-model="$ctrl.session.date" md-min-date="$ctrl.event.start_date" md-max-date="$ctrl.event.end_date" ></md-datepicker>
                 </div>
             </div>
             <div layout-padding>

@@ -1,13 +1,34 @@
 <div layout="column">
     <wa-breadcrump title-name="$ctrl.titleName"></wa-breadcrump>
     <md-content flex layout-padding>
-        <md-button class="md-raised wa-icon-text-button" ng-click="$ctrl.goToSessions()">
-            <i class="material-icons md-24">chat</i>
-            <span>Manage sessions</span>
-        </md-button>
-        <md-button class="md-raised wa-icon-text-button" ng-click="$ctrl.goToPlaces()">
-            <i class="material-icons md-24">place</i>
-            <span>Manage places</span>
-        </md-button>
+        <div layout="column" layout-padding>
+            <div layout="row">
+                <md-button class="md-raised wa-icon-text-button" ng-click="$ctrl.goToSessions()">
+                    <i class="material-icons md-24">chat</i>
+                    <span>Manage sessions</span>
+                </md-button>
+                <md-button class="md-raised wa-icon-text-button" ng-click="$ctrl.goToPlaces()">
+                    <i class="material-icons md-24">place</i>
+                    <span>Manage places</span>
+                </md-button>
+            </div>
+            <md-divider></md-divider>
+            <div layout="column">
+                <form>
+                    <div layout-padding>
+                        <span class="md-heading">Event information</span>
+                        <div layout-gt-xs="row" class="md-inline-form">
+                            <md-datepicker md-placeholder="Start date" ng-model="$ctrl.event.start_date"></md-datepicker>
+                            <md-datepicker md-placeholder="End date" ng-model="$ctrl.event.end_date"></md-datepicker>
+                        </div>
+                    </div>
+                    <div layout-padding>
+                        <md-input-container class="md-block">
+                            <md-button class="md-raised md-accent" ng-click="$ctrl.saveEvent()">Save !</md-button>
+                        </md-input-container>
+                    </div>
+                </form>
+            </div>
+        </div>
     </md-content>
 </div>

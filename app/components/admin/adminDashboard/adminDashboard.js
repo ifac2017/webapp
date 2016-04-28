@@ -13,12 +13,13 @@ angular.module('webapp').component('waAdminDashboard', {
         angular.element($element).addClass('layout-column')
         return 'adminDashboard.html'
     }],
-    $canActivate: ['AuthService', '$rootRouter', function(AuthService, $rootRouter) {
+    $canActivate: ['AuthService', 'EventService', '$rootRouter', function(AuthService, EventService, $rootRouter) {
         return AuthService.requireAdminAuth()
             .then(function() {
-                return true
-            })
-            .catch(function(error) {
+                return EventService.loadEvent()
+            }).then(function() {
+              return true
+            }).catch(function(error) {
                 $rootRouter.navigate(['Login'])
                 return false
             })
