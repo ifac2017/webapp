@@ -1,12 +1,12 @@
 angular.module('webapp').controller('AdminDashboardCtrl', AdminDashboardCtrl)
-AdminDashboardCtrl.$inject = ['EventService']
+AdminDashboardCtrl.$inject = ['EventService', 'NotificationsService']
 
 /**
  * @ngdoc controller
  * @name webapp.controller:AdminDashboardCtrl
  * @description In charge of the admin dashboard view.
  */
-function AdminDashboardCtrl(EventService) {
+function AdminDashboardCtrl(EventService, NotificationsService) {
     var vm = this
 
     vm.titleName = "Admin Dashboard"
@@ -20,9 +20,9 @@ function AdminDashboardCtrl(EventService) {
 
     vm.saveEvent = function() {
       EventService.save(vm.event).then(function(){
-        console.log("ok")
+        NotificationsService.success('The event has been well updated!')
       }).catch(function(error){
-        console.log("error: "+error);
+        NotificationsService.error('An error occurred... Please try again.')
       })
     }
 
