@@ -19,6 +19,7 @@ function AdminDashboardCtrl(EventService, NotificationsService) {
     }
 
     vm.$routerOnActivate = function(next, prev) {
+      vm.event.reset()
         vm.event.start_date = new Date(EventService.event.start_date)
         vm.event.end_date = new Date(EventService.event.end_date)
         if (EventService.event.timeslots) {
