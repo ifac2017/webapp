@@ -1,13 +1,13 @@
 angular.module('webapp').controller('SidebarCtrl', SidebarCtrl)
 SidebarCtrl.$inject = ['AuthService', 'CurrentUser', '$rootRouter', '$mdSidenav']
-/**
- * @ngdoc controller
- * @name webapp.controller:SidebarCtrl
- * @requires AuthService
- * @requires CurrentUser
- * @requires $rootRouter
- * @description In charge of the sidebar view.
- */
+    /**
+     * @ngdoc controller
+     * @name webapp.controller:SidebarCtrl
+     * @requires AuthService
+     * @requires CurrentUser
+     * @requires $rootRouter
+     * @description In charge of the sidebar view.
+     */
 function SidebarCtrl(AuthService, CurrentUser, $rootRouter, $mdSidenav) {
     var vm = this
 

@@ -1,12 +1,11 @@
 angular.module('webapp').controller('AppCtrl', AppCtrl)
-AppCtrl.$inject = []
+AppCtrl.$inject = ['EventService']
 
 /**
  * @ngdoc controller
  * @name webapp.controller:AppCtrl
  * @description In charge of the app view.
  */
-function AppCtrl() {
+function AppCtrl(EventService) {
     var vm = this
-    vm.teub = 'aa'
 }

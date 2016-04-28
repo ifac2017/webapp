@@ -1,12 +1,12 @@
 angular.module('webapp').factory('SessionsService', SessionsService)
-SessionsService.$inject = ['SessionsConferencesService', 'Session']
+SessionsService.$inject = ['SessionsConferencesService', 'Session', '$firebaseArray']
 
 /**
  * @ngdoc service
  * @name webapp.service:SessionsService
  * @description In charge of sessions management.
  */
-function SessionsService(SessionsConferencesService, Session) {
+function SessionsService(SessionsConferencesService, Session, $firebaseArray) {
     var SessionsService = {}
 
     SessionsService.sessions = SessionsConferencesService.sessions
@@ -44,6 +44,10 @@ function SessionsService(SessionsConferencesService, Session) {
         }
         session.conferences.push(conference)
         return SessionsService.saveSession(session)
+    }
+
+    SessionsService.getSessionsByDate = function(date) {
+        return $firebaseArray(SessionsService.sessions.$ref().orderByChild("date").equalTo(date.valueOf())).$loaded()
     }
 
     return SessionsService
