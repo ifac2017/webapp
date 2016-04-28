@@ -1,12 +1,12 @@
 angular.module('webapp').controller('PlannerCtrl', PlannerCtrl)
-PlannerCtrl.$inject = ['SessionsService', 'EventService', 'moment']
+PlannerCtrl.$inject = ['SessionsService', 'EventService', 'moment', '$mdDialog']
 
 /**
  * @ngdoc controller
  * @name webapp.controller:PlannerCtrl
  * @description In charge of the planner view.
  */
-function PlannerCtrl(SessionsService, EventService, moment) {
+function PlannerCtrl(SessionsService, EventService, moment, $mdDialog) {
     var vm = this
 
     vm.titleName = "Planner"
@@ -48,6 +48,22 @@ function PlannerCtrl(SessionsService, EventService, moment) {
     vm.getSessions = function(index) {
         SessionsService.getSessionsByDate(vm.days[index]).then(function(sessions) {
             vm.sessions = sessions
+        })
+    }
+
+    vm.showSession = function(session, ev) {
+        $mdDialog.show({
+            controller: "PlannerSessionCtrl",
+            templateUrl: 'plannerSession.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose: true,
+            fullscreen: false,
+            locals: {
+              session: session
+            },
+            bindToController: true,
+            controllerAs: '$ctrl'
         })
     }
 }
