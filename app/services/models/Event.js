@@ -9,12 +9,14 @@ Event.$inject = []
 function Event() {
     var Event = {
         start_date: null,
-        end_date: null
+        end_date: null,
+        timeslots: []
     }
 
     Event.reset = function() {
-      Place.start_date = null
-      Place.end_date = null
+      Event.start_date = null
+      Event.end_date = null
+      Event.timeslots = []
     }
 
     return Event
