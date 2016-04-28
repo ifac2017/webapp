@@ -4,8 +4,8 @@
         <md-button ng-click="$ctrl.selectDay($index)" flex class="md-raised" aria-label="date" ng-repeat="day in $ctrl.days" ng-disabled="$ctrl.selectedIndex == $index">{{day | amDateFormat:'dddd, MMMM D'}}</md-button>
     </div>
     <md-content flex layout="column" layout-padding>
-        <div layout="row">
-            <div flex ng-repeat="timeslot in $ctrl.timeslots">
+        <div layout-gt-xs="row">
+            <div flex ng-repeat="timeslot in $ctrl.timeslots" layout="column">
                 <h4>{{timeslot.start_time | amDateFormat:'HH:mm'}}
                     -
                     {{timeslot.end_time | amDateFormat:'HH:mm'}}</h4>
