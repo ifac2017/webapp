@@ -5,7 +5,7 @@
         <md-list flex ng-if="$ctrl.conferences.length">
             <md-list-item flex ng-repeat="conference in $ctrl.conferences" class="md-1-line">
                 <md-icon class="material-icons md-18">chat</md-icon>
-                <md-button ng-click="$ctrl.showConference(conference)" flex>{{conference.name}}</md-button>
+                <md-button ng-click="$ctrl.goToConference(conference)" flex>{{conference.name}}</md-button>
                 <md-content layout-padding>
                 </md-content>
                 <div layout="column">

@@ -9,8 +9,6 @@ PlannerSessionCtrl.$inject = ['SessionsService', 'ConferencesService']
 function PlannerSessionCtrl(SessionsService, ConferencesService) {
     var vm = this
 
-    //vm.titleName = vm.session.name
-
     vm.backName = "Planner"
     vm.backAction = function() {
         vm.$router.navigate(['PlannerCalendar'])
@@ -26,5 +24,11 @@ function PlannerSessionCtrl(SessionsService, ConferencesService) {
                 vm.conferences.push(ConferencesService.getConferenceById(vm.session.conferences[i]))
             }
         }
+    }
+
+    vm.goToConference = function(conference) {
+      vm.$router.navigate(['PlannerConference', {
+        id: conference.$id
+      }])
     }
 }

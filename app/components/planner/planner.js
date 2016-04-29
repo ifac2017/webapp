@@ -12,6 +12,7 @@ angular.module('webapp').component('waPlanner', {
     }],
     $routeConfig: [
       {path: '/', name:'PlannerCalendar', component: 'waPlannerCalendar', useAsDefault: true},
-      {path: '/:id', name:'PlannerSession', component: 'waPlannerSession'}
+      {path: '/session/:id', name:'PlannerSession', component: 'waPlannerSession'},
+      {path: '/conference/:id', name:'PlannerConference', component: 'waPlannerConference'}
     ]
 })
