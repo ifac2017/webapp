@@ -14,21 +14,20 @@ function PlannerSessionCtrl(SessionsService, ConferencesService) {
         vm.$router.navigate(['PlannerCalendar'])
     }
 
-    vm.conferences = []
-
     vm.$routerOnActivate = function(next) {
         vm.session = SessionsService.getSessionById(next.params.id)
         vm.titleName = vm.session.name
-        if (vm.session.conferences) {
-            for (var i = 0; i < vm.session.conferences.length; i++) {
-                vm.conferences.push(ConferencesService.getConferenceById(vm.session.conferences[i]))
-            }
-        }
+        SessionsService.getConferencesBySession(vm.session).then(function(conferences) {
+            vm.conferences = conferences
+        }).catch(function(error){
+          console.log(error)
+          vm.conferences = []
+        })
     }
 
     vm.goToConference = function(conference) {
-      vm.$router.navigate(['PlannerConference', {
-        id: conference.$id
-      }])
+        vm.$router.navigate(['PlannerConference', {
+            id: conference.$id
+        }])
     }
 }
