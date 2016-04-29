@@ -9,4 +9,14 @@ wa-planner-conference {
             }
         }
     }
+    .directions-mobile {
+        .wa-map {
+            width: 68%;
+            float: left;
+            height: 400px;
+            ng-map {
+                height: 100%;
+            }
+        }
+    }
 }
