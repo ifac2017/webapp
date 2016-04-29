@@ -1,16 +1,29 @@
-<div flex layout="column">
+<md-content class="md-padding">
   <wa-breadcrump title-name="$ctrl.titleName"></wa-breadcrump>
-    <md-content flex layout="column" layout-padding>
-        <md-list>
-          <md-list-item class="md-3-line" ng-repeat="session in $ctrl.sessions">
-            <md-icon class="material-icons">question_answer</md-icon>
+  <div flex layout="column" ng-repeat="session in $ctrl.sessions">
+    <md-card >
+      <md-card-title ng-click="$ctrl.selectSession(session)">
+        <md-card-title-media layout-padding>
+          <md-icon class="material-icons">question_answer</md-icon>
+        </md-card-title-media>
+        <md-card-title-text>
+          <span class="md-headline">{{ session.name }}</span>
+          <span class="md-subhead">{{ session.date | amDateFormat:'dddd, MMMM D'}} Horaire : {{ session.start_time | amDateFormat:'hh:mm'}} - {{session.end_time | amDateFormat:'hh:mm'}}</span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content>
+        <md-list ng-if="$ctrl.sessionActivated == session">
+          <md-divider ></md-divider>
+          <md-list-item flex class="md-3-line" ng-repeat="conference in $ctrl.conferences">
+            <md-icon class="material-icons">chat</md-icon>
             <div class="md-list-item-text" layout="column">
-              <h3>{{ session.name }}</h3>
-              <h4>{{ session.date | amDateFormat:'dddd, MMMM D'}}</h4>
-              <p>{{ session.start_time | amDateFormat:'hh:mm'}} - {{session.end_time | amDateFormat:'hh:mm'}}</p>
+              <h3>{{ conference.name }}</h3>
+              <h4>{{ conference.date | amDateFormat:'dddd, MMMM D'}} Horaire : {{ conference.start_time | amDateFormat:'hh:mm'}} - {{conference.end_time | amDateFormat:'hh:mm'}}</h4>
+              <p>À :{{ conference.placeId}} - {{conference.room}} </p>
             </div>
-            <md-divider ></md-divider>
           </md-list-item>
         </md-list>
-    </md-content>
-</div>
+      </md-card-content>
+    </md-card>
+  </div>
+</md-content>
