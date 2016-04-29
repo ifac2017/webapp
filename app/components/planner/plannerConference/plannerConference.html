@@ -1,6 +1,35 @@
 <div flex layout="column">
     <wa-breadcrump title-name="$ctrl.titleName" back-name="$ctrl.backName" back-action="$ctrl.backAction()"></wa-breadcrump>
     <md-content flex layout-padding layout="column">
-        <h3>{{conference.name}}</h3>
+        <div layout-gt-xs="row">
+            <div layout="column">
+                <span class="md-subhead">
+                    <md-icon class="material-icons md-24">access_time</md-icon>
+                    From
+                    {{$ctrl.start_time | amDateFormat:'HH:mm'}}
+                    until
+                    {{$ctrl.end_time | amDateFormat:'HH:mm'}}</span>
+                <span class="md-subhead">
+                    <md-icon class="material-icons md-24">place</md-icon>{{$ctrl.place.name}}
+                    -
+                    {{$ctrl.conference.room}}</span>
+            </div>
+            <span flex></span>
+            <div layout-wrap>
+                <span class="md-body-2">Speakers:
+                </span>
+                <span ng-repeat="speaker in $ctrl.conference.speakers"><span ng-if="!$first">, </span>{{speaker.name}}
+                    <span class="md-caption">-
+                        {{speaker.institution}}</span>
+                </span>
+            </div>
+        </div>
+        <div layout-padding></div>
+        <div flex layout-padding layout="column">
+            <ng-map flex zoom="15" center="current-location" style="height:200px">
+                <directions draggable="true" panel="directions-panel" travel-mode="WALKING" origin="current-location" destination="{{$ctrl.place.address}}"></directions>
+            </ng-map>
+            <div id="directions-panel"></div>
+        </div>
     </md-content>
 </div>

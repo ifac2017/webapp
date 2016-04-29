@@ -1,12 +1,12 @@
 angular.module('webapp').controller('AdminSessionsConferencesEditCtrl', AdminSessionsConferencesEditCtrl)
-AdminSessionsConferencesEditCtrl.$inject = ['SessionsService', 'ConferencesService', 'PlacesService']
+AdminSessionsConferencesEditCtrl.$inject = ['SessionsService', 'ConferencesService', 'PlacesService', 'Speaker']
 
 /**
  * @ngdoc controller
  * @name webapp.controller:AdminSessionsConferencesEditCtrl
  * @description In charge of the admin sessions conferences edition view.
  */
-function AdminSessionsConferencesEditCtrl(SessionsService, ConferencesService, PlacesService) {
+function AdminSessionsConferencesEditCtrl(SessionsService, ConferencesService, PlacesService, Speaker) {
     var vm = this
 
     vm.titleName = "Edit conferences"
@@ -14,6 +14,8 @@ function AdminSessionsConferencesEditCtrl(SessionsService, ConferencesService, P
     vm.backAction = function() {
         vm.$router.parent.parent.navigate(['AdminSessionsDashboard'])
     }
+
+    vm.speaker = Speaker
 
     vm.places = PlacesService.places
 
@@ -24,6 +26,17 @@ function AdminSessionsConferencesEditCtrl(SessionsService, ConferencesService, P
         vm.date = new Date(vm.session.date)
         vm.start_time = new Date(vm.conference.start_time)
         vm.end_time = new Date(vm.conference.end_time)
+    }
+
+    vm.addSpeaker = function() {
+        var speaker = angular.copy(vm.speaker)
+        vm.conference.speakers.push(speaker)
+        vm.speaker.name = null
+        vm.speaker.institution = null
+    }
+
+    vm.removeSpeaker = function(speaker) {
+        vm.conference.speakers.splice(vm.conference.speakers.indexOf(speaker), 1)
     }
 
     vm.editConference = function() {
