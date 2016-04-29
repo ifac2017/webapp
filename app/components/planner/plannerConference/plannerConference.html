@@ -1,6 +1,9 @@
 <div flex layout="column">
     <wa-breadcrump title-name="$ctrl.titleName" back-name="$ctrl.backName" back-action="$ctrl.backAction()"></wa-breadcrump>
     <md-content flex layout-padding layout="column">
-        <h3>{{conference.name}}</h3>
+        <ng-map flex zoom="15" center="current-location" style="height:200px">
+            <directions draggable="true" panel="directions-panel" travel-mode="DRIVING" origin="current-location" destination="{{$ctrl.place.address}}"></directions>
+        </ng-map>
+        <div id="directions-panel"></div>
     </md-content>
 </div>

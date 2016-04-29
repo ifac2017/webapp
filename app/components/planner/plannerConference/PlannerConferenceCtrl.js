@@ -1,15 +1,16 @@
 angular.module('webapp').controller('PlannerConferenceCtrl', PlannerConferenceCtrl)
-PlannerConferenceCtrl.$inject = ['ConferencesService']
+PlannerConferenceCtrl.$inject = ['ConferencesService', 'PlacesService']
 
 /**
  * @ngdoc controller
  * @name webapp.controller:PlannerConferenceCtrl
  * @description In charge of the planner conference view.
  */
-function PlannerConferenceCtrl(ConferencesService) {
+function PlannerConferenceCtrl(ConferencesService, PlacesService) {
     var vm = this
 
     vm.backName = "Session"
+    vm.place = null
 
     vm.$routerOnActivate = function(next) {
         vm.conference = ConferencesService.getConferenceById(next.params.id)
@@ -19,5 +20,6 @@ function PlannerConferenceCtrl(ConferencesService) {
               id: vm.conference.sessionId
             }])
         }
+        vm.place = PlacesService.getPlaceById(vm.conference.placeId)
     }
 }

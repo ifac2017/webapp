@@ -13,7 +13,7 @@ angular.module('webapp').component('waPlannerConference', {
     bindings: {
         $router: '<'
     },
-    $canActivate: ['ConferencesService', '$rootRouter', function(ConferencesService, $rootRouter) {
+    $canActivate: ['ConferencesService', 'PlacesService', '$rootRouter', function(ConferencesService, PlacesService, $rootRouter) {
         return ConferencesService.loadArray().then(function() {
                 return true
             })
