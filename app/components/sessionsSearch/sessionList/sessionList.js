@@ -1,14 +1,8 @@
-/**
- * @ngdoc directive
- * @name webapp.directive:wa-session-card
- * @restrict E
- * @description Card describing one session.
- */
-angular.module('webapp').component('waSessionCard', {
-  controller: 'SessionCardCtrl',
+angular.module('webapp').component('waSessionList', {
+  controller: 'SessionListCtrl',
   templateUrl: ['$element', function($element) {
       angular.element($element).addClass('layout-column')
-      return 'sessionCard.html'
+      return 'sessionList.html'
   }],
   $canActivate: ['ConferencesService', 'SessionsService', '$rootRouter', function(ConferencesService, SessionsService, $rootRouter) {
     return SessionsService.loadArray()
@@ -22,8 +16,5 @@ angular.module('webapp').component('waSessionCard', {
         $rootRouter.navigate(['Planner'])
         return false
       })
-  }],
-  bindings: {
-      session: '<',
-  }
+  }]
 })
