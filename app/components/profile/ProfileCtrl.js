@@ -10,6 +10,14 @@ ProfileCtrl.$inject = ['CurrentUser']
 function ProfileCtrl(CurrentUser) {
     var vm = this
 
+    vm.titleName = "Conferences saved"
+
+    vm.goToConference = function(conference) {
+      vm.$router.navigate(['Planner', 'PlannerConference', {
+        id: conference.$id
+      }])
+    }
+
     /**
      * @ngdoc property
      * @name currentUser
@@ -17,4 +25,13 @@ function ProfileCtrl(CurrentUser) {
      * @description Current logged user
      */
     vm.currentUser = CurrentUser
+
+    vm.$routerOnActivate = function() {
+      CurrentUser.getConferences().then(function(conferences) {
+          vm.conferences = conferences
+      }).catch(function(error){
+        console.log(error)
+        vm.conferences = []
+      })
+    }
 }

@@ -1,12 +1,12 @@
 angular.module('webapp').factory('CurrentUser', CurrentUser)
-CurrentUser.$inject = ['$firebaseObject']
+CurrentUser.$inject = ['ConferencesService', '$firebaseObject']
 
 /**
  * @ngdoc service
  * @name webapp.service:CurrentUser
  * @description Represents the current logged user
  */
-function CurrentUser($firebaseObject) {
+function CurrentUser(ConferencesService, $firebaseObject) {
     var CurrentUser = {}
 
     CurrentUser._ref = new Firebase("https://ifac2017.firebaseio.com/users")
@@ -121,6 +121,24 @@ function CurrentUser($firebaseObject) {
                 }
             } else {
                 reject()
+            }
+        })
+    }
+
+    CurrentUser.getConferences = function() {
+        return new Promise(function(resolve, reject) {
+            if (CurrentUser.isLogged) {
+                if (!CurrentUser._user.conferences) {
+                    reject("any conferences found")
+                } else {
+                    var conferences = []
+                    for (var i = 0; i < CurrentUser._user.conferences.length; i++) {
+                        conferences.push(ConferencesService.getConferenceById(CurrentUser._user.conferences[i]))
+                    }
+                    resolve(conferences)
+                }
+            } else {
+                reject("not logged")
             }
         })
     }

@@ -1,1 +1,23 @@
-<h1>{{$ctrl.currentUser.email}}</h1>
+<div layout="column">
+  <wa-breadcrump title-name="$ctrl.titleName"></wa-breadcrump>
+  <md-content flex layout="column" layout-padding>
+    <md-list>
+        <md-list-item ng-repeat="conference in $ctrl.conferences" class="md-1-line">
+            <md-icon class="material-icons md-18">chat</md-icon>
+            <span flex></span>
+            <md-button flex ng-click="$ctrl.goToConference(conference)">{{conference.name}}</md-button>
+            <span flex></span>
+            <div layout="column">
+                <span class="md-caption">
+                  <md-icon class="material-icons md-18">access_time</md-icon>
+                  From
+                    {{conference.start_time | amDateFormat:'HH:mm'}}
+                    until
+                    {{conference.end_time | amDateFormat:'HH:mm'}}</span>
+                    <span class="md-caption"><md-icon class="material-icons md-18">place</md-icon> {{conference.room}}</span>
+            </div>
+            <md-divider ng-if="!$last"></md-divider>
+        </md-list-item>
+    </md-list>
+  </md-content>
+</div>
