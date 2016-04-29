@@ -8,20 +8,14 @@
                     <md-input-container flex class="md-block">
                         <input type="text" name="name" placeholder="Name" ng-model="$ctrl.session.name" required>
                     </md-input-container>
-                    <md-datepicker md-placeholder="Date" ng-model="$ctrl.date"></md-datepicker>
-                </div>
-            </div>
-            <div layout-padding>
-                <span class="md-heading">Scheduling</span>
-                <div layout-gt-xs="row" class="md-inline-form">
-                    <md-input-container flex class="md-block md-icon-float">
-                        <md-icon class="material-icons md-24">access_time</md-icon>
-                        <input type="time" name="start_time" placeholder="Start time" ng-model="$ctrl.start_time" required>
+                    <md-input-container class="md-block">
+                        <md-select placeholder="Timeslot" ng-model="$ctrl.timeslot">
+                            <md-option ng-repeat="timeslot in $ctrl.event.timeslots" ng-value="timeslot">{{timeslot.start_time | amDateFormat:'HH:mm'}}
+                                -
+                                {{timeslot.end_time | amDateFormat:'HH:mm'}}</md-option>
+                        </md-select>
                     </md-input-container>
-                    <md-input-container flex class="md-block md-icon-float">
-                        <md-icon class="material-icons md-24">access_time</md-icon>
-                        <input type="time" name="end_time" placeholder="End time" ng-model="$ctrl.end_time" required>
-                    </md-input-container>
+                    <md-datepicker md-placeholder="Date" ng-model="$ctrl.date" md-min-date="$ctrl.event.start_date" md-max-date="$ctrl.event.end_date"></md-datepicker>
                 </div>
             </div>
             <div layout-padding>

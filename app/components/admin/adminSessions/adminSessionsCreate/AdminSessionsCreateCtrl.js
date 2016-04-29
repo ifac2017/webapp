@@ -18,7 +18,14 @@ function AdminSessionsCreateCtrl(SessionsService, EventService) {
     vm.session = SessionsService.Model
     vm.event = EventService.Model
 
+    vm.timeslot = {
+        start_time: null,
+        end_time: null
+    }
+
     vm.addSession = function() {
+        vm.session.start_time = vm.timeslot.start_time
+        vm.session.end_time = vm.timeslot.end_time
         SessionsService.addSession(vm.session)
             .then(function() {
                 vm.$router.navigate(['AdminSessionsDashboardData', {
@@ -29,8 +36,17 @@ function AdminSessionsCreateCtrl(SessionsService, EventService) {
     }
 
     vm.$routerOnActivate = function(next, prev) {
+        vm.event.reset()
         SessionsService.Model.reset()
         vm.event.start_date = new Date(EventService.event.start_date)
         vm.event.end_date = new Date(EventService.event.end_date)
+        if (EventService.event.timeslots) {
+            EventService.event.timeslots.forEach(function(item) {
+                vm.event.timeslots.push({
+                    start_time: new Date(item.start_time),
+                    end_time: new Date(item.end_time)
+                })
+            })
+        }
     }
 }
