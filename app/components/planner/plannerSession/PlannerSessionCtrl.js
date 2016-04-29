@@ -14,8 +14,6 @@ function PlannerSessionCtrl(SessionsService, ConferencesService) {
         vm.$router.navigate(['PlannerCalendar'])
     }
 
-    //vm.conferences = []
-
     vm.$routerOnActivate = function(next) {
         vm.session = SessionsService.getSessionById(next.params.id)
         vm.titleName = vm.session.name
