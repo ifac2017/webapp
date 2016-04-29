@@ -12,10 +12,5 @@ function Speaker() {
         institution: null
     }
 
-    Speaker.reset = function() {
-      Speaker.name = null
-      Speaker.institution = null
-    }
-
     return Speaker
 }

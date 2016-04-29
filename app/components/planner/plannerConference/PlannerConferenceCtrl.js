@@ -14,6 +14,9 @@ function PlannerConferenceCtrl(ConferencesService, PlacesService) {
 
     vm.$routerOnActivate = function(next) {
         vm.conference = ConferencesService.getConferenceById(next.params.id)
+        vm.date = new Date(vm.conference.date)
+        vm.start_time = new Date(vm.conference.start_time)
+        vm.end_time = new Date(vm.conference.end_time)
         vm.titleName = vm.conference.name
         vm.backAction = function() {
             vm.$router.navigate(['PlannerSession', {
