@@ -1,16 +1,24 @@
 angular.module('webapp').controller('PlannerConferenceCtrl', PlannerConferenceCtrl)
-PlannerConferenceCtrl.$inject = ['ConferencesService', 'PlacesService']
+PlannerConferenceCtrl.$inject = ['ConferencesService', 'PlacesService', 'NotificationsService', 'CurrentUser']
 
 /**
  * @ngdoc controller
  * @name webapp.controller:PlannerConferenceCtrl
  * @description In charge of the planner conference view.
  */
-function PlannerConferenceCtrl(ConferencesService, PlacesService) {
+function PlannerConferenceCtrl(ConferencesService, PlacesService, NotificationsService, CurrentUser) {
     var vm = this
 
     vm.backName = "Session"
-    vm.place = null
+    vm.textAction = "Save this conference"
+    vm.iconAction = "save"
+    vm.action = function() {
+      CurrentUser.saveConference(vm.conference).then(function() {
+        NotificationsService.success("Conference saved!")
+      }).catch(function(){
+        NotificationsService.error("You must be logged to save a conference.")
+      })
+    }
 
     vm.$routerOnActivate = function(next) {
         vm.conference = ConferencesService.getConferenceById(next.params.id)

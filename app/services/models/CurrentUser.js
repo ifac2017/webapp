@@ -1,13 +1,23 @@
 angular.module('webapp').factory('CurrentUser', CurrentUser)
-CurrentUser.$inject = []
+CurrentUser.$inject = ['ConferencesService', '$firebaseObject']
 
 /**
  * @ngdoc service
  * @name webapp.service:CurrentUser
  * @description Represents the current logged user
  */
-function CurrentUser() {
+function CurrentUser(ConferencesService, $firebaseObject) {
     var CurrentUser = {}
+
+    CurrentUser._ref = new Firebase("https://ifac2017.firebaseio.com/users")
+
+    /**
+     * @ngdoc property
+     * @name _user
+     * @propertyOf webapp.service:CurrentUser
+     * @description Firebase instance of the connected user
+     */
+    CurrentUser._user = null
 
     /**
      * @ngdoc property
@@ -16,6 +26,14 @@ function CurrentUser() {
      * @description True if the user is connected false otherwise
      */
     CurrentUser.isLogged = false
+
+    /**
+     * @ngdoc property
+     * @name uid
+     * @propertyOf webapp.service:CurrentUser
+     * @description Firebase id of the connected user
+     */
+    CurrentUser.uid = null
 
     /**
      * @ngdoc property
@@ -43,10 +61,12 @@ function CurrentUser() {
       CurrentUser.create(email, role)
       ```
       */
-    CurrentUser.create = function(email, role) {
+    CurrentUser.create = function(uid, email, role) {
         CurrentUser.isLogged = true
+        CurrentUser.uid = uid
         CurrentUser.email = email
         CurrentUser.role = role
+        CurrentUser._user = $firebaseObject(CurrentUser._ref.child(CurrentUser.uid))
     }
 
     /**
@@ -76,7 +96,51 @@ function CurrentUser() {
       ```
       */
     CurrentUser.isAdmin = function() {
-      return CurrentUser.role === "admin"
+        return CurrentUser.role === "admin"
+    }
+
+    CurrentUser.save = function() {
+        return CurrentUser._user.$save()
+    }
+
+    CurrentUser.saveConference = function(conference) {
+        return new Promise(function(resolve, reject) {
+            if (CurrentUser.isLogged) {
+                if (!CurrentUser._user.conferences) {
+                    CurrentUser._user.conferences = []
+                }
+                if (CurrentUser._user.conferences.indexOf(conference.$id) > -1) {
+                    resolve()
+                } else {
+                    CurrentUser._user.conferences.push(conference.$id)
+                    CurrentUser.save().then(function() {
+                        resolve()
+                    }).catch(function() {
+                        reject()
+                    })
+                }
+            } else {
+                reject()
+            }
+        })
+    }
+
+    CurrentUser.getConferences = function() {
+        return new Promise(function(resolve, reject) {
+            if (CurrentUser.isLogged) {
+                if (!CurrentUser._user.conferences) {
+                    reject("any conferences found")
+                } else {
+                    var conferences = []
+                    for (var i = 0; i < CurrentUser._user.conferences.length; i++) {
+                        conferences.push(ConferencesService.getConferenceById(CurrentUser._user.conferences[i]))
+                    }
+                    resolve(conferences)
+                }
+            } else {
+                reject("not logged")
+            }
+        })
     }
 
     return CurrentUser

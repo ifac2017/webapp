@@ -44,7 +44,11 @@ function AuthService($firebaseAuth, $firebaseObject, CurrentUser) {
             AuthService._auth.$waitForAuth()
                 .then(function(authData) {
                     if (authData) {
-                        resolve(authData)
+                        AuthService._createCurrentUser(authData.uid).then(function() {
+                            resolve()
+                        }).catch(function(error) {
+                            reject(error)
+                        })
                     } else {
                         reject("error requireAuth")
                     }
@@ -99,6 +103,8 @@ function AuthService($firebaseAuth, $firebaseObject, CurrentUser) {
                         } else {
                             reject("You are not an admin !")
                         }
+                    }).catch(function(error) {
+                        reject(error)
                     })
                 })
                 .catch(function(error) {
@@ -217,7 +223,7 @@ function AuthService($firebaseAuth, $firebaseObject, CurrentUser) {
                 var ref = AuthService._ref.child("users").child(uid)
                 var user = $firebaseObject(ref)
                 user.$loaded().then(function() {
-                    CurrentUser.create(user.email, user.role)
+                    CurrentUser.create(user.$id, user.email, user.role)
                     resolve()
                 })
             } else {

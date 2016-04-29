@@ -2,6 +2,6 @@
     <div class="md-toolbar-tools">
         <md-button class="md-icon-button" hide-gt-sm ng-click="$ctrl.toggleSideMenu()"><i class="material-icons md-24">dehaze</i></md-button>
         <span flex></span>
-        <md-button class="md-icon-button" ng-click="$ctrl.openProfile()"><i class="material-icons md-24">settings</i></md-button>
+        <md-button ng-if="$ctrl.currentUser.isLogged" class="md-icon-button" ng-click="$ctrl.openProfile()"><i class="material-icons md-32">person</i></md-button>
     </div>
 </md-toolbar>

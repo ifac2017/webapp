@@ -1,5 +1,5 @@
 angular.module('webapp').controller('TopbarCtrl', TopbarCtrl)
-TopbarCtrl.$inject = ['$rootRouter', '$mdSidenav']
+TopbarCtrl.$inject = ['CurrentUser', '$rootRouter', '$mdSidenav']
 
 /**
  * @ngdoc controller
@@ -7,8 +7,16 @@ TopbarCtrl.$inject = ['$rootRouter', '$mdSidenav']
  * @requires $rootRouter
  * @description In charge of the topbar view.
  */
-function TopbarCtrl($rootRouter, $mdSidenav) {
+function TopbarCtrl(CurrentUser, $rootRouter, $mdSidenav) {
     var vm = this
+
+    /**
+     * @ngdoc property
+     * @name currentUser
+     * @propertyOf webapp.controller:SidebarCtrl
+     * @description Current logged user
+     */
+    vm.currentUser = CurrentUser
 
     /**
      * @ngdoc method

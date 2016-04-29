@@ -24,10 +24,11 @@ Be sure to have previous requirements installed on your computer.
 
 ### TODO
 
-- Planner view
-- Profile view (with list of user's conferences)
+- Mobile Button
+- Index Database
 - Firebase rules
 - Admin forms validation
+- Design stuff
 - add a 404 page
 - Code refactoring (always...)
 
