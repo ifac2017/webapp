@@ -3,17 +3,19 @@
     <div ng-if="true |isMobile:false" layout-gt-xs="row">
         <md-button ng-click="$ctrl.selectDay($index)" flex class="md-raised" aria-label="date" ng-repeat="day in $ctrl.days" ng-disabled="$ctrl.selectedIndex == $index">{{day | amDateFormat:'dddd, MMMM D'}}</md-button>
     </div>
+    <md-input-container ng-if="false |isMobile:true" class="md-block">
+        <md-select placeholder="Day" ng-model="$ctrl.selectedIndex">
+            <md-option ng-click="$ctrl.selectDay($index)" ng-repeat="day in $ctrl.days" ng-value="$index">{{day | amDateFormat:'dddd, MMMM D'}}</md-option>
+        </md-select>
+    </md-input-container>
     <md-content flex layout="column" layout-padding>
-      <div ng-if="false |isMobile:true" layout-wrap>
-          <md-button ng-click="$ctrl.selectDay($index)" flex class="md-raised" aria-label="date" ng-repeat="day in $ctrl.days" ng-disabled="$ctrl.selectedIndex == $index">{{day | amDateFormat:'dddd, MMMM D'}}</md-button>
-      </div>
         <div layout-gt-xs="row">
             <div flex ng-repeat="timeslot in $ctrl.timeslots" layout="column">
                 <h4>{{timeslot.start_time | amDateFormat:'HH:mm'}}
                     -
                     {{timeslot.end_time | amDateFormat:'HH:mm'}}</h4>
-                    <md-divider></md-divider>
-                    <md-button flex ng-repeat="session in $ctrl.sessions | filter:{ start_time: timeslot.start_time.getTime()}:true" ng-click="$ctrl.showSession(session)">{{session.name}}</md-button>
+                <md-divider></md-divider>
+                <md-button flex ng-repeat="session in $ctrl.sessions | filter:{ start_time: timeslot.start_time.getTime()}:true" ng-click="$ctrl.showSession(session)">{{session.name}}</md-button>
             </div>
         </div>
     </md-content>
