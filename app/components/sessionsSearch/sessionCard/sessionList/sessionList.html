@@ -4,14 +4,13 @@
     <div class="md-list-item-text" layout="column">
       <h3>{{ conference.name }}</h3>
       <h4>{{ conference.date | amDateFormat:'dddd, MMMM D'}} Horaire : {{ conference.start_time | amDateFormat:'hh:mm'}} - {{conference.end_time | amDateFormat:'hh:mm'}}</h4>
-      <p>À :{{ $ctrl.getPlaceById(conference.placeId).name}} - Salle : {{conference.room}} </p>
+      <p>À : {{ $ctrl.getPlaceById(conference.placeId).name}} - Salle : {{conference.room}} </p>
         <md-chips ng-model="conference.speakers" name="speaker" readonly="true" md-max-chips="5">
         <md-chip-template>
           <strong>{{$chip.name}}</strong>
           <em>{{$chip.institution}}</em>
         </md-chip-template>
       </md-chips>
-
     </div>
   </md-list-item>
 </md-list>
