@@ -1,0 +1,12 @@
+wa-planner-conference {
+    .directions {
+        .wa-map {
+            width: 68%;
+            float: left;
+            height: 200px;
+            ng-map {
+                height: 100%;
+            }
+        }
+    }
+}
