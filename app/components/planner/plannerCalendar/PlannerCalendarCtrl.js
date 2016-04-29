@@ -20,6 +20,7 @@ function PlannerCalendarCtrl(SessionsService, EventService, moment) {
     vm.sessions = null
 
     EventService.loadEvent().then(function() {
+      console.log(vm)
         if (EventService.event.start_date && EventService.event.end_date) {
             var start = moment(EventService.event.start_date)
             var end = moment(EventService.event.end_date)
@@ -37,7 +38,6 @@ function PlannerCalendarCtrl(SessionsService, EventService, moment) {
                 })
             })
         }
-
         vm.getSessions(0)
 
     })
