@@ -14,8 +14,12 @@ angular.module('webapp').component('waPlannerConference', {
         $router: '<'
     },
     $canActivate: ['ConferencesService', 'PlacesService', '$rootRouter', function(ConferencesService, PlacesService, $rootRouter) {
-        return ConferencesService.loadArray().then(function() {
-                return true
+        return ConferencesService.loadArray()
+            .then(function() {
+                return PlacesService.loadArray()
+            })
+            .then(function(){
+              return true
             })
             .catch(function(error) {
                 $rootRouter.navigate(['Planner'])
