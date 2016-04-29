@@ -217,7 +217,7 @@ function AuthService($firebaseAuth, $firebaseObject, CurrentUser) {
                 var ref = AuthService._ref.child("users").child(uid)
                 var user = $firebaseObject(ref)
                 user.$loaded().then(function() {
-                    CurrentUser.create(user.email, user.role)
+                    CurrentUser.create(user.$id, user.email, user.role)
                     resolve()
                 })
             } else {
