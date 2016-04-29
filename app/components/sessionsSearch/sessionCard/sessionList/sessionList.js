@@ -16,5 +16,8 @@ angular.module('webapp').component('waSessionList', {
         $rootRouter.navigate(['Planner'])
         return false
       })
-  }]
+  }],
+  bindings: {
+      conferences: '<',
+  }
 })
