@@ -9,5 +9,9 @@ angular.module('webapp').component('waPlanner', {
     templateUrl: ['$element', function($element) {
         angular.element($element).addClass('layout-column')
         return 'planner.html'
-    }]
+    }],
+    $routeConfig: [
+      {path: '/', name:'PlannerCalendar', component: 'waPlannerCalendar', useAsDefault: true},
+      {path: '/:id', name:'PlannerSession', component: 'waPlannerSession'}
+    ]
 })
