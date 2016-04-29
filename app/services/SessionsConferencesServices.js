@@ -36,6 +36,20 @@ function SessionsConferencesService($firebaseArray) {
         return SessionsConferencesService.conferences.$getRecord(id)
     }
 
+    SessionsConferencesService.getConferencesBySession = function(session) {
+        return new Promise(function(resolve, reject) {
+            if (typeof session.conferences !== 'undefined') {
+                var conferences = []
+                for (var i = 0; i < session.conferences.length; i++) {
+                    conferences.push(SessionsConferencesService.getConferenceById(session.conferences[i]))
+                }
+                resolve(conferences)
+            } else {
+                reject("any conference found for this session")
+            }
+        })
+    }
+
     SessionsConferencesService.saveSession = function(session) {
         return SessionsConferencesService.sessions.$save(session)
     }

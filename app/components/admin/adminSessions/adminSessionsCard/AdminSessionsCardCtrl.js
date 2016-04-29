@@ -34,11 +34,10 @@ function AdminSessionsCardCtrl(SessionsService, ConferencesService, $mdDialog) {
         })
     }
 
-    vm.conferences = []
     vm.showConferences = false
 
     vm.toggleConferences = function() {
-        if (!vm.conferences.length) {
+        if (!vm.conferences) {
             vm.getConferences()
         }
         vm.showConferences = !vm.showConferences
@@ -46,11 +45,11 @@ function AdminSessionsCardCtrl(SessionsService, ConferencesService, $mdDialog) {
     }
 
     vm.getConferences = function() {
-        if (vm.session.conferences) {
-            for (var i = 0; i < vm.session.conferences.length; i++) {
-                vm.conferences.push(ConferencesService.getConferenceById(vm.session.conferences[i]))
-            }
-        }
+        SessionsService.getConferencesBySession(vm.session).then(function(conferences) {
+            vm.conferences = conferences
+        }).catch(function(error) {
+            console.log(error)
+        })
     }
 
 }

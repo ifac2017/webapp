@@ -50,5 +50,9 @@ function SessionsService(SessionsConferencesService, Session, $firebaseArray) {
         return $firebaseArray(SessionsService.sessions.$ref().orderByChild("date").equalTo(date.valueOf())).$loaded()
     }
 
+    SessionsService.getConferencesBySession = function(session) {
+        return SessionsConferencesService.getConferencesBySession(session)
+    }
+
     return SessionsService
 }
