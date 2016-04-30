@@ -1,12 +1,20 @@
 angular.module('webapp').controller('SessionSearchCtrl', SessionSearchCtrl)
 SessionSearchCtrl.$inject = ['SessionsService', 'ConferencesService']
 
+/**
+ * @ngdoc controller
+ * @name webapp.controller:SessionSearchCtrl
+ * @requires ConferencesService
+ * @requires ConferencesService
+ * @description In charge of the sessionCard in SessionSearch view.
+ */
 function SessionSearchCtrl(SessionsService, ConferencesService) {
   var vm = this
   vm.titleName = "SessionSearch"
   vm.sessions = []
   vm.sessionActivated = null
   vm.conferences = []
+  vm.search = ""
 
   vm.$routerOnActivate = function(next) {
       vm.sessions = SessionsService.sessions

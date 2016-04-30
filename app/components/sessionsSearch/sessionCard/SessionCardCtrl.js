@@ -1,7 +1,14 @@
 angular.module('webapp').controller('SessionCardCtrl', SessionCardCtrl)
-SessionCardCtrl.$inject = ['SessionsService', 'ConferencesService']
+SessionCardCtrl.$inject = ['ConferencesService']
 
-function SessionCardCtrl(SessionsService, ConferencesService) {
+/**
+ * @ngdoc controller
+ * @name webapp.controller:SessionCardCtrl
+ * @requires ConferencesService
+ * @description In charge of the sessionCard in sessionSearch view.
+ */
+
+function SessionCardCtrl(ConferencesService) {
   var vm = this
   vm.session = vm.session
   vm.sessionActivated = false
