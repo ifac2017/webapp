@@ -8,4 +8,8 @@ function SessionListCtrl(PlacesService) {
   vm.getPlaceById = function(placeId) {
     return PlacesService.getPlaceById(placeId)
   }
+
+  vm.showConference = function(placeId) {
+    console.log("Clické")
+  }
 }

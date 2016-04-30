@@ -10,26 +10,37 @@ SessionSearchCtrl.$inject = ['SessionsService', 'ConferencesService']
  */
 function SessionSearchCtrl(SessionsService, ConferencesService) {
   var vm = this
+  /**
+   * @ngdoc property
+   * @name titleName
+   * @propertyOf webapp.controller:SessionSearchCtrl
+   * @description Name of the controller
+   */
   vm.titleName = "SessionSearch"
+  /**
+   * @ngdoc property
+   * @name sessions
+   * @propertyOf webapp.controller:SessionSearchCtrl
+   * @description List of all sessions for the event
+   */
   vm.sessions = []
-  vm.sessionActivated = null
-  vm.conferences = []
+  /**
+   * @ngdoc property
+   * @name search
+   * @propertyOf webapp.controller:SessionSearchCtrl
+   * @description String of the beginning of the sessions searched by the user.
+   */
   vm.search = ""
 
+
+  /**
+   * @ngdoc method
+   * @name routerOnActivate
+   * @methodOf webapp.controller:SessionSearchCtrl
+   * @description Todo before loading the component.
+   */
   vm.$routerOnActivate = function(next) {
       vm.sessions = SessionsService.sessions
   }
 
-  vm.selectSession = function(session) {
-    console.log(session)
-    vm.conferences = []
-    vm.sessionActivated = session
-    if(typeof session.conferences !== 'undefined' ){
-      for (var i = 0; i < session.conferences.length; i++) {
-          vm.conferences.push(ConferencesService.getConferenceById(vm.sessionActivated.conferences[i]))
-      }
-    }
-    console.log(vm.conferences)
-    console.log(vm.sessionActivated)
-  }
 }

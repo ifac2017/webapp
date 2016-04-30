@@ -10,16 +10,13 @@ angular.module('webapp').component('waSessionCard', {
       angular.element($element).addClass('layout-column')
       return 'sessionCard.html'
   }],
-  $canActivate: ['ConferencesService', 'SessionsService', '$rootRouter', function(ConferencesService, SessionsService, $rootRouter) {
-    return SessionsService.loadArray()
-      .then(function() {
-        return ConferencesService.loadArray()
-      })
+  $canActivate: ['ConferencesService', '$rootRouter', function(ConferencesService, SessionsService, $rootRouter) {
+    return ConferencesService.loadArray()
       .then(function() {
         return true
       })
       .catch(function(error) {
-        $rootRouter.navigate(['Planner'])
+        $rootRouter.navigate(['SessionSearch'])
         return false
       })
   }],

@@ -13,7 +13,7 @@ angular.module('webapp').component('waSessionSearch', {
         return true
       })
       .catch(function(error) {
-        $rootRouter.navigate(['Planner'])
+        $rootRouter.navigate(['SessionSearch'])
         return false
       })
   }]

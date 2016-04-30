@@ -1,5 +1,5 @@
 <md-list ng-class="leftPadding">
-  <md-list-item flex class="md-3-line" ng-repeat="conference in $ctrl.conferences">
+  <md-list-item flex class="md-3-line" ng-click="$ctrl.showConference(conference)" ng-repeat="conference in $ctrl.conferences">
     <md-icon class="material-icons">chat</md-icon>
     <div class="md-list-item-text" layout="column">
       <h3>{{ conference.name }}</h3>

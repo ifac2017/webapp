@@ -12,6 +12,6 @@ angular.module('webapp').component('waApp', {
       {path: '/login', name:'Login', component: 'waLogin'},
       {path: '/profile', name:'Profile', component: 'waProfile'},
       {path: '/admin/...', name:'Admin', component: 'waAdmin'},
-      {path: '/sessions', name:'Sessions', component: 'waSessionSearch'}
+      {path: '/sessions/...', name:'Sessions', component: 'waSessionSearch'}
     ]
 })
