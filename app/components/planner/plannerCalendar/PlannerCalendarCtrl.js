@@ -37,6 +37,7 @@ function PlannerCalendarCtrl(SessionsService, EventService, moment) {
                         end_time: new Date(item.end_time)
                     })
                 })
+
             }
 
             vm.getSessions(0)
