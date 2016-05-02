@@ -4,6 +4,9 @@ angular.module('webapp').component('waSessionSearch', {
       angular.element($element).addClass('layout-column')
       return 'sessionSearch.html'
   }],
+  bindings: {
+      $router: '<'
+  },
   $canActivate: ['ConferencesService', 'SessionsService', '$rootRouter', function(ConferencesService, SessionsService, $rootRouter) {
     return SessionsService.loadArray()
       .then(function() {

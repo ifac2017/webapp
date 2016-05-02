@@ -16,7 +16,7 @@ function SessionSearchCtrl(SessionsService, ConferencesService) {
    * @propertyOf webapp.controller:SessionSearchCtrl
    * @description Name of the controller
    */
-  vm.titleName = "SessionSearch"
+  vm.titleName = "Discover"
   /**
    * @ngdoc property
    * @name sessions
@@ -31,6 +31,12 @@ function SessionSearchCtrl(SessionsService, ConferencesService) {
    * @description String of the beginning of the sessions searched by the user.
    */
   vm.search = ""
+
+  vm.goToConference = function(conference) {
+      vm.$router.navigate(['Planner', 'PlannerConference', {
+          id: conference.$id
+      }])
+  }
 
 
   /**

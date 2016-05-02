@@ -67,6 +67,21 @@ function SidebarCtrl(AuthService, CurrentUser, $rootRouter, $mdSidenav) {
 
     /**
      * @ngdoc method
+     * @name openAdmin
+     * @methodOf webapp.controller:SidebarCtrl
+     * @description Redirect to the admin page.
+     * @example
+      ```javascript
+      sidebarCtrl.openAdmin()
+      ```
+     */
+    vm.goDiscover = function() {
+        $rootRouter.navigate(['SessionSearch'])
+        $mdSidenav('left').toggle()
+    }
+
+    /**
+     * @ngdoc method
      * @name goHome
      * @methodOf webapp.controller:SidebarCtrl
      * @description Redirect to the home page.
