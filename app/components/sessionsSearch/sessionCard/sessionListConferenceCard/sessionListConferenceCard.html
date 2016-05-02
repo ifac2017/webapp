@@ -1,0 +1,22 @@
+<md-list-item flex class="md-3-line" ng-click="$ctrl.conferenceClicked()">
+    <md-icon class="material-icons">chat</md-icon>
+    <div class="md-list-item-text" layout="column">
+        <h3>{{ $ctrl.conference.name }}</h3>
+        <h4>{{ $ctrl.conference.date | amDateFormat:'dddd, MMMM D'}}
+            Horaire :
+            {{ $ctrl.conference.start_time | amDateFormat:'hh:mm'}}
+            -
+            {{$ctrl.conference.end_time | amDateFormat:'hh:mm'}}</h4>
+        <p>À :
+            {{ $ctrl.getPlaceById($ctrl.conference.placeId).name}}
+            - Salle :
+            {{$ctrl.conference.room}}
+        </p>
+        <md-chips ng-model="$ctrl.conference.speakers" name="speaker" readonly="true" md-max-chips="5">
+            <md-chip-template>
+                <strong>{{$chip.name}}</strong>
+                <em>{{$chip.institution}}</em>
+            </md-chip-template>
+        </md-chips>
+    </div>
+</md-list-item>

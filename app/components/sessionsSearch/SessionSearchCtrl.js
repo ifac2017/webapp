@@ -32,6 +32,12 @@ function SessionSearchCtrl(SessionsService, ConferencesService) {
    */
   vm.search = ""
 
+  vm.goToConference = function(conference) {
+      vm.$router.navigate(['Planner', 'PlannerConference', {
+          id: conference.$id
+      }])
+  }
+
 
   /**
    * @ngdoc method
