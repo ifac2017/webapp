@@ -7,4 +7,8 @@ function SessionListConferenceCardCtrl(PlacesService) {
   vm.getPlaceById = function(placeId) {
     return PlacesService.getPlaceById(placeId)
   }
+
+  vm.saveConf = function(confId) {
+    console.log("Cliked")
+  }
 }
