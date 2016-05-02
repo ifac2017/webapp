@@ -1,22 +1,27 @@
 <md-list-item flex class="md-3-line" ng-click="$ctrl.conferenceClicked()">
     <md-icon class="material-icons">chat</md-icon>
-    <div class="md-list-item-text" layout="column">
+    <div flex class="md-list-item-text" layout="column">
         <h3>{{ $ctrl.conference.name }}</h3>
-        <h4>{{ $ctrl.conference.date | amDateFormat:'dddd, MMMM D'}}
+        <p>{{ $ctrl.conference.date | amDateFormat:'dddd, MMMM D'}}
             Schedule :
             {{ $ctrl.conference.start_time | amDateFormat:'hh:mm'}}
             -
-            {{$ctrl.conference.end_time | amDateFormat:'hh:mm'}}</h4>
-        <p>À :
+            {{$ctrl.conference.end_time | amDateFormat:'hh:mm'}}</p>
+        <p><i>À :
             {{ $ctrl.getPlaceById($ctrl.conference.placeId).name}}
             - Room :
             {{$ctrl.conference.room}}
-        </p>
+        </i></p>
         <md-chips ng-model="$ctrl.conference.speakers" name="speaker" readonly="true" md-max-chips="5">
             <md-chip-template>
                 <strong>{{$chip.name}}</strong>
                 <em>{{$chip.institution}}</em>
             </md-chip-template>
         </md-chips>
+    </div>
+    <div>
+      <md-button ng-click="$ctrl.saveConf" class="md-fab" aria-label="Eat cake">
+            <md-icon>save</md-icon>
+      </md-button>
     </div>
 </md-list-item>
