@@ -16,7 +16,7 @@ function SessionSearchCtrl(SessionsService, ConferencesService) {
    * @propertyOf webapp.controller:SessionSearchCtrl
    * @description Name of the controller
    */
-  vm.titleName = "SessionSearch"
+  vm.titleName = "Discover"
   /**
    * @ngdoc property
    * @name sessions

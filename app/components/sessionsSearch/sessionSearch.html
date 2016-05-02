@@ -1,7 +1,7 @@
 <md-content class="md-padding">
   <wa-breadcrump title-name="$ctrl.titleName"></wa-breadcrump>
   <md-input-container>
-      <label>Recherche</label>
+      <label>Search</label>
       <input md-maxlength="15" ng-model="$ctrl.search">
   </md-input-container>
   <wa-session-card session="session" ng-repeat="session in $ctrl.sessions | filter:$ctrl.search" conference-clicked="$ctrl.goToConference"></wa-session-card>
