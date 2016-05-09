@@ -4,10 +4,12 @@
             <div class="md-list-item-text" layout="column">
                 <h3>{{$ctrl.session.name}}</h3>
                 <h4>{{$ctrl.session.date | amDateFormat:'dddd, MMMM Do YYYY'}}</h4>
-                <p>From
-                    {{$ctrl.session.start_time | amDateFormat:'HH:mm'}}
-                    until
-                    {{$ctrl.session.end_time | amDateFormat:'HH:mm'}}</p>
+                <p><md-icon class="material-icons md-18">access_time</md-icon>
+                From
+                  {{$ctrl.session.start_time | amDateFormat:'HH:mm'}}
+                  until
+                  {{$ctrl.session.end_time | amDateFormat:'HH:mm'}}</p>
+                  <span class="md-caption"><md-icon class="material-icons md-18">place</md-icon> {{$ctrl.session.room}}</span>
             </div>
             <span flex></span>
             <md-button class="md-icon-button" ng-click="$ctrl.toggleConferences()">
@@ -46,7 +48,6 @@
                         {{conference.start_time | amDateFormat:'HH:mm'}}
                         until
                         {{conference.end_time | amDateFormat:'HH:mm'}}</span>
-                        <span class="md-caption"><md-icon class="material-icons md-18">place</md-icon> {{conference.room}}</span>
                 </div>
                 <span flex></span>
                 <md-button class="md-icon-button" ng-click="$ctrl.onEditConference()($ctrl.session, conference)">

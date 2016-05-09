@@ -12,6 +12,8 @@ function Session() {
         date: null,
         start_time: null,
         end_time: null,
+        placeId: null,
+        room: null,
         conferences: []
     }
 
@@ -20,6 +22,8 @@ function Session() {
       Session.date = null
       Session.start_time = null
       Session.end_time = null
+      Session.placeId = null
+      Session.room = null
       Session.conferences = []
     }
 

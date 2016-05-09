@@ -13,10 +13,13 @@ angular.module('webapp').component('waPlannerSession', {
     bindings: {
         $router: '<'
     },
-    $canActivate: ['ConferencesService', 'SessionsService', '$rootRouter', function(ConferencesService, SessionsService, $rootRouter) {
+    $canActivate: ['ConferencesService', 'SessionsService', 'PlacesService', '$rootRouter', function(ConferencesService, SessionsService, PlacesService, $rootRouter) {
         return SessionsService.loadArray()
             .then(function() {
                 return ConferencesService.loadArray()
+            })
+            .then(function() {
+                return PlacesService.loadArray()
             })
             .then(function() {
                 return true
