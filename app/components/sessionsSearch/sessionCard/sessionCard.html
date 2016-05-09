@@ -1,6 +1,6 @@
 <div flex layout="column">
-    <md-card ng-click="$ctrl.selectSession(session)">
-        <md-card-title >
+    <md-card>
+        <md-card-title ng-click="$ctrl.selectSession(session)">
             <md-card-title-media layout-padding>
                 <md-icon class="material-icons">question_answer</md-icon>
             </md-card-title-media>
@@ -13,10 +13,11 @@
                     {{$ctrl.session.end_time | amDateFormat:'hh:mm'}}</span>
             </md-card-title-text>
         </md-card-title>
-        <md-card-content>
-            <md-list ng-class="leftPadding" ng-if="$ctrl.sessionActivated == true">
-                <wa-session-list-conference-card conference-clicked="$ctrl.conferenceClicked()(conference)" conference="conference" ng-repeat="conference in $ctrl.conferences"></wa-session-list-card>
-            </md-list>
+        <md-card-content ng-if="$ctrl.sessionActivated == true">
+          <md-divider></md-divider>
+          <md-list ng-class="leftPadding">
+              <wa-session-list-conference-card conference-clicked="$ctrl.conferenceClicked()(conference)" conference="conference" ng-repeat="conference in $ctrl.conferences"></wa-session-list-card>
+          </md-list>
         </md-card-content>
     </md-card>
 </div>
