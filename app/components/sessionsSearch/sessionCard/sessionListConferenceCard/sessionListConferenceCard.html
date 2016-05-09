@@ -5,9 +5,9 @@
           <h3>{{ $ctrl.conference.name }}</h3>
           <p>{{ $ctrl.conference.date | amDateFormat:'dddd, MMMM D'}}
               Schedule :
-              {{ $ctrl.conference.start_time | amDateFormat:'hh:mm'}}
+              {{ $ctrl.conference.start_time | amDateFormat:'HH:mm'}}
               -
-              {{$ctrl.conference.end_time | amDateFormat:'hh:mm'}}</p>
+              {{$ctrl.conference.end_time | amDateFormat:'HH:mm'}}</p>
           <p><i>At :
               {{ $ctrl.getPlaceById($ctrl.conference.placeId).name}}
               - Room :
@@ -23,8 +23,9 @@
   </md-list-item>
   <div layout="column">
     <span flex></span>
-    <md-button ng-click="$ctrl.saveConf()" class="md-fab" aria-label="Eat cake">
+    <md-button ng-click="$ctrl.saveConf()" class="md-fab" aria-label="Save">
           <md-icon>save</md-icon>
+          <md-tooltip>Save</md-tooltip>
     </md-button>
     <span flex></span>
   </div>
