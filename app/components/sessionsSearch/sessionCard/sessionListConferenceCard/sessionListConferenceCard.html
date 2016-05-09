@@ -8,7 +8,7 @@
               {{ $ctrl.conference.start_time | amDateFormat:'hh:mm'}}
               -
               {{$ctrl.conference.end_time | amDateFormat:'hh:mm'}}</p>
-          <p><i>À :
+          <p><i>At :
               {{ $ctrl.getPlaceById($ctrl.conference.placeId).name}}
               - Room :
               {{$ctrl.conference.room}}
