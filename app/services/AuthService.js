@@ -97,17 +97,12 @@ function AuthService($firebaseAuth, $firebaseObject, CurrentUser) {
         return new Promise(function(resolve, reject) {
             AuthService.requireAuth()
                 .then(function(authData) {
-                    AuthService._createCurrentUser(authData.uid).then(function() {
-                        if (CurrentUser.role === "admin") {
-                            resolve()
-                        } else {
-                            reject("You are not an admin !")
-                        }
-                    }).catch(function(error) {
-                        reject(error)
-                    })
-                })
-                .catch(function(error) {
+                    if (CurrentUser.role === "admin") {
+                        resolve()
+                    } else {
+                        reject("You are not an admin !")
+                    }
+                }).catch(function(error) {
                     reject(error)
                 })
         })

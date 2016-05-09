@@ -20,7 +20,7 @@ function SessionsConferencesService($firebaseArray) {
     SessionsConferencesService.removeSession = function(session) {
         if (session.conferences) {
             for (var i = 0; i < session.conferences.length; i++) {
-                SessionsConferencesService.removeConference(SessionsConferencesService.getConferenceById(session.conferences[i]))
+                SessionsConferencesService.removeConference(SessionsConferencesService.getConferenceById(session.conferences[i]), session)
             }
         }
         SessionsConferencesService.sessions.$remove(session)

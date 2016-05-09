@@ -4,7 +4,7 @@ SessionSearchCtrl.$inject = ['SessionsService', 'ConferencesService']
 /**
  * @ngdoc controller
  * @name webapp.controller:SessionSearchCtrl
- * @requires ConferencesService
+ * @requires SessionsService
  * @requires ConferencesService
  * @description In charge of the sessionCard in SessionSearch view.
  */
@@ -16,7 +16,7 @@ function SessionSearchCtrl(SessionsService, ConferencesService) {
    * @propertyOf webapp.controller:SessionSearchCtrl
    * @description Name of the controller
    */
-  vm.titleName = "SessionSearch"
+  vm.titleName = "Discover"
   /**
    * @ngdoc property
    * @name sessions
@@ -32,6 +32,17 @@ function SessionSearchCtrl(SessionsService, ConferencesService) {
    */
   vm.search = ""
 
+  /**
+   * @ngdoc method
+   * @name goToConference
+   * @methodOf webapp.controller:SessionSearchCtrl
+   * @description Redirect to conference view when the conference sessionListConferenceCard is clicked.
+   */
+  vm.goToConference = function(conference) {
+      vm.$router.navigate(['Planner', 'PlannerConference', {
+          id: conference.$id
+      }])
+  }
 
   /**
    * @ngdoc method
