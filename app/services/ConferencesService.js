@@ -16,7 +16,6 @@ function ConferencesService(SessionsService, SessionsConferencesService, Confere
     ConferencesService.addConference = function(conference, session) {
         return ConferencesService.conferences.$add({
             name: conference.name,
-            date: conference.date.getTime(),
             start_time: conference.start_time.getTime(),
             end_time: conference.end_time.getTime(),
             speakers: conference.speakers,

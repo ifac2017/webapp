@@ -9,7 +9,6 @@ Conference.$inject = []
 function Conference() {
     var Conference = {
         name: null,
-        date: null,
         start_time: null,
         end_time: null,
         speakers: [],
@@ -19,7 +18,6 @@ function Conference() {
 
     Conference.reset = function() {
       Conference.name = null
-      Conference.date = null
       Conference.start_time = null
       Conference.end_time = null
       Conference.speakers = []
