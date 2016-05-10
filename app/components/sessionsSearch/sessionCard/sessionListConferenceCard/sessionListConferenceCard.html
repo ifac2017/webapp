@@ -3,8 +3,7 @@
       <md-icon class="material-icons">chat</md-icon>
       <div flex class="md-list-item-text" layout="column">
           <h3>{{ $ctrl.conference.name }}</h3>
-          <p>{{ $ctrl.conference.date | amDateFormat:'dddd, MMMM D'}}
-              Schedule :
+          <p>Schedule :
               {{ $ctrl.conference.start_time | amDateFormat:'HH:mm'}}
               -
               {{$ctrl.conference.end_time | amDateFormat:'HH:mm'}}</p>
