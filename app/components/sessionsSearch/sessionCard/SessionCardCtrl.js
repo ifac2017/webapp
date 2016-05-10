@@ -1,5 +1,5 @@
 angular.module('webapp').controller('SessionCardCtrl', SessionCardCtrl)
-SessionCardCtrl.$inject = ['ConferencesService']
+SessionCardCtrl.$inject = ['PlacesService','ConferencesService']
 
 /**
  * @ngdoc controller
@@ -8,7 +8,7 @@ SessionCardCtrl.$inject = ['ConferencesService']
  * @description In charge of the sessionCard in sessionSearch view.
  */
 
-function SessionCardCtrl(ConferencesService) {
+function SessionCardCtrl(PlacesService, ConferencesService) {
   var vm = this
   /**
    * @ngdoc property
@@ -46,5 +46,14 @@ function SessionCardCtrl(ConferencesService) {
    */
   vm.selectSession = function(session) {
     vm.sessionActivated = !vm.sessionActivated
+  }
+  /**
+   * @ngdoc method
+   * @name getPlaceById
+   * @methodOf webapp.controller:SessionListConferenceCardCtrl
+   * @description Get the place from the ID the the place.
+   */
+  vm.getPlaceById = function(placeId) {
+    return PlacesService.getPlaceById(placeId)
   }
 }

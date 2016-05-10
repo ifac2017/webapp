@@ -8,19 +8,26 @@
             </md-card-title-media>
             <md-card-title-text>
                 <span class="md-headline">{{ conference.name }}</span>
-                <span class="md-subhead"><p>{{ conference.date | amDateFormat:'dddd, MMMM D'}}
-                    Schedule :
-                    {{ conference.start_time | amDateFormat:'HH:mm'}}
-                    -
-                    {{conference.end_time | amDateFormat:'HH:mm'}}</p></span>
             </md-card-title-text>
         </md-card-title>
-        <md-card-content>
-          <p><i>At :
-              {{ $ctrl.getPlaceById(conference.placeId).name}}
+        <md-card-content layout="column">
+          <span>
+            <md-icon class="material-icons">room</md-icon>
+            <b>
+              At :
+              {{ $ctrl.getPlaceByConf(conference).name}}
               - Room :
-              {{conference.room}}
-          </i></p>
+              {{$ctrl.getRoomByConf(conference)}}
+            </b>
+          </span>
+          <span>
+            <md-icon class="material-icons">alarm</md-icon>
+            {{ conference.date | amDateFormat:'dddd, MMMM D'}}
+            Schedule :
+            {{ conference.start_time | amDateFormat:'HH:mm'}}
+            -
+            {{conference.end_time | amDateFormat:'HH:mm'}}
+          </span>
           <md-chips ng-model="conference.speakers" name="speaker" readonly="true" md-max-chips="5">
               <md-chip-template>
                   <strong>{{$chip.name}}</strong>

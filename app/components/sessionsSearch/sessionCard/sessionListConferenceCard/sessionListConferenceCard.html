@@ -8,11 +8,6 @@
               {{ $ctrl.conference.start_time | amDateFormat:'HH:mm'}}
               -
               {{$ctrl.conference.end_time | amDateFormat:'HH:mm'}}</p>
-          <p><i>At :
-              {{ $ctrl.getPlaceById($ctrl.conference.placeId).name}}
-              - Room :
-              {{$ctrl.conference.room}}
-          </i></p>
           <md-chips ng-model="$ctrl.conference.speakers" name="speaker" readonly="true" md-max-chips="5">
               <md-chip-template>
                   <strong>{{$chip.name}}</strong>
