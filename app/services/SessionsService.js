@@ -18,7 +18,9 @@ function SessionsService(SessionsConferencesService, Session, $firebaseArray) {
             name: session.name,
             date: session.date.getTime(),
             start_time: session.start_time.getTime(),
-            end_time: session.end_time.getTime()
+            end_time: session.end_time.getTime(),
+            placeId: session.placeId,
+            room: session.room
         })
     }
 

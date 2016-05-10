@@ -1,13 +1,25 @@
 <div flex layout="column">
     <wa-breadcrump title-name="$ctrl.titleName" back-name="$ctrl.backName" back-action="$ctrl.backAction()"></wa-breadcrump>
     <md-content flex layout-padding layout="column">
+        <div>
+            <p>
+                <md-icon class="material-icons md-18">access_time</md-icon>
+                From
+                {{$ctrl.session.start_time | amDateFormat:'HH:mm'}}
+                until
+                {{$ctrl.session.end_time | amDateFormat:'HH:mm'}}</p>
+            <p>
+                <md-icon class="material-icons md-18">place</md-icon>
+                {{$ctrl.place.name}}
+                -
+                {{$ctrl.session.room}}</p>
+        </div>
         <h3>Conferences:</h3>
         <md-list flex ng-if="$ctrl.conferences.length">
             <md-list-item flex ng-repeat="conference in $ctrl.conferences" class="md-1-line">
                 <md-icon class="material-icons md-18">chat</md-icon>
                 <md-button ng-click="$ctrl.goToConference(conference)" flex>{{conference.name}}</md-button>
-                <md-content layout-padding>
-                </md-content>
+                <md-content layout-padding></md-content>
                 <div layout="column">
                     <span class="md-caption">
                         <md-icon class="material-icons md-18">access_time</md-icon>
@@ -15,9 +27,6 @@
                         {{conference.start_time | amDateFormat:'HH:mm'}}
                         until
                         {{conference.end_time | amDateFormat:'HH:mm'}}</span>
-                    <span class="md-caption">
-                        <md-icon class="material-icons md-18">place</md-icon>
-                        {{conference.room}}</span>
                 </div>
                 <md-divider ng-if="!$last"></md-divider>
             </md-list-item>

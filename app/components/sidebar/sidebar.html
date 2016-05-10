@@ -8,6 +8,7 @@
     </md-toolbar>
     <md-content layout="column">
         <md-button ng-click="$ctrl.goHome()" class="md-raised">Planner</md-button>
+        <md-button ng-click="$ctrl.goDiscover()" class="md-raised">Discover</md-button>
         <md-button ng-if="$ctrl.currentUser.isLogged && $ctrl.currentUser.isAdmin()" ng-click="$ctrl.openAdmin()" class="md-raised">ADMIN ZONE</md-button>
         <md-button ng-if="!$ctrl.currentUser.isLogged" ng-click="$ctrl.login()" class="md-raised">Login</md-button>
         <md-button ng-if="$ctrl.currentUser.isLogged" ng-click="$ctrl.logout()" class="md-raised">Logout</md-button>

@@ -22,5 +22,6 @@ angular.module('webapp').component('waSessionCard', {
   }],
   bindings: {
       session: '<',
+      conferenceClicked: '&'
   }
 })

@@ -28,19 +28,6 @@
                 </div>
             </div>
             <div layout-padding>
-                <span class="md-heading">Place</span>
-                <div layout-gt-xs="row" class="md-inline-form">
-                    <md-input-container flex class="md-block">
-                        <input type="text" name="room" placeholder="Room" ng-model="$ctrl.conference.room" required>
-                    </md-input-container>
-                    <md-input-container flex class="md-block">
-                        <md-select placeholder="Place" ng-model="$ctrl.conference.placeId">
-                            <md-option ng-repeat="place in $ctrl.places" ng-value="place.$id">{{place.name}}</md-option>
-                        </md-select>
-                    </md-input-container>
-                </div>
-            </div>
-            <div layout-padding>
                 <span class="md-heading">Speakers</span>
                 <div layout-gt-xs="row">
                     <md-input-container class="md-block md-icon-float">

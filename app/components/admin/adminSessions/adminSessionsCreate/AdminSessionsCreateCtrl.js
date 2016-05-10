@@ -1,12 +1,12 @@
 angular.module('webapp').controller('AdminSessionsCreateCtrl', AdminSessionsCreateCtrl)
-AdminSessionsCreateCtrl.$inject = ['SessionsService', 'EventService']
+AdminSessionsCreateCtrl.$inject = ['SessionsService', 'EventService', 'PlacesService']
 
 /**
  * @ngdoc controller
  * @name webapp.controller:AdminSessionsCreateCtrl
  * @description In charge of the admin sessions creation view.
  */
-function AdminSessionsCreateCtrl(SessionsService, EventService) {
+function AdminSessionsCreateCtrl(SessionsService, EventService, PlacesService) {
     var vm = this
 
     vm.titleName = "Add new session"
@@ -17,6 +17,8 @@ function AdminSessionsCreateCtrl(SessionsService, EventService) {
 
     vm.session = SessionsService.Model
     vm.event = EventService.Model
+
+    vm.places = PlacesService.places
 
     vm.timeslot = {
         start_time: null,

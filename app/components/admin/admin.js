@@ -10,19 +10,28 @@ angular.module('webapp').component('waAdmin', {
         angular.element($element).addClass('layout-column')
         return 'admin.html'
     }],
-    $routeConfig: [
-      {path: '/', name:'AdminDashboard', component: 'waAdminDashboard', useAsDefault: true},
-      {path: '/sessions/...', name:'AdminSessions', component: 'waAdminSessions'},
-      {path: '/places/...', name:'AdminPlaces', component: 'waAdminPlaces'}
-    ],
+    $routeConfig: [{
+        path: '/',
+        name: 'AdminDashboard',
+        component: 'waAdminDashboard',
+        useAsDefault: true
+    }, {
+        path: '/sessions/...',
+        name: 'AdminSessions',
+        component: 'waAdminSessions'
+    }, {
+        path: '/places/...',
+        name: 'AdminPlaces',
+        component: 'waAdminPlaces'
+    }],
     $canActivate: ['AuthService', '$rootRouter', function(AuthService, $rootRouter) {
         return AuthService.requireAdminAuth()
-        .then(function(){
-          return true
-        })
-        .catch(function(error){
-          $rootRouter.navigate(['Login'])
-          return false
-        })
+            .then(function() {
+                return true
+            })
+            .catch(function(error) {
+                $rootRouter.navigate(['Login'])
+                return false
+            })
     }]
 })

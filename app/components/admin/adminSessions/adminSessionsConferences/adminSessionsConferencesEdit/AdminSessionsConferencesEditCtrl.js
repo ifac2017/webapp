@@ -1,12 +1,12 @@
 angular.module('webapp').controller('AdminSessionsConferencesEditCtrl', AdminSessionsConferencesEditCtrl)
-AdminSessionsConferencesEditCtrl.$inject = ['SessionsService', 'ConferencesService', 'PlacesService', 'Speaker']
+AdminSessionsConferencesEditCtrl.$inject = ['SessionsService', 'ConferencesService', 'Speaker']
 
 /**
  * @ngdoc controller
  * @name webapp.controller:AdminSessionsConferencesEditCtrl
  * @description In charge of the admin sessions conferences edition view.
  */
-function AdminSessionsConferencesEditCtrl(SessionsService, ConferencesService, PlacesService, Speaker) {
+function AdminSessionsConferencesEditCtrl(SessionsService, ConferencesService, Speaker) {
     var vm = this
 
     vm.titleName = "Edit conferences"
@@ -16,8 +16,6 @@ function AdminSessionsConferencesEditCtrl(SessionsService, ConferencesService, P
     }
 
     vm.speaker = Speaker
-
-    vm.places = PlacesService.places
 
     vm.$routerOnActivate = function(next) {
         var sessionId = vm.$router.parent.parent._currentInstruction.component.params.id

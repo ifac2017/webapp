@@ -1,12 +1,12 @@
 angular.module('webapp').controller('AdminSessionsEditCtrl', AdminSessionsEditCtrl)
-AdminSessionsEditCtrl.$inject = ['SessionsService', 'EventService']
+AdminSessionsEditCtrl.$inject = ['SessionsService', 'EventService', 'PlacesService']
 
 /**
  * @ngdoc controller
  * @name webapp.controller:AdminSessionsEditCtrl
  * @description In charge of the admin sessions edition view.
  */
-function AdminSessionsEditCtrl(SessionsService, EventService) {
+function AdminSessionsEditCtrl(SessionsService, EventService, PlacesService) {
     var vm = this
 
     vm.titleName = "Edit session"
@@ -16,6 +16,8 @@ function AdminSessionsEditCtrl(SessionsService, EventService) {
     }
 
     vm.event = EventService.Model
+
+    vm.places = PlacesService.places
 
     vm.timeslot = {
         start_time: null,
