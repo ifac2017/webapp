@@ -1,16 +1,28 @@
 <div flex layout="column">
-    <md-card>
-        <md-card-title ng-click="$ctrl.selectSession(session)">
+    <md-card >
+        <md-card-title ng-click="$ctrl.selectSession(session)" md-ink-ripple="true">
             <md-card-title-media layout-padding>
                 <md-icon class="material-icons">question_answer</md-icon>
             </md-card-title-media>
             <md-card-title-text>
                 <span class="md-headline">{{ $ctrl.session.name }}</span>
-                <span class="md-subhead">{{ $ctrl.session.date | amDateFormat:'dddd, MMMM D'}}
-                    Schedule :
-                    {{ $ctrl.session.start_time | amDateFormat:'hh:mm'}}
-                    -
-                    {{$ctrl.session.end_time | amDateFormat:'hh:mm'}}</span>
+                <span style="margin-left:10px;" class="md-subhead">
+                  <md-icon class="material-icons">room</md-icon>
+                  <b>
+                    At :
+                    {{ $ctrl.getPlaceById($ctrl.session.placeId).name}}
+                    - Room :
+                    {{$ctrl.session.room}}
+                  </b>
+                </span>
+                <span style="margin-left:10px;" class="md-subhead">
+                  <md-icon class="material-icons">alarm</md-icon>
+                  {{ $ctrl.session.date | amDateFormat:'dddd, MMMM D'}}
+                  Schedule :
+                  {{ $ctrl.session.start_time | amDateFormat:'HH:mm'}}
+                  -
+                  {{$ctrl.session.end_time | amDateFormat:'HH:mm'}}
+                </span>
             </md-card-title-text>
         </md-card-title>
         <md-card-content ng-if="$ctrl.sessionActivated == true">

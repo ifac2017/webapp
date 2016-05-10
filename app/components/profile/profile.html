@@ -1,23 +1,42 @@
 <div layout="column">
   <wa-breadcrump title-name="$ctrl.titleName"></wa-breadcrump>
   <md-content flex layout="column" layout-padding>
-    <md-list>
-        <md-list-item ng-repeat="conference in $ctrl.conferences" class="md-1-line">
-            <md-icon class="material-icons md-18">chat</md-icon>
-            <span flex></span>
-            <md-button flex ng-click="$ctrl.goToConference(conference)">{{conference.name}}</md-button>
-            <span flex></span>
-            <div layout="column">
-                <span class="md-caption">
-                  <md-icon class="material-icons md-18">access_time</md-icon>
-                  From
-                    {{conference.start_time | amDateFormat:'HH:mm'}}
-                    until
-                    {{conference.end_time | amDateFormat:'HH:mm'}}</span>
-                    <span class="md-caption"><md-icon class="material-icons md-18">place</md-icon> {{conference.room}}</span>
-            </div>
-            <md-divider ng-if="!$last"></md-divider>
-        </md-list-item>
-    </md-list>
+    <md-card ng-repeat="conference in $ctrl.conferences">
+        <md-card-title layout="column" g-click="$ctrl.goToConference(conference)">
+            <span layout="row">
+              <md-card-title-media layout-padding>
+                  <md-icon class="material-icons">question_answer</md-icon>
+              </md-card-title-media>
+              <md-card-title-text>
+                  <span class="md-headline">{{ conference.name }}</span>
+              </md-card-title-text>
+            </span>
+            <span style="margin-left:20px;" class="md-subhead">
+              <md-icon class="material-icons">room</md-icon>
+              <b>
+                At :
+                {{ $ctrl.getPlaceByConf(conference).name}}
+                - Room :
+                {{$ctrl.getRoomByConf(conference)}}
+              </b>
+            </span>
+            <span style="margin-left:20px;" class="md-subhead">
+              <md-icon class="material-icons">alarm</md-icon>
+              {{ conference.date | amDateFormat:'dddd, MMMM D'}}
+              Schedule :
+              {{ conference.start_time | amDateFormat:'HH:mm'}}
+              -
+              {{conference.end_time | amDateFormat:'HH:mm'}}
+            </span>
+        </md-card-title>
+        <md-card-content layout="column">
+          <md-chips ng-model="conference.speakers" name="speaker" readonly="true" md-max-chips="5">
+              <md-chip-template>
+                  <strong>{{$chip.name}}</strong>
+                  <em>{{$chip.institution}}</em>
+              </md-chip-template>
+          </md-chips>
+        </md-card-content>
+    </md-card>
   </md-content>
 </div>
