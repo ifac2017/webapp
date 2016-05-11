@@ -31,6 +31,13 @@ function SessionSearchCtrl(SessionsService, ConferencesService) {
    * @description String of the beginning of the sessions searched by the user.
    */
   vm.search = ""
+  /**
+   * @ngdoc property
+   * @name order
+   * @propertyOf webapp.controller:SessionSearchCtrl
+   * @description Order of the sessions list
+   */
+  vm.order = "date"
 
   /**
    * @ngdoc method

@@ -20,7 +20,9 @@ function AdminSessionsDashboardCtrl(NotificationsService, SessionsService) {
     vm.backAction = function() {
             vm.$router.parent.navigate(['AdminDashboard'])
         }
-        // end breadcrump
+    // end breadcrump
+
+    vm.order = "name"
 
     vm.sessions = SessionsService.sessions
 
