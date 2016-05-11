@@ -1,0 +1,22 @@
+wa-profile{
+  .md-list-item-text{
+    padding : 10px;
+    margin-left: 20px;
+  }
+  md-card:hover{
+    background-color: #F9F9F9;
+  }
+  md-card{
+    outline: none;
+    cursor: pointer;
+    position: relative;
+  }
+  md-icon{
+    margin : 0px;
+    margin-left : 5px;
+    margin-right : 5px;
+  }
+  md-card-content{
+    margin-left: 20px;
+  }
+}

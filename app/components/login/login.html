@@ -3,7 +3,7 @@
     <md-content layout-padding>
         <form name="loginForm">
             <md-input-container class="md-block">
-                <input ng-model="$ctrl.user.email" type="email" name="email" placeholder="Email address" required>
+                <input ng-model="$ctrl.user.email" type="email" name="email" placeholder="Email address" autofocus required>
                 <div ng-messages="loginForm.email.$error">
                     <div ng-message="required">This is required.</div>
                     <div ng-message="email">The email address is not correct.</div>
