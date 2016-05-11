@@ -7,16 +7,13 @@
             <md-card-title-text>
                 <span class="md-headline">{{ $ctrl.session.name }}</span>
                 <span style="margin-left:10px;" class="md-subhead">
-                  <md-icon class="material-icons">room</md-icon>
-                  <b>
-                    At :
+                  <md-icon class="material-icons  md-18">place</md-icon>
                     {{ $ctrl.getPlaceById($ctrl.session.placeId).name}}
                     - Room :
                     {{$ctrl.session.room}}
-                  </b>
                 </span>
                 <span style="margin-left:10px;" class="md-subhead">
-                  <md-icon class="material-icons">alarm</md-icon>
+                  <md-icon class="material-icons  md-18">access_time</md-icon>
                   {{ $ctrl.session.date | amDateFormat:'dddd, MMMM D'}}
                   Schedule :
                   {{ $ctrl.session.start_time | amDateFormat:'HH:mm'}}
