@@ -99,6 +99,7 @@ function PlacesService($firebaseArray, Place) {
      * @name getPlaceById
      * @methodOf webapp.service:PlacesService
      * @description Return a promise with the place
+     * @param {ID} id - The place id
      * @returns {Promise} the place found if it exists
      * @example
       ```javascript
@@ -120,6 +121,7 @@ function PlacesService($firebaseArray, Place) {
      * @name savePlace
      * @methodOf webapp.service:PlacesService
      * @description Return a promise indicating if the place was saved
+     * @param {Place} place - The place to be saved
      * @returns {Promise} ok if the place was saved
      * @example
       ```javascript

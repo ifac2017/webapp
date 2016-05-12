@@ -99,6 +99,7 @@ function ConferencesService(CurrentUser, SessionsService, SessionsConferencesSer
      * @name getConferenceById
      * @methodOf webapp.service:ConferencesService
      * @description Return a promise with the conference
+     * @param {ID} id - The conference id
      * @returns {Promise} the conference found if it exists
      * @example
       ```javascript
@@ -120,6 +121,7 @@ function ConferencesService(CurrentUser, SessionsService, SessionsConferencesSer
      * @name saveConference
      * @methodOf webapp.service:ConferencesService
      * @description Return a promise indicating if the conference was saved
+     * @param {Conference} conference - The conference to be saved
      * @returns {Promise} ok if the conference was saved
      * @example
       ```javascript
