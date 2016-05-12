@@ -3,7 +3,7 @@ AdminSessionsDashboardCtrl.$inject = ['NotificationsService', 'SessionsService']
 
 /**
  * @ngdoc controller
- * @name webapp.controller:AdminSessionsCreateCtrl
+ * @name webapp.controller:AdminSessionsDashboardCtrl
  * @description In charge of the admin sessions dashboard view.
  */
 function AdminSessionsDashboardCtrl(NotificationsService, SessionsService) {
