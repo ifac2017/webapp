@@ -62,7 +62,7 @@ function ConferencesService(CurrentUser, SessionsService, SessionsConferencesSer
      * @name removeConference
      * @methodOf webapp.service:ConferencesService
      * @description Remove a conference from firebase
-     * @param {Conference} conference - The new conference
+     * @param {Conference} conference - The conference to be removed
      * @param {Session} session - The session of the conference
      * @example
       ```javascript
