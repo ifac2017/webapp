@@ -1,12 +1,12 @@
 angular.module('webapp').factory('ConferencesService', ConferencesService)
-ConferencesService.$inject = ['SessionsService', 'SessionsConferencesService', 'Conference']
+ConferencesService.$inject = ['CurrentUser', 'SessionsService', 'SessionsConferencesService', 'Conference']
 
 /**
  * @ngdoc service
  * @name webapp.service:ConferencesService
  * @description In charge of conferences management.
  */
-function ConferencesService(SessionsService, SessionsConferencesService, Conference) {
+function ConferencesService(CurrentUser, SessionsService, SessionsConferencesService, Conference) {
     var ConferencesService = {}
 
     ConferencesService.conferences = SessionsConferencesService.conferences
@@ -40,6 +40,24 @@ function ConferencesService(SessionsService, SessionsConferencesService, Confere
 
     ConferencesService.saveConference = function(conference) {
         return ConferencesService.conferences.$save(conference)
+    }
+
+    ConferencesService.getConferencesOfCurrentUser = function() {
+      return new Promise(function(resolve, reject) {
+          if (CurrentUser.isLogged) {
+              if (!CurrentUser.conferences()) {
+                  reject("any conferences found")
+              } else {
+                  var conferences = []
+                  for (var i = 0; i < CurrentUser.conferences().length; i++) {
+                      conferences.push(ConferencesService.getConferenceById(CurrentUser.conferences()[i]))
+                  }
+                  resolve(conferences)
+              }
+          } else {
+              reject("not logged")
+          }
+      })
     }
 
     return ConferencesService

@@ -1,5 +1,5 @@
 angular.module('webapp').controller('ProfileCtrl', ProfileCtrl)
-ProfileCtrl.$inject = ['PlacesService', 'CurrentUser', 'SessionsService']
+ProfileCtrl.$inject = ['PlacesService', 'ConferencesService', 'CurrentUser', 'SessionsService']
 
 /**
  * @ngdoc controller
@@ -7,7 +7,7 @@ ProfileCtrl.$inject = ['PlacesService', 'CurrentUser', 'SessionsService']
  * @requires CurrentUser
  * @description In charge of the profile view.
  */
-function ProfileCtrl(PlacesService, CurrentUser, SessionsService) {
+function ProfileCtrl(PlacesService, ConferencesService, CurrentUser, SessionsService) {
     var vm = this
 
     vm.titleName = "Conferences saved"
@@ -39,7 +39,7 @@ function ProfileCtrl(PlacesService, CurrentUser, SessionsService) {
     }
 
     vm.$routerOnActivate = function() {
-      CurrentUser.getConferences().then(function(conferences) {
+      ConferencesService.getConferencesOfCurrentUser().then(function(conferences) {
           vm.conferences = conferences
       }).catch(function(error){
         console.log(error)

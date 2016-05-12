@@ -1,12 +1,12 @@
 angular.module('webapp').factory('SessionsConferencesService', SessionsConferencesService)
-SessionsConferencesService.$inject = ['$firebaseArray']
+SessionsConferencesService.$inject = ['CurrentUser', '$firebaseArray']
 
 /**
  * @ngdoc service
  * @name webapp.service:SessionsConferencesService
  * @description In charge of sessions and conferences management.
  */
-function SessionsConferencesService($firebaseArray) {
+function SessionsConferencesService(CurrentUser, $firebaseArray) {
     var SessionsConferencesService = {}
 
     SessionsConferencesService._refSessions = new Firebase("https://ifac2017.firebaseio.com/sessions")
@@ -27,6 +27,7 @@ function SessionsConferencesService($firebaseArray) {
     }
 
     SessionsConferencesService.removeConference = function(conference, session) {
+        CurrentUser.removeConference(conference)
         session.conferences.splice(session.conferences.indexOf(conference.$id), 1)
         SessionsConferencesService.saveSession(session)
         SessionsConferencesService.conferences.$remove(conference)

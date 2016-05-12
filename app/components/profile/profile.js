@@ -13,8 +13,11 @@ angular.module('webapp').component('waProfile', {
     bindings: {
         $router: '<'
     },
-    $canActivate: ['AuthService', '$rootRouter', function(AuthService, $rootRouter) {
+    $canActivate: ['AuthService', 'ConferencesService', '$rootRouter', function(AuthService, ConferencesService, $rootRouter) {
         return AuthService.requireAuth()
+        .then(function(){
+          return ConferencesService.loadArray()
+        })
         .then(function(){
           return true
         })
