@@ -1,16 +1,7 @@
 <div flex layout="column">
     <wa-breadcrump title-name="$ctrl.titleName" back-name="$ctrl.backName" back-action="$ctrl.backAction()" text-action="$ctrl.textAction" icon-action="$ctrl.iconAction" action="$ctrl.action()"></wa-breadcrump>
     <md-content flex layout-padding layout="column">
-        <div class="directions">
-            <div class="wa-map">
-                <ng-map zoom="15" center="current-location" disable-default-u-i="true">
-                    <directions draggable="true" panel="directions-panel" travel-mode="WALKING" origin="current-location" destination="{{$ctrl.place.address}}"></directions>
-                </ng-map>
-            </div>
-            <div id="directions-panel" style="width: 30%;float: right;height: 400px;overflow: scroll;"></div>
-        </div>
-        <md-divider></md-divider>
-        <div layout="row">
+        <div>
             <div layout="column">
                 <span class="md-subhead">
                     <md-icon class="material-icons md-24">access_time</md-icon>
@@ -35,13 +26,14 @@
                 </span>
             </div>
         </div>
-        <span layout-padding></span>
-        <div layout="column">
-          <span layout-padding></span>
-            <span class="md-body-2">
-                Abstract:
-            </span>
-            <p>{{$ctrl.conference.abstract}}</p>
+        <div class="directions-mobile">
+            <div class="wa-map">
+                <ng-map zoom="15" center="current-location" disable-default-u-i="true">
+                    <directions draggable="true" panel="directions-panel" travel-mode="WALKING" origin="current-location" destination="{{$ctrl.place.address}}"></directions>
+                </ng-map>
+            </div>
+            <div id="directions-panel" style="width: 100%;float: right;height: 400px;overflow: scroll;"></div>
         </div>
+        <md-divider></md-divider>
     </md-content>
 </div>

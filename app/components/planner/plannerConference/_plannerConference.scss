@@ -10,9 +10,9 @@ wa-planner-conference {
         }
     }
     .directions-mobile {
+      position: relative;
+      top: 50px;
         .wa-map {
-            width: 68%;
-            float: left;
             height: 400px;
             ng-map {
                 height: 100%;

@@ -6,9 +6,13 @@
  */
 angular.module('webapp').component('waPlannerConference', {
     controller: 'PlannerConferenceCtrl',
-    templateUrl: ['$element', function($element) {
+    templateUrl: ['$element', '$mdMedia', function($element, $mdMedia) {
         angular.element($element).addClass('layout-column')
-        return 'plannerConference.html'
+        if ($mdMedia('gt-sm')) {
+            return 'plannerConference.html'
+        } else {
+            return 'plannerConferenceMobile.html'
+        }
     }],
     bindings: {
         $router: '<'
@@ -18,8 +22,8 @@ angular.module('webapp').component('waPlannerConference', {
             .then(function() {
                 return PlacesService.loadArray()
             })
-            .then(function(){
-              return true
+            .then(function() {
+                return true
             })
             .catch(function(error) {
                 $rootRouter.navigate(['Planner'])
