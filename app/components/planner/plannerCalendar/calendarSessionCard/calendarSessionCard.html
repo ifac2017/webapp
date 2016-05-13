@@ -1,1 +1,25 @@
-<md-button style="background-color: {{$ctrl.place.color}};" flex ng-click="$ctrl.sessionClicked()($ctrl.session)">{{$ctrl.session.name}}</md-button>
+<md-card flex style="background-color: {{$ctrl.place.color}};" ng-click="$ctrl.sessionClicked()($ctrl.session)" md-ink-ripple="true">
+    <div flex layout="row">
+        <div class="colored" style="background-color:{{$ctrl.place.color}}"></div>
+        <div flex layout="column">
+        <md-card-title>
+            <md-card-title-media layout-padding>
+              <md-icon class="material-icons">question_answer</md-icon>
+              <span class="md-headline">{{ $ctrl.session.name }}</span>
+            </md-card-title-media>
+        </md-card-title>
+        <md-divider></md-divider>
+        <md-card-content layout="column">
+          <span style="margin-left:10px;" class="md-subhead">
+              <md-icon class="material-icons  md-18">place</md-icon>
+              {{ $ctrl.place.name}}
+          </span>
+          <span style="margin-left:10px;" class="md-subhead">
+              <md-icon class="material-icons  md-18">place</md-icon>
+              {{$ctrl.session.room}}
+          </span>
+        </md-card-content>
+        <div layout-padding></div>
+      </div>
+    </div>
+</md-card>

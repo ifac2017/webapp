@@ -1,0 +1,12 @@
+wa-calendar-session-card {
+  md-card{
+    cursor: pointer;
+    position: relative;
+  }
+  md-card:hover{
+    background-color: #F9F9F9;
+  }
+  md-card-title{
+    outline: none;
+  }
+}
