@@ -1,5 +1,5 @@
 <div layout="column">
-  <wa-breadcrump title-name="$ctrl.titleName"></wa-breadcrump>
+  <wa-breadcrump title-name="$ctrl.titleName" icon-action="$ctrl.icon" text-action="$ctrl.textAction" action="$ctrl.print()"></wa-breadcrump>
   <md-content flex layout-padding>
     <md-card md-ink-ripple="true" ng-repeat="conference in $ctrl.conferences" ng-click="$ctrl.goToConference(conference)">
         <md-card-title layout="column" g-click="$ctrl.goToConference(conference)">
