@@ -106,32 +106,24 @@ function SessionsConferencesService(CurrentUser, $firebaseArray) {
      * @ngdoc method
      * @name getConferencesBySession
      * @methodOf webapp.service:SessionsConferencesService
-     * @description Return a promise with the conferences list corresponding to a session
+     * @description Return the conferences list corresponding to a session
      * @param {Session} session - The session of the conference
-     * @returns {Promise} the conferences list found if it exists
+     * @returns {Array} the conferences list found if it exists
      * @example
       ```javascript
       SessionsConferencesService.getConferencesBySession(session)
-      .then(function(conferences) {
-        // success...
-      })
-      .catch(function(error) {
-        // error...
-      })
       ```
       */
     SessionsConferencesService.getConferencesBySession = function(session) {
-        return new Promise(function(resolve, reject) {
-            if (typeof session.conferences !== 'undefined') {
-                var conferences = []
-                for (var i = 0; i < session.conferences.length; i++) {
-                    conferences.push(SessionsConferencesService.getConferenceById(session.conferences[i]))
-                }
-                resolve(conferences)
-            } else {
-                reject("any conference found for this session")
+        if (typeof session.conferences !== 'undefined') {
+            var conferences = []
+            for (var i = 0; i < session.conferences.length; i++) {
+                conferences.push(SessionsConferencesService.getConferenceById(session.conferences[i]))
             }
-        })
+            return conferences
+        } else {
+            return [];
+        }
     }
 
     /**

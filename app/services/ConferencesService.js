@@ -142,35 +142,27 @@ function ConferencesService(CurrentUser, SessionsService, SessionsConferencesSer
      * @ngdoc method
      * @name getConferencesOfCurrentUser
      * @methodOf webapp.service:ConferencesService
-     * @description Return a promise with the user's conferences
-     * @returns {Promise} the user's conferences if they exist
+     * @description Return the user's conferences
+     * @returns {Array} the user's conferences
      * @example
       ```javascript
       ConferencesService.getConferencesOfCurrentUser()
-      .then(function(conferences) {
-        // success...
-      })
-      .catch(function(error) {
-        // error...
-      })
       ```
       */
     ConferencesService.getConferencesOfCurrentUser = function() {
-      return new Promise(function(resolve, reject) {
           if (CurrentUser.isLogged) {
               if (!CurrentUser.conferences()) {
-                  reject("any conferences found")
+                  return []
               } else {
                   var conferences = []
                   for (var i = 0; i < CurrentUser.conferences().length; i++) {
                       conferences.push(ConferencesService.getConferenceById(CurrentUser.conferences()[i]))
                   }
-                  resolve(conferences)
+                  return conferences
               }
           } else {
-              reject("not logged")
+              []
           }
-      })
     }
 
     return ConferencesService

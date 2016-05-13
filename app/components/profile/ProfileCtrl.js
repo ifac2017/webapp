@@ -15,9 +15,9 @@ function ProfileCtrl(PlacesService, ConferencesService, CurrentUser, SessionsSer
     vm.textAction = "Print"
 
     vm.goToConference = function(conference) {
-      vm.$router.navigate(['Planner', 'PlannerConference', {
-        id: conference.$id
-      }])
+        vm.$router.navigate(['Planner', 'PlannerConference', {
+            id: conference.$id
+        }])
     }
 
     /**
@@ -28,28 +28,23 @@ function ProfileCtrl(PlacesService, ConferencesService, CurrentUser, SessionsSer
      */
     vm.currentUser = CurrentUser
 
-    vm.print = function(){
-      window.print()
+    vm.print = function() {
+        window.print()
     }
 
     vm.getPlaceById = function(placeId) {
-      return PlacesService.getPlaceById(placeId)
+        return PlacesService.getPlaceById(placeId)
     }
 
-    vm.getPlaceByConf = function(conference){
-      return PlacesService.getPlaceById(SessionsService.getSessionById(conference.sessionId).placeId)
+    vm.getPlaceByConf = function(conference) {
+        return PlacesService.getPlaceById(SessionsService.getSessionById(conference.sessionId).placeId)
     }
 
-    vm.getRoomByConf = function(conference){
-      return SessionsService.getSessionById(conference.sessionId).room
+    vm.getRoomByConf = function(conference) {
+        return SessionsService.getSessionById(conference.sessionId).room
     }
 
     vm.$routerOnActivate = function() {
-      ConferencesService.getConferencesOfCurrentUser().then(function(conferences) {
-          vm.conferences = conferences
-      }).catch(function(error){
-        console.log(error)
-        vm.conferences = []
-      })
+        vm.conferences = ConferencesService.getConferencesOfCurrentUser()
     }
 }

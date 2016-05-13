@@ -183,24 +183,18 @@ function SessionsService(SessionsConferencesService, Session, $firebaseArray) {
         return $firebaseArray(SessionsService.sessions.$ref().orderByChild("date").equalTo(date.valueOf())).$loaded()
     }
 
-    /**
-     * @ngdoc method
-     * @name getConferencesBySession
-     * @methodOf webapp.service:SessionsService
-     * @description Return a promise with the conferences list corresponding to a session
-     * @param {Session} session - The session of the conference
-     * @returns {Promise} the conferences list found if it exists
-     * @example
-      ```javascript
-      SessionsService.getConferencesBySession(session)
-      .then(function(conferences) {
-        // success...
-      })
-      .catch(function(error) {
-        // error...
-      })
-      ```
-      */
+      /**
+       * @ngdoc method
+       * @name getConferencesBySession
+       * @methodOf webapp.service:SessionsService
+       * @description Return the conferences list corresponding to a session
+       * @param {Session} session - The session of the conference
+       * @returns {Array} the conferences list found if it exists
+       * @example
+        ```javascript
+        SessionsService.getConferencesBySession(session)
+        ```
+        */
     SessionsService.getConferencesBySession = function(session) {
         return SessionsConferencesService.getConferencesBySession(session)
     }

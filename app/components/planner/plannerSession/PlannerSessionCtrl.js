@@ -18,12 +18,7 @@ function PlannerSessionCtrl(SessionsService, ConferencesService, PlacesService) 
         vm.session = SessionsService.getSessionById(next.params.id)
         vm.place = PlacesService.getPlaceById(vm.session.placeId)
         vm.titleName = vm.session.name
-        SessionsService.getConferencesBySession(vm.session).then(function(conferences) {
-            vm.conferences = conferences
-        }).catch(function(error){
-          console.log(error)
-          vm.conferences = []
-        })
+        vm.conferences = SessionsService.getConferencesBySession(vm.session)
     }
 
     vm.goToConference = function(conference) {
