@@ -17,6 +17,15 @@ function SessionCardCtrl(PlacesService, ConferencesService) {
    * @description The session represented by the card.
    */
   vm.session = vm.session
+
+  /**
+   * @ngdoc property
+   * @name place
+   * @propertyOf webapp.controller:SessionCardCtrl
+   * @description The session place.
+   */
+  vm.place = PlacesService.getPlaceById(vm.session.placeId)
+
   /**
    * @ngdoc property
    * @name sessionActivated
@@ -46,14 +55,5 @@ function SessionCardCtrl(PlacesService, ConferencesService) {
    */
   vm.selectSession = function(session) {
     vm.sessionActivated = !vm.sessionActivated
-  }
-  /**
-   * @ngdoc method
-   * @name getPlaceById
-   * @methodOf webapp.controller:SessionListConferenceCardCtrl
-   * @description Get the place from the ID the the place.
-   */
-  vm.getPlaceById = function(placeId) {
-    return PlacesService.getPlaceById(placeId)
   }
 }

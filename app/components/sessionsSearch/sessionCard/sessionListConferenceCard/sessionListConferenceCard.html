@@ -9,8 +9,8 @@
               {{$ctrl.conference.end_time | amDateFormat:'HH:mm'}}</p>
           <md-chips ng-model="$ctrl.conference.speakers" name="speaker" readonly="true" md-max-chips="5">
               <md-chip-template>
-                  <strong>{{$chip.name}}</strong>
-                  <em>{{$chip.institution}}</em>
+                  <span class="md-body-2">{{$chip.name}}</span>
+                  <span class="md-body-1">{{$chip.institution}}</span>
               </md-chip-template>
           </md-chips>
       </div>

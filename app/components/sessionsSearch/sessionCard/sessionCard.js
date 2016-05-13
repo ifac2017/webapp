@@ -10,7 +10,7 @@ angular.module('webapp').component('waSessionCard', {
       angular.element($element).addClass('layout-column')
       return 'sessionCard.html'
   }],
-  $canActivate: ['ConferencesService', '$rootRouter', function(ConferencesService, SessionsService, $rootRouter) {
+  $canActivate: ['ConferencesService', '$rootRouter', function(ConferencesService, $rootRouter) {
     return ConferencesService.loadArray()
       .then(function() {
         return true
