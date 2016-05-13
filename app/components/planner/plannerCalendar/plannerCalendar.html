@@ -10,7 +10,7 @@
             <md-option ng-click="$ctrl.selectDay($index)" ng-repeat="day in $ctrl.days" ng-value="$index">{{day | amDateFormat:'dddd, MMMM D'}}</md-option>
         </md-select>
     </md-input-container>
-    <md-content>
+    <md-content flex>
         <div layout-gt-xs="row">
             <div flex ng-repeat="timeslot in $ctrl.timeslots" layout="column">
                 <h4>{{timeslot.start_time | amDateFormat:'HH:mm'}}
