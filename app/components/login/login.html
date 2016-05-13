@@ -2,24 +2,26 @@
   <wa-breadcrump title-name="$ctrl.titleName"></wa-breadcrump>
     <md-content layout-padding>
         <form name="loginForm">
-            <md-input-container class="md-block">
-                <input ng-model="$ctrl.user.email" type="email" name="email" placeholder="Email address" autofocus required>
-                <div ng-messages="loginForm.email.$error">
-                    <div ng-message="required">This is required.</div>
-                    <div ng-message="email">The email address is not correct.</div>
+            <ng-keyup ng-keyup="$ctrl.keyPressed($event)">
+                <md-input-container class="md-block">
+                    <input ng-model="$ctrl.user.email" type="email" name="email" placeholder="Email address" autofocus required>
+                    <div ng-messages="loginForm.email.$error">
+                        <div ng-message="required">This is required.</div>
+                        <div ng-message="email">The email address is not correct.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <input ng-model="$ctrl.user.password" type="password" name="password" placeholder="Password" required>
+                    <div ng-messages="loginForm.password.$error">
+                        <div ng-message="required">This is required.</div>
+                    </div>
+                </md-input-container>
+                <div layout="row">
+                    <md-button class="md-raised md-accent" ng-click="$ctrl.login()">Login !</md-button>
+                    <h4>OR</h4>
+                    <md-button class="md-raised md-warn" ng-click="$ctrl.signup()">Signup !</md-button>
                 </div>
-            </md-input-container>
-            <md-input-container class="md-block">
-                <input ng-model="$ctrl.user.password" type="password" name="password" placeholder="Password" required>
-                <div ng-messages="loginForm.password.$error">
-                    <div ng-message="required">This is required.</div>
-                </div>
-            </md-input-container>
-            <div layout="row">
-                <md-button class="md-raised md-accent" ng-click="$ctrl.login()">Login !</md-button>
-                <h4>OR</h4>
-                <md-button class="md-raised md-warn" ng-click="$ctrl.signup()">Signup !</md-button>
-            </div>
+            </ng-keyup>
         </form>
     </md-content>
 </div>

@@ -45,6 +45,12 @@ function LoginCtrl(AuthService, NotificationsService) {
             })
     }
 
+    vm.keyPressed = function(event){
+      if (event.keyCode == 13){
+        vm.login();
+      }
+    }
+
     /**
      * @ngdoc method
      * @name signup
