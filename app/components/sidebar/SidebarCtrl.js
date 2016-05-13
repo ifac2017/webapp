@@ -67,16 +67,31 @@ function SidebarCtrl(AuthService, CurrentUser, $rootRouter, $mdSidenav) {
 
     /**
      * @ngdoc method
-     * @name openAdmin
+     * @name goDiscover
      * @methodOf webapp.controller:SidebarCtrl
-     * @description Redirect to the admin page.
+     * @description Redirect to the discover page.
      * @example
       ```javascript
-      sidebarCtrl.openAdmin()
+      sidebarCtrl.goDiscover()
       ```
      */
     vm.goDiscover = function() {
         $rootRouter.navigate(['SessionSearch'])
+        $mdSidenav('left').toggle()
+    }
+
+    /**
+     * @ngdoc method
+     * @name goProfile
+     * @methodOf webapp.controller:SidebarCtrl
+     * @description Redirect to the profile page.
+     * @example
+      ```javascript
+      sidebarCtrl.goProfile()
+      ```
+     */
+    vm.goProfile = function() {
+        $rootRouter.navigate(['Profile'])
         $mdSidenav('left').toggle()
     }
 
