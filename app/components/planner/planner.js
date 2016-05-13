@@ -14,5 +14,15 @@ angular.module('webapp').component('waPlanner', {
       {path: '/', name:'PlannerCalendar', component: 'waPlannerCalendar', useAsDefault: true},
       {path: '/session/:id', name:'PlannerSession', component: 'waPlannerSession'},
       {path: '/conference/:id', name:'PlannerConference', component: 'waPlannerConference'}
-    ]
+    ],
+    $canActivate: ['PlacesService', '$rootRouter', function(PlacesService, $rootRouter) {
+      return PlacesService.loadArray()
+        .then(function() {
+          return true
+        })
+        .catch(function(error) {
+          $rootRouter.navigate(['SessionSearch'])
+          return false
+        })
+    }]
 })
