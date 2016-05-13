@@ -10,8 +10,9 @@ require('firebase')
 require('angular-messages')
 require('ngmap')
 require('angular-moment')
+require('md-color-picker')
 
-angular.module('webapp', ['ngMaterial', 'firebase', 'ngMessages', 'ngComponentRouter', 'ngMap', 'angularMoment'])
+angular.module('webapp', ['ngMaterial', 'firebase', 'ngMessages', 'ngComponentRouter', 'ngMap', 'angularMoment', 'mdColorPicker'])
 .value('$routerRootComponent', 'waApp')
 
 require('./**/*.js', {mode: 'expand'})

@@ -3,7 +3,7 @@ AdminSessionsDashboardCtrl.$inject = ['NotificationsService', 'SessionsService']
 
 /**
  * @ngdoc controller
- * @name webapp.controller:AdminSessionsCreateCtrl
+ * @name webapp.controller:AdminSessionsDashboardCtrl
  * @description In charge of the admin sessions dashboard view.
  */
 function AdminSessionsDashboardCtrl(NotificationsService, SessionsService) {
@@ -20,7 +20,9 @@ function AdminSessionsDashboardCtrl(NotificationsService, SessionsService) {
     vm.backAction = function() {
             vm.$router.parent.navigate(['AdminDashboard'])
         }
-        // end breadcrump
+    // end breadcrump
+
+    vm.order = "name"
 
     vm.sessions = SessionsService.sessions
 

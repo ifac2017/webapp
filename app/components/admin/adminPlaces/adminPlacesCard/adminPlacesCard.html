@@ -1,22 +1,27 @@
 <md-list-item class="md-3-line">
-    <div class="md-list-item-text" layout="column">
-        <h3>{{$ctrl.place.name}}</h3>
-        <h4>{{$ctrl.place.address}}</h4>
+    <div flex layout="row">
+        <div class="colored" style="background-color:{{$ctrl.place.color}}"></div>
+        <div flex layout="row">
+            <div class="md-list-item-text" layout="column">
+                <h3>{{$ctrl.place.name}}</h3>
+                <h4>{{$ctrl.place.address}}</h4>
+            </div>
+            <div hide show-gt-xs layout-padding flex>
+                <ng-map id="placesMap" zoom="15" center="{{$ctrl.place.address}}" disable-default-u-i="true"></ng-map>
+            </div>
+            <md-button class="md-icon-button" ng-click="$ctrl.onEdit()">
+                <md-tooltip md-direction="top">
+                    Edit the place
+                </md-tooltip>
+                <i class="material-icons md-24">edit</i>
+            </md-button>
+            <md-button class="md-icon-button" ng-click="$ctrl.removePlace()">
+                <md-tooltip md-direction="top">
+                    Delete the place
+                </md-tooltip>
+                <i class="material-icons md-24">delete</i>
+            </md-button>
+        </div>
     </div>
-    <div hide show-gt-xs layout-padding flex>
-        <ng-map id="placesMap" zoom="15" center="{{$ctrl.place.address}}" disable-default-u-i="true"></ng-map>
-    </div>
-    <md-button class="md-icon-button" ng-click="$ctrl.onEdit()">
-        <md-tooltip md-direction="top">
-            Edit the place
-        </md-tooltip>
-        <i class="material-icons md-24">edit</i>
-    </md-button>
-    <md-button class="md-icon-button" ng-click="$ctrl.removePlace()">
-        <md-tooltip md-direction="top">
-            Delete the place
-        </md-tooltip>
-        <i class="material-icons md-24">delete</i>
-    </md-button>
     <md-divider ng-if="!$ctrl.$last"></md-divider>
 </md-list-item>

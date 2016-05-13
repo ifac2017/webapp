@@ -1,12 +1,12 @@
 angular.module('webapp').factory('CurrentUser', CurrentUser)
-CurrentUser.$inject = ['ConferencesService', '$firebaseObject']
+CurrentUser.$inject = ['$firebaseObject']
 
 /**
  * @ngdoc service
  * @name webapp.service:CurrentUser
  * @description Represents the current logged user
  */
-function CurrentUser(ConferencesService, $firebaseObject) {
+function CurrentUser($firebaseObject) {
     var CurrentUser = {}
 
     CurrentUser._ref = new Firebase("https://ifac2017.firebaseio.com/users")
@@ -50,6 +50,16 @@ function CurrentUser(ConferencesService, $firebaseObject) {
      * @description Role of the connected user
      */
     CurrentUser.role = null
+
+    /**
+     * @ngdoc method
+     * @name conferences
+     * @methodOf webapp.service:CurrentUser
+     * @description Conferences of the connected user
+     */
+    CurrentUser.conferences = function() {
+      return CurrentUser._user.conferences
+    }
 
     /**
      * @ngdoc method
@@ -103,6 +113,11 @@ function CurrentUser(ConferencesService, $firebaseObject) {
         return CurrentUser._user.$save()
     }
 
+    CurrentUser.removeConference = function(conference) {
+      CurrentUser._user.conferences.splice(CurrentUser._user.conferences.indexOf(conference.$id), 1)
+      CurrentUser.save()
+    }
+
     CurrentUser.saveConference = function(conference) {
         return new Promise(function(resolve, reject) {
             if (CurrentUser.isLogged) {
@@ -124,24 +139,5 @@ function CurrentUser(ConferencesService, $firebaseObject) {
             }
         })
     }
-
-    CurrentUser.getConferences = function() {
-        return new Promise(function(resolve, reject) {
-            if (CurrentUser.isLogged) {
-                if (!CurrentUser._user.conferences) {
-                    reject("any conferences found")
-                } else {
-                    var conferences = []
-                    for (var i = 0; i < CurrentUser._user.conferences.length; i++) {
-                        conferences.push(ConferencesService.getConferenceById(CurrentUser._user.conferences[i]))
-                    }
-                    resolve(conferences)
-                }
-            } else {
-                reject("not logged")
-            }
-        })
-    }
-
     return CurrentUser
 }

@@ -1,4 +1,4 @@
-wa-session-card {
+wa-calendar-session-card {
   md-card{
     cursor: pointer;
     position: relative;
@@ -8,8 +8,5 @@ wa-session-card {
   }
   md-card-title{
     outline: none;
-  }
-  .colored {
-      width: 5px;
   }
 }

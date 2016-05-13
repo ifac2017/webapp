@@ -9,12 +9,14 @@ Place.$inject = []
 function Place() {
     var Place = {
         name: null,
-        address: null
+        address: null,
+        color: null
     }
 
     Place.reset = function() {
       Place.name = null
       Place.address = null
+      Place.color = null
     }
 
     return Place

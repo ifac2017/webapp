@@ -15,6 +15,20 @@
                 </div>
             </div>
             <div layout-padding>
+                <div
+                    label="Place Color"
+                    md-color-picker
+                    ng-model="$ctrl.place.color"
+                    md-color-alpha-channel="false"
+                    random="true"
+                    md-color-sliders="false"
+                    md-color-generic-palette="false"
+                    md-color-material-palette="false"
+                    md-color-history="false"
+                    md-color-clear-button="false"
+                    md-color-preview></div>
+            </div>
+            <div layout-padding>
                 <md-input-container class="md-block">
                     <md-button class="md-raised md-accent" ng-click="$ctrl.addPlace()">Create !</md-button>
                 </md-input-container>
