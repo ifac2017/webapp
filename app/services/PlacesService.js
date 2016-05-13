@@ -54,7 +54,8 @@ function PlacesService($firebaseArray, Place) {
     PlacesService.addPlace = function(place) {
         return PlacesService.places.$add({
             name: place.name,
-            address: place.address
+            address: place.address,
+            color: place.color
         })
     }
 

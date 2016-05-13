@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -rf ./node_modules ./public ./sass-cache ./docs",
-    "start": "mkdir -p ./public/js/ && cp ./node_modules/@angular/router/angular1/angular_1_router.js public/js/ && gulp"
+    "start": "mkdir -p ./public/js/ && mkdir -p ./public/css && cp ./node_modules/md-color-picker/dist/mdColorPicker.min.css public/css && cp ./node_modules/@angular/router/angular1/angular_1_router.js public/js/ && gulp"
   },
   "repository": {
     "type": "git",
@@ -40,6 +40,7 @@
     "angularfire": "^1.2.0",
     "firebase": "^2.4.2",
     "marked": "^0.3.5",
+    "md-color-picker": "^0.2.6",
     "moment": "^2.13.0",
     "ngmap": "^1.17.1"
   },
