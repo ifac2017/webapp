@@ -1,18 +1,20 @@
-<wa-breadcrump title-name="$ctrl.titleName"></wa-breadcrump>
-<md-content class="md-padding">
-  <div layout="row">
-    <md-input-container flex>
-        <label>Search</label>
-        <input md-maxlength="15" ng-model="$ctrl.search">
-    </md-input-container>
-    <md-input-container flex="20">
-       <label>Order By</label>
-       <md-select ng-model="$ctrl.order">
-         <md-option value="date"> Date </md-option>
-         <md-option value="name"> Name </md-option>
-         <md-option value="placeId"> Place </md-option>
-       </md-select>
-     </md-input-container>
-  </div>
-  <wa-session-card session="session" ng-repeat="session in $ctrl.sessions | filter:$ctrl.search | orderBy:$ctrl.order" conference-clicked="$ctrl.goToConference"></wa-session-card>
-</md-content>
+<div layout="column">
+  <wa-breadcrump title-name="$ctrl.titleName"></wa-breadcrump>
+  <md-content class="md-padding" flex>
+    <div layout="row">
+      <md-input-container flex>
+          <label>Search</label>
+          <input md-maxlength="15" ng-model="$ctrl.search">
+      </md-input-container>
+      <md-input-container flex="20">
+         <label>Order By</label>
+         <md-select ng-model="$ctrl.order">
+           <md-option value="date"> Date </md-option>
+           <md-option value="name"> Name </md-option>
+           <md-option value="placeId"> Place </md-option>
+         </md-select>
+       </md-input-container>
+    </div>
+    <wa-session-card session="session" ng-repeat="session in $ctrl.sessions | filter:$ctrl.search | orderBy:$ctrl.order" conference-clicked="$ctrl.goToConference"></wa-session-card>
+  </md-content>
+</div>
