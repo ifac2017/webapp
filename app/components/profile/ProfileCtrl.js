@@ -11,6 +11,8 @@ function ProfileCtrl(PlacesService, ConferencesService, CurrentUser, SessionsSer
     var vm = this
 
     vm.titleName = "Conferences saved"
+    vm.icon = "print"
+    vm.textAction = "Print"
 
     vm.goToConference = function(conference) {
       vm.$router.navigate(['Planner', 'PlannerConference', {
@@ -25,6 +27,10 @@ function ProfileCtrl(PlacesService, ConferencesService, CurrentUser, SessionsSer
      * @description Current logged user
      */
     vm.currentUser = CurrentUser
+
+    vm.print = function(){
+      window.print()
+    }
 
     vm.getPlaceById = function(placeId) {
       return PlacesService.getPlaceById(placeId)
