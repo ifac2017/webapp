@@ -1,4 +1,4 @@
-<md-sidenav class="site-sidenav md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
+<md-sidenav flex class="site-sidenav md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
     <md-toolbar md-whiteframe="1">
         <div class="md-toolbar-tools">
             <a href="" ng-click="$ctrl.goHome()">
@@ -6,7 +6,7 @@
             </a>
         </div>
     </md-toolbar>
-    <md-content layout="column">
+    <md-content flex layout="column">
         <md-button ng-click="$ctrl.goHome()" class="md-raised">Planner</md-button>
         <md-button ng-click="$ctrl.goDiscover()" class="md-raised">Discover</md-button>
         <span class="separator"></span>
@@ -15,5 +15,24 @@
         <md-button ng-if="$ctrl.currentUser.isLogged" ng-click="$ctrl.goProfile()" class="md-raised">Profile</md-button>
         <span ng-if="$ctrl.currentUser.isLogged" class="separator"></span>
         <md-button ng-if="$ctrl.currentUser.isLogged" ng-click="$ctrl.logout()" class="md-raised">Logout</md-button>
+        <span flex></span>
+        <div layout="row">
+            <span flex></span>
+            <span class="footer-love">
+                <a href="https://github.com/ifac2017/webapp">
+                    <md-icon class="md-18">code</md-icon>
+                    with
+                    <md-icon class="md-18">favorite</md-icon>
+                </a>
+            </span>
+            <span flex></span>
+        </div>
+        <div layout="row">
+            <span flex></span>
+            <span class="footer md-body-1">
+                INSA Toulouse - 2016
+            </span>
+            <span flex></span>
+        </div>
     </md-content>
 </md-sidenav>
