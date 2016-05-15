@@ -1,39 +1,48 @@
 <div layout="column">
-  <wa-breadcrump title-name="$ctrl.titleName" icon-action="$ctrl.icon" text-action="$ctrl.textAction" action="$ctrl.print()"></wa-breadcrump>
-  <md-content flex layout-padding>
-    <md-card md-ink-ripple="true" ng-repeat="conference in $ctrl.conferences" ng-click="$ctrl.goToConference(conference)">
-        <md-card-title layout="column" g-click="$ctrl.goToConference(conference)">
-            <span layout="row">
-              <md-card-title-media layout-padding>
-                  <md-icon class="material-icons">question_answer</md-icon>
-              </md-card-title-media>
-              <md-card-title-text>
-                  <span class="md-headline">{{ conference.name }}</span>
-              </md-card-title-text>
-            </span>
-            <span style="margin-left:20px;" class="md-subhead">
-              <md-icon class="material-icons">place</md-icon>
-                {{ $ctrl.getPlaceByConf(conference).name}}
-                - Room :
-                {{$ctrl.getRoomByConf(conference)}}
-            </span>
-            <span style="margin-left:20px;" class="md-subhead">
-              <md-icon class="material-icons">access_time</md-icon>
-              {{ conference.date | amDateFormat:'dddd, MMMM D'}}
-              Schedule :
-              {{ conference.start_time | amDateFormat:'HH:mm'}}
-              -
-              {{conference.end_time | amDateFormat:'HH:mm'}}
-            </span>
-        </md-card-title>
-        <md-card-content layout="column">
-          <md-chips ng-model="conference.speakers" name="speaker" readonly="true" md-max-chips="5">
-              <md-chip-template>
-                  <strong>{{$chip.name}}</strong>
-                  <em>{{$chip.institution}}</em>
-              </md-chip-template>
-          </md-chips>
-        </md-card-content>
-    </md-card>
-  </md-content>
+    <wa-breadcrump title-name="$ctrl.titleName" icon-action="$ctrl.icon" text-action="$ctrl.textAction" action="$ctrl.print()"></wa-breadcrump>
+    <md-content flex layout-padding>
+        <md-card md-ink-ripple="true" ng-repeat="conference in $ctrl.conferences">
+            <div layout="row">
+                <div layout="column" ng-click="$ctrl.goToConference(conference)">
+                    <md-card-title layout="column" g-click="$ctrl.goToConference(conference)">
+                        <span layout="row">
+                            <md-card-title-media layout-padding>
+                                <md-icon class="material-icons">question_answer</md-icon>
+                            </md-card-title-media>
+                            <md-card-title-text>
+                                <span class="md-headline">{{ conference.name }}</span>
+                            </md-card-title-text>
+                        </span>
+                        <span style="margin-left:20px;" class="md-subhead">
+                            <md-icon class="material-icons">place</md-icon>
+                            {{ $ctrl.getPlaceByConf(conference).name}}
+                            - Room :
+                            {{$ctrl.getRoomByConf(conference)}}
+                        </span>
+                        <span style="margin-left:20px;" class="md-subhead">
+                            <md-icon class="material-icons">access_time</md-icon>
+                            {{ conference.date | amDateFormat:'dddd, MMMM D'}}
+                            Schedule :
+                            {{ conference.start_time | amDateFormat:'HH:mm'}}
+                            -
+                            {{conference.end_time | amDateFormat:'HH:mm'}}
+                        </span>
+                    </md-card-title>
+                    <md-card-content layout="column">
+                        <md-chips ng-model="conference.speakers" name="speaker" readonly="true" md-max-chips="5">
+                            <md-chip-template>
+                                <strong>{{$chip.name}}</strong>
+                                <em>{{$chip.institution}}</em>
+                            </md-chip-template>
+                        </md-chips>
+                    </md-card-content>
+                </div>
+                <span flex ng-click="$ctrl.goToConference(conference)"></span>
+                <div layout="column" class="noprint">
+                    <md-button class="md-icon-button" ng-click="$ctrl.removeConference(conference)"><md-icon class="material-icons">remove_circle_outline</md-icon></md-button>
+                    <span flex></span>
+                </div>
+            </div>
+        </md-card>
+    </md-content>
 </div>

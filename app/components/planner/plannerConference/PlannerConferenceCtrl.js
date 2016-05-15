@@ -32,6 +32,10 @@ function PlannerConferenceCtrl(ConferencesService, NotificationsService, Current
           vm.backAction = function() {
               vm.$router.parent.navigate(['SessionSearch'])
           }
+        } else if (next.params.data === "backProfile") {
+          vm.backAction = function() {
+              vm.$router.parent.navigate(['Profile'])
+          }
         } else {
             vm.backAction = function() {
                 vm.$router.navigate(['PlannerSession', {

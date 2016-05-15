@@ -1,5 +1,5 @@
 angular.module('webapp').controller('ProfileCtrl', ProfileCtrl)
-ProfileCtrl.$inject = ['PlacesService', 'ConferencesService', 'CurrentUser', 'SessionsService']
+ProfileCtrl.$inject = ['PlacesService', 'ConferencesService', 'CurrentUser', 'SessionsService', '$mdDialog']
 
 /**
  * @ngdoc controller
@@ -7,7 +7,7 @@ ProfileCtrl.$inject = ['PlacesService', 'ConferencesService', 'CurrentUser', 'Se
  * @requires CurrentUser
  * @description In charge of the profile view.
  */
-function ProfileCtrl(PlacesService, ConferencesService, CurrentUser, SessionsService) {
+function ProfileCtrl(PlacesService, ConferencesService, CurrentUser, SessionsService, $mdDialog) {
     var vm = this
 
     vm.titleName = "Conferences saved"
@@ -16,7 +16,9 @@ function ProfileCtrl(PlacesService, ConferencesService, CurrentUser, SessionsSer
 
     vm.goToConference = function(conference) {
         vm.$router.navigate(['Planner', 'PlannerConference', {
-            id: conference.$id
+          id: conference.$id,
+          data:"backProfile",
+          back: 1
         }])
     }
 
@@ -27,6 +29,19 @@ function ProfileCtrl(PlacesService, ConferencesService, CurrentUser, SessionsSer
      * @description Current logged user
      */
     vm.currentUser = CurrentUser
+
+    vm.removeConference = function(conference) {
+      var confirm = $mdDialog.confirm()
+          .title('Would you like to unsubscribe yourself from this conference?')
+          .ariaLabel('Unsubscribe')
+          .targetEvent(event)
+          .ok('Unsubscribe!')
+          .cancel('Cancel')
+      $mdDialog.show(confirm).then(function() {
+        vm.conferences.splice(vm.conferences.indexOf(conference), 1)
+        CurrentUser.removeConference(conference)
+      })
+    }
 
     vm.print = function() {
         window.print()
