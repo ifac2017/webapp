@@ -19,7 +19,7 @@ function PlannerCalendarCtrl(SessionsService, EventService, moment) {
 
     vm.sessions = null
 
-    vm.$routerOnActivate = function() {
+    vm.$routerOnActivate = function(next) {
         EventService.loadEvent().then(function() {
             if (EventService.event.start_date && EventService.event.end_date) {
                 var start = moment(EventService.event.start_date)
@@ -39,15 +39,19 @@ function PlannerCalendarCtrl(SessionsService, EventService, moment) {
                 })
 
             }
-
-            vm.getSessions(0)
-
+            if (next.params.id) {
+              vm.selectedIndex = next.params.id
+              vm.getSessions(next.params.id)
+            } else {
+              vm.getSessions(0)
+            }
         })
     }
 
     vm.selectDay = function(index) {
-        vm.selectedIndex = index
-        vm.getSessions(index)
+        vm.$router.navigate(['PlannerCalendar', {
+            id: index
+        }])
     }
 
     vm.getSessions = function(index) {
@@ -58,7 +62,8 @@ function PlannerCalendarCtrl(SessionsService, EventService, moment) {
 
     vm.showSession = function(session) {
         vm.$router.navigate(['PlannerSession', {
-            id: session.$id
+            id: session.$id,
+            back: vm.selectedIndex
         }])
     }
 }

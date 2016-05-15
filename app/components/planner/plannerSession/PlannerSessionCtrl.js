@@ -10,20 +10,26 @@ function PlannerSessionCtrl(SessionsService, ConferencesService, PlacesService) 
     var vm = this
 
     vm.backName = "Planner"
-    vm.backAction = function() {
-        vm.$router.navigate(['PlannerCalendar'])
-    }
+
+    vm.back = 0
 
     vm.$routerOnActivate = function(next) {
         vm.session = SessionsService.getSessionById(next.params.id)
         vm.place = PlacesService.getPlaceById(vm.session.placeId)
         vm.titleName = vm.session.name
         vm.conferences = SessionsService.getConferencesBySession(vm.session)
+        vm.back = next.params.back
+        vm.backAction = function() {
+            vm.$router.navigate(['PlannerCalendar', {
+              id: next.params.back
+            }])
+        }
     }
 
     vm.goToConference = function(conference) {
         vm.$router.navigate(['PlannerConference', {
-            id: conference.$id
+            id: conference.$id,
+            back: vm.back
         }])
     }
 }

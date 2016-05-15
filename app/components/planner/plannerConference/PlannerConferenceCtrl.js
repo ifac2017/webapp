@@ -35,7 +35,8 @@ function PlannerConferenceCtrl(ConferencesService, NotificationsService, Current
         } else {
             vm.backAction = function() {
                 vm.$router.navigate(['PlannerSession', {
-                    id: vm.conference.sessionId
+                    id: vm.conference.sessionId,
+                    back: next.params.back
                 }])
             }
         }

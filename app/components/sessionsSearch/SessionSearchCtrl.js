@@ -48,7 +48,8 @@ function SessionSearchCtrl(SessionsService, ConferencesService) {
   vm.goToConference = function(conference) {
       vm.$router.navigate(['Planner', 'PlannerConference', {
           id: conference.$id,
-          data:"backDiscover"
+          data:"backDiscover",
+          back: 1
       }])
   }
 
