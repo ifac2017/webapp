@@ -12,7 +12,7 @@
     </md-input-container>
     <md-content flex>
         <div layout-gt-xs="row">
-            <div flex ng-repeat="timeslot in $ctrl.timeslots" layout="column">
+            <div flex ng-repeat="timeslot in $ctrl.timeslots | orderBy:'start_time'" layout="column">
                 <h4>{{timeslot.start_time | amDateFormat:'HH:mm'}}
                     -
                     {{timeslot.end_time | amDateFormat:'HH:mm'}}</h4>
