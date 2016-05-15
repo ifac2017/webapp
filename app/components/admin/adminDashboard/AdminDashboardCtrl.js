@@ -37,10 +37,12 @@ function AdminDashboardCtrl(EventService, NotificationsService) {
         vm.event.timeslots.push(timeslot)
         vm.timeslot.start_time = null
         vm.timeslot.end_time = null
+        vm.saveEvent()
     }
 
     vm.removeTimeslot = function(timeslot) {
         vm.event.timeslots.splice(vm.event.timeslots.indexOf(timeslot), 1)
+        vm.saveEvent()
     }
 
     vm.saveEvent = function() {
