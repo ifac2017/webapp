@@ -2,6 +2,7 @@ wa-session-card {
   md-card{
     cursor: pointer;
     position: relative;
+    overflow: hidden;
   }
   md-card:hover{
     background-color: #F9F9F9;

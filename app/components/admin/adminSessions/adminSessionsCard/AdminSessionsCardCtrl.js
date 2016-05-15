@@ -45,11 +45,7 @@ function AdminSessionsCardCtrl(SessionsService, ConferencesService, $mdDialog) {
     }
 
     vm.getConferences = function() {
-        SessionsService.getConferencesBySession(vm.session).then(function(conferences) {
-            vm.conferences = conferences
-        }).catch(function(error) {
-            console.log(error)
-        })
+        vm.conferences = SessionsService.getConferencesBySession(vm.session)
     }
 
 }
