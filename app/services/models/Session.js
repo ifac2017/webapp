@@ -5,6 +5,14 @@ Session.$inject = []
  * @ngdoc service
  * @name webapp.service:Session
  * @description Represents a session
+ *  A session is characterized by
+ *  - a name: `String`
+ *  - a date: `int`
+ *  - a start_time: `int`
+ *  - an end_time: `int`
+ *  - one or more conferences: `Array<Conference>`
+ *  - a place id: `String`
+ *  - a room: `String`
  */
 function Session() {
     var Session = {

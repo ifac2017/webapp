@@ -109,15 +109,61 @@ function CurrentUser($firebaseObject) {
         return CurrentUser.role === "admin"
     }
 
+    /**
+     * @ngdoc method
+     * @name save
+     * @methodOf webapp.service:CurrentUser
+     * @description return a promise validate when the user is saved in Firebase
+     * @returns {Promise} ok if the user is well saved
+     * @example
+      ```javascript
+      CurrentUser.save()
+      .then(function() {
+        // success...
+      })
+      .catch(function(error) {
+        // error...
+      })
+      ```
+      */
     CurrentUser.save = function() {
         return CurrentUser._user.$save()
     }
 
+    /**
+     * @ngdoc method
+     * @name removeConference
+     * @methodOf webapp.service:CurrentUser
+     * @description return a promise validate when the user is saved in Firebase
+     * @param {Conference} conference - the conference to be removed
+     * @example
+      ```javascript
+      CurrentUser.removeConference(conference)
+      ```
+      */
     CurrentUser.removeConference = function(conference) {
       CurrentUser._user.conferences.splice(CurrentUser._user.conferences.indexOf(conference.$id), 1)
       CurrentUser.save()
     }
 
+    /**
+     * @ngdoc method
+     * @name saveConference
+     * @methodOf webapp.service:CurrentUser
+     * @description return a promise validate when the user is saved in Firebase
+     * @param {Conference} conference - the conference to be added
+     * @returns {Promise} ok if the conference and the user are well saved
+     * @example
+      ```javascript
+      CurrentUser.saveConference(conference)
+      .then(function() {
+        // success...
+      })
+      .catch(function(error) {
+        // error...
+      })
+      ```
+      */
     CurrentUser.saveConference = function(conference) {
         return new Promise(function(resolve, reject) {
             if (CurrentUser.isLogged) {

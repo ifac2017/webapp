@@ -72,6 +72,7 @@ function EventService($firebaseObject, Event) {
       ```
       */
     EventService.save = function(event) {
+        EventService.event.name = event.name
         EventService.event.start_date = event.start_date.getTime()
         EventService.event.end_date = event.end_date.getTime()
         EventService.event.timeslots = event.timeslots.map(function(item) {

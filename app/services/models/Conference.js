@@ -5,6 +5,13 @@ Conference.$inject = []
  * @ngdoc service
  * @name webapp.service:Conference
  * @description Represents a conference
+ *  A conference is characterized by
+ *  - a name: `String`
+ *  - a start_time: `int`
+ *  - an end_time: `int`
+ *  - one or more speakers: `Array<Speaker>`
+ *  - a session id: `String`
+ *  - a facultative abstract: `String`
  */
 function Conference() {
     var Conference = {

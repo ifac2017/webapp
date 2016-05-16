@@ -5,6 +5,10 @@ Place.$inject = []
  * @ngdoc service
  * @name webapp.service:Place
  * @description Represents a place
+ *  A place is characterized by
+ *  - a name: `String`
+ *  - an address: `String`
+ *  - a color: `String`
  */
 function Place() {
     var Place = {

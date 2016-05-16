@@ -1,5 +1,5 @@
 angular.module('webapp').controller('SidebarCtrl', SidebarCtrl)
-SidebarCtrl.$inject = ['AuthService', 'CurrentUser', '$rootRouter', '$mdSidenav']
+SidebarCtrl.$inject = ['EventService', 'AuthService', 'CurrentUser', '$rootRouter', '$mdSidenav']
     /**
      * @ngdoc controller
      * @name webapp.controller:SidebarCtrl
@@ -8,7 +8,7 @@ SidebarCtrl.$inject = ['AuthService', 'CurrentUser', '$rootRouter', '$mdSidenav'
      * @requires $rootRouter
      * @description In charge of the sidebar view.
      */
-function SidebarCtrl(AuthService, CurrentUser, $rootRouter, $mdSidenav) {
+function SidebarCtrl(EventService, AuthService, CurrentUser, $rootRouter, $mdSidenav) {
     var vm = this
 
     /**
@@ -18,6 +18,8 @@ function SidebarCtrl(AuthService, CurrentUser, $rootRouter, $mdSidenav) {
      * @description Current logged user
      */
     vm.currentUser = CurrentUser
+
+    vm.event = EventService.event
 
     /**
      * @ngdoc method
