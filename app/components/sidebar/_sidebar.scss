@@ -16,6 +16,11 @@ wa-sidebar {
         .separator {
             height: 20px;
         }
+        .md-toolbar-tools {
+          img {
+            margin-right: 5px;
+          }
+        }
     }
     md-sidenav,
     md-sidenav.md-closed.md-locked-open-add-active,

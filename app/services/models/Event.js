@@ -9,6 +9,7 @@ Event.$inject = []
  *  - a name: `String`
  *  - a start_date: `int`
  *  - an end_date: `int`
+ *  - an image: `base64DataUrl`
  *  - one or more timeslots: `Array<Timeslot>`
  */
 function Event() {
@@ -16,6 +17,7 @@ function Event() {
         name: null,
         start_date: null,
         end_date: null,
+        image: null,
         timeslots: []
     }
 
@@ -23,6 +25,7 @@ function Event() {
       Event.name = null
       Event.start_date = null
       Event.end_date = null
+      Event.image = null
       Event.timeslots = []
     }
 

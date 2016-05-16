@@ -15,17 +15,12 @@
             <md-divider></md-divider>
             <div layout="column">
                 <form>
-                    <div layout-padding>
+                    <div layout-padding layout="column">
                         <span class="md-heading">Event properties</span>
                         <div layout-gt-xs="row" class="md-inline-form">
                             <md-input-container flex class="md-block">
                                 <input type="text" name="name" placeholder="Name" ng-model="$ctrl.event.name" ng-change="$ctrl.saveEvent()" required>
                             </md-input-container>
-                        </div>
-                    </div>
-                    <div layout-padding>
-                        <span class="md-heading">Event dates</span>
-                        <div layout-gt-xs="row" class="md-inline-form">
                             <md-input-container md-no-float class="md-block">
                                 <span class="md-body-2">Start on</span>
                             </md-input-container>
@@ -35,39 +30,54 @@
                             </md-input-container>
                             <md-datepicker md-placeholder="End date" ng-change="$ctrl.saveEvent()" ng-model="$ctrl.event.end_date"></md-datepicker>
                         </div>
-                    </div>
-                    <div layout-padding>
-                        <span class="md-heading">Event timeslots</span>
-                        <div layout-gt-xs="row">
-                            <div>
-                                <md-input-container class="md-block md-icon-float">
-                                    <md-icon class="material-icons md-24">access_time</md-icon>
-                                    <input type="time" name="start_time" placeholder="Start time" ng-model="$ctrl.timeslot.start_time">
-                                </md-input-container>
+                        <div layout-gt-xs="row" class="md-inline-form">
+                            <div layout="column">
+                              <span class="md-body-2">Timeslots:</span>
+                                <div layout-gt-xs="row" class="md-inline-form">
+                                    <div>
+                                        <md-input-container class="md-block md-icon-float">
+                                            <md-icon class="material-icons md-24">access_time</md-icon>
+                                            <input type="time" name="start_time" placeholder="Start time" ng-model="$ctrl.timeslot.start_time">
+                                        </md-input-container>
+                                    </div>
+                                    <div>
+                                        <md-input-container class="md-block md-icon-float">
+                                            <md-icon class="material-icons md-24">access_time</md-icon>
+                                            <input type="time" name="end_time" placeholder="End time" ng-model="$ctrl.timeslot.end_time">
+                                        </md-input-container>
+                                    </div>
+                                    <md-input-container class="md-block">
+                                        <md-button class="md-accent" ng-click="$ctrl.addTimeslot()">Add !</md-button>
+                                    </md-input-container>
+                                </div>
+                                <div layout="column" flex>
+                                    <ul>
+                                        <li ng-repeat="timeslot in $ctrl.event.timeslots | orderBy:'start_time'">{{timeslot.start_time | amDateFormat:'HH:mm'}}
+                                            -
+                                            {{timeslot.end_time | amDateFormat:'HH:mm'}}
+                                            <md-button class="md-icon-button" ng-click="$ctrl.removeTimeslot(timeslot)">
+                                                <md-tooltip md-direction="right">
+                                                    Remove timeslot
+                                                </md-tooltip>
+                                                <i class="material-icons md-18">remove_circle_outline</i>
+                                            </md-button>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div>
-                                <md-input-container class="md-block md-icon-float">
-                                    <md-icon class="material-icons md-24">access_time</md-icon>
-                                    <input type="time" name="end_time" placeholder="End time" ng-model="$ctrl.timeslot.end_time">
-                                </md-input-container>
-                            </div>
-                            <md-input-container class="md-block">
-                                <md-button class="md-accent" ng-click="$ctrl.addTimeslot()">Add !</md-button>
-                            </md-input-container>
-                            <div layout="column" flex>
-                                <span ng-if="$ctrl.event.timeslots.length" class="md-body-2">Timeslots:</span>
-                                <ul>
-                                    <li ng-repeat="timeslot in $ctrl.event.timeslots | orderBy:'start_time'">{{timeslot.start_time | amDateFormat:'HH:mm'}}
-                                        -
-                                        {{timeslot.end_time | amDateFormat:'HH:mm'}}
-                                        <md-button class="md-icon-button" ng-click="$ctrl.removeTimeslot(timeslot)">
-                                            <md-tooltip md-direction="right">
-                                                Remove timeslot
-                                            </md-tooltip>
-                                            <i class="material-icons md-18">remove_circle_outline</i>
-                                        </md-button>
-                                    </li>
-                                </ul>
+                            <span flex></span>
+                            <div layout="column">
+                                <div layout-gt-xs="row">
+                                    <md-input-container md-no-float class="md-block">
+                                        <span class="md-body-2">Logo
+                                        </span>
+                                        <span class="md-caption">(max 10MB, 50x50px)</span>
+                                    </md-input-container>
+                                    <md-button class="md-fab md-mini" ngf-select="$ctrl.upload($file)" accept="image/*" ngf-max-size="10MB" ngf-resize="{width: 50, height: 50}">
+                                        <md-icon class="material-icons md-24">attach_file</md-icon>
+                                    </md-button>
+                                </div>
+                                <img ng-src="{{$ctrl.event.image}}" width="50" height="50">
                             </div>
                         </div>
                     </div>

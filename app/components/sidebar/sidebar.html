@@ -1,6 +1,7 @@
 <md-sidenav flex class="site-sidenav md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
     <md-toolbar md-whiteframe="1">
-        <div class="md-toolbar-tools">
+        <div class="md-toolbar-tools" layout="row">
+            <img ng-src="{{$ctrl.event.image}}" width="50" height="50">
             <a href="" ng-click="$ctrl.goHome()">
                 <h2>{{$ctrl.event.name}}</h2>
             </a>
