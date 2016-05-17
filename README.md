@@ -22,15 +22,5 @@ Be sure to have previous requirements installed on your computer.
 - The webapp is available at `http://localhost:4000`.
 - Documentation is available at `http://localhost:4001`.
 
-### TODO
-
-- Mobile Button
-- Index Database
-- Firebase rules
-- Admin forms validation
-- Design stuff
-- add a 404 page
-- Code refactoring (always...)
-
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
