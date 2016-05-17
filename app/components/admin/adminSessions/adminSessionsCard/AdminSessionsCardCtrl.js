@@ -1,13 +1,15 @@
 angular.module('webapp').controller('AdminSessionsCardCtrl', AdminSessionsCardCtrl)
-AdminSessionsCardCtrl.$inject = ['SessionsService', 'ConferencesService', '$mdDialog']
+AdminSessionsCardCtrl.$inject = ['SessionsService', 'ConferencesService', 'PlacesService', '$mdDialog']
 
 /**
  * @ngdoc controller
  * @name webapp.controller:AdminSessionsCardCtrl
  * @description In charge of the admin sessions card view.
  */
-function AdminSessionsCardCtrl(SessionsService, ConferencesService, $mdDialog) {
+function AdminSessionsCardCtrl(SessionsService, ConferencesService, PlacesService, $mdDialog) {
     var vm = this
+
+    vm.place = PlacesService.getPlaceById(vm.session.placeId)
 
     vm.removeSession = function(event) {
         var confirm = $mdDialog.confirm()

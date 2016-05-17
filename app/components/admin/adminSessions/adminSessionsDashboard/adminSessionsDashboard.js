@@ -13,8 +13,11 @@ angular.module('webapp').component('waAdminSessionsDashboard', {
     bindings: {
         $router: '<'
     },
-    $canActivate: ['AuthService', '$rootRouter', function(AuthService, $rootRouter) {
+    $canActivate: ['AuthService', 'PlacesService', '$rootRouter', function(AuthService, PlacesService, $rootRouter) {
         return AuthService.requireAdminAuth()
+        .then(function(){
+          return PlacesService.loadArray()
+        })
         .then(function(){
           return true
         })
