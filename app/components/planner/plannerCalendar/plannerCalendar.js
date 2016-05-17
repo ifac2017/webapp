@@ -6,9 +6,13 @@
  */
 angular.module('webapp').component('waPlannerCalendar', {
     controller: 'PlannerCalendarCtrl',
-    templateUrl: ['$element', function($element) {
+    templateUrl: ['$element', '$mdMedia', function($element, $mdMedia) {
         angular.element($element).addClass('layout-column')
-        return 'plannerCalendar.html'
+        if ($mdMedia('gt-sm')) {
+            return 'plannerCalendar.html'
+        } else {
+            return 'plannerCalendarMobile.html'
+        }
     }],
     bindings: {
         $router: '<'

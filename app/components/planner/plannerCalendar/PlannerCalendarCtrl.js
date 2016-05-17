@@ -37,7 +37,7 @@ function PlannerCalendarCtrl(SessionsService, EventService, moment) {
                         end_time: new Date(item.end_time)
                     })
                 })
-
+                vm.selectedTimeslot = vm.timeslots[0]
             }
             if (next.params.id) {
               vm.selectedIndex = next.params.id

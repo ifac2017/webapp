@@ -1,15 +1,10 @@
 <div layout="column">
     <wa-breadcrump title-name="$ctrl.titleName"></wa-breadcrump>
-    <div ng-if="true |isMobile:false">
+    <div>
         <div layout-gt-xs="row">
             <md-button ng-click="$ctrl.selectDay($index)" flex class="md-raised" aria-label="date" ng-repeat="day in $ctrl.days" ng-disabled="$ctrl.selectedIndex == $index">{{day | amDateFormat:'dddd, MMMM D'}}</md-button>
         </div>
     </div>
-    <md-input-container ng-if="false |isMobile:true" class="md-block">
-        <md-select placeholder="Day" ng-model="$ctrl.selectedIndex">
-            <md-option ng-click="$ctrl.selectDay($index)" ng-repeat="day in $ctrl.days" ng-value="$index">{{day | amDateFormat:'dddd, MMMM D'}}</md-option>
-        </md-select>
-    </md-input-container>
     <md-content flex>
         <div layout-gt-xs="row">
             <div flex ng-repeat="timeslot in $ctrl.timeslots | orderBy:'start_time'" layout="column">

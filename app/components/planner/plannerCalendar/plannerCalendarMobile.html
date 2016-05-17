@@ -1,0 +1,26 @@
+<div layout="column">
+    <wa-breadcrump title-name="$ctrl.titleName"></wa-breadcrump>
+    <div layout="row">
+        <span flex></span>
+        <md-input-container class="md-block">
+            <md-select placeholder="Day" ng-model="$ctrl.selectedIndex">
+                <md-option ng-click="$ctrl.selectDay($index)" ng-repeat="day in $ctrl.days" ng-value="$index">{{day | amDateFormat:'dddd, MMMM D'}}</md-option>
+            </md-select>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <md-select placeholder="Timeslot" ng-model="$ctrl.selectedTimeslot">
+                <md-option ng-repeat="timeslot in $ctrl.timeslots" ng-value="timeslot">{{timeslot.start_time | amDateFormat:'HH:mm'}}
+                    -
+                    {{timeslot.end_time | amDateFormat:'HH:mm'}}</md-option>
+            </md-select>
+        </md-input-container>
+        <span flex></span>
+    </div>
+    <md-content flex>
+        <div layout-gt-xs="row">
+            <div flex layout="column">
+                <wa-calendar-session-card ng-repeat="session in $ctrl.sessions | filter:{ start_time: $ctrl.selectedTimeslot.start_time.getTime()}:true" session="session" session-clicked="$ctrl.showSession"></wa-calendar-session-card>
+            </div>
+        </div>
+    </md-content>
+</div>
