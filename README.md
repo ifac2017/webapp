@@ -4,7 +4,6 @@
 
 
 ## Test the app
-Online : [https://ifac2017.firebaseapp.com/](https://ifac2017.firebaseapp.com/) or from your computer:
 
 ### Requirements
 Developed with:
