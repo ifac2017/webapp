@@ -11,6 +11,8 @@ function PlannerSessionCtrl(SessionsService, ConferencesService, PlacesService) 
 
     vm.backName = "Planner"
 
+    vm.order = "start_time"
+    
     vm.back = 0
 
     vm.$routerOnActivate = function(next) {

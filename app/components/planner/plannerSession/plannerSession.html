@@ -7,7 +7,7 @@
                     <div class="colored no-margin" style="background-color:{{$ctrl.place.color}}"></div>
                     <div hide show-gt-xs flex>
                         <ng-map flex id="placesMap" zoom="15" center="{{$ctrl.place.address}}" disable-default-u-i="true">
-                          <marker position="{{$ctrl.place.address}}" centered="true" title="{{$ctrl.place.address}}"></marker>
+                            <marker position="{{$ctrl.place.address}}" centered="true" title="{{$ctrl.place.address}}"></marker>
                         </ng-map>
                     </div>
                 </div>
@@ -28,9 +28,19 @@
                                 -
                                 {{$ctrl.session.room}}</p>
                         </div>
-                        <h3>Conferences:</h3>
+                        <div layout-gt-xs="row">
+                            <h3>Conferences:</h3>
+                            <span flex></span>
+                            <md-input-container>
+                               <label>Order By</label>
+                               <md-select ng-model="$ctrl.order">
+                                 <md-option value="start_time"> Start Time </md-option>
+                                 <md-option value="name"> Name </md-option>
+                               </md-select>
+                             </md-input-container>
+                        </div>
                         <md-list flex ng-if="$ctrl.conferences.length">
-                            <md-list-item flex ng-repeat="conference in $ctrl.conferences" class="md-3-line" ng-click="$ctrl.goToConference(conference)">
+                            <md-list-item flex ng-repeat="conference in $ctrl.conferences | orderBy:$ctrl.order" class="md-3-line" ng-click="$ctrl.goToConference(conference)">
                                 <md-icon class="material-icons">chat</md-icon>
                                 <div flex class="md-list-item-text" layout="column">
                                     <h3>{{ conference.name }}</h3>
