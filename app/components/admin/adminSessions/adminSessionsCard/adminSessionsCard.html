@@ -47,8 +47,8 @@
             <md-list ng-if="$ctrl.showConferences && $ctrl.conferences.length">
                 <md-list-item ng-repeat="conference in $ctrl.conferences" class="md-1-line">
                     <md-icon class="material-icons md-18">chat</md-icon>
-                    <p>{{conference.name}}</p>
                     <div layout="column">
+                        <p>{{conference.name}}</p>
                         <span class="md-caption">
                             <md-icon class="material-icons md-18">access_time</md-icon>
                             From
