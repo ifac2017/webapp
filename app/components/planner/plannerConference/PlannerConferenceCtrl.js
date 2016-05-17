@@ -9,7 +9,6 @@ PlannerConferenceCtrl.$inject = ['ConferencesService', 'NotificationsService', '
 function PlannerConferenceCtrl(ConferencesService, NotificationsService, CurrentUser, SessionsService, PlacesService) {
     var vm = this
 
-    vm.backName = "Session"
     vm.textAction = "Save this conference"
     vm.iconAction = "save"
     vm.action = function() {
@@ -29,14 +28,17 @@ function PlannerConferenceCtrl(ConferencesService, NotificationsService, Current
         vm.end_time = new Date(vm.conference.end_time)
         vm.titleName = vm.conference.name
         if (next.params.data === "backDiscover") {
-          vm.backAction = function() {
-              vm.$router.parent.navigate(['SessionSearch'])
-          }
+            vm.backName = "Discover"
+            vm.backAction = function() {
+                vm.$router.parent.navigate(['SessionSearch'])
+            }
         } else if (next.params.data === "backProfile") {
-          vm.backAction = function() {
-              vm.$router.parent.navigate(['Profile'])
-          }
+            vm.backName = "Profile"
+            vm.backAction = function() {
+                vm.$router.parent.navigate(['Profile'])
+            }
         } else {
+            vm.backName = "Session"
             vm.backAction = function() {
                 vm.$router.navigate(['PlannerSession', {
                     id: vm.conference.sessionId,
