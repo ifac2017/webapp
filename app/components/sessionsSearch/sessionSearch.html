@@ -1,12 +1,12 @@
 <div layout="column">
   <wa-breadcrump title-name="$ctrl.titleName"></wa-breadcrump>
   <md-content class="md-padding" flex>
-    <div layout="row">
-      <md-input-container flex>
+    <div layout-gt-xs="row">
+      <md-input-container flex="80">
           <label>Search</label>
           <input md-maxlength="15" ng-model="$ctrl.search">
       </md-input-container>
-      <md-input-container flex="20">
+      <md-input-container flex>
          <label>Order By</label>
          <md-select ng-model="$ctrl.order">
            <md-option value="date"> Date </md-option>
