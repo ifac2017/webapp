@@ -1,12 +1,12 @@
 angular.module('webapp').controller('AdminSessionsConferencesEditCtrl', AdminSessionsConferencesEditCtrl)
-AdminSessionsConferencesEditCtrl.$inject = ['SessionsService', 'ConferencesService', 'Speaker']
+AdminSessionsConferencesEditCtrl.$inject = ['SessionsService', 'ConferencesService', 'Speaker', 'NotificationsService']
 
 /**
  * @ngdoc controller
  * @name webapp.controller:AdminSessionsConferencesEditCtrl
  * @description In charge of the admin sessions conferences edition view.
  */
-function AdminSessionsConferencesEditCtrl(SessionsService, ConferencesService, Speaker) {
+function AdminSessionsConferencesEditCtrl(SessionsService, ConferencesService, Speaker, NotificationsService) {
     var vm = this
 
     vm.titleName = "Edit conferences"
@@ -29,6 +29,7 @@ function AdminSessionsConferencesEditCtrl(SessionsService, ConferencesService, S
     vm.addSpeaker = function() {
         var speaker = angular.copy(vm.speaker)
         vm.conference.speakers.push(speaker)
+        vm.editConference()
         vm.speaker.name = null
         vm.speaker.institution = null
     }
@@ -42,10 +43,10 @@ function AdminSessionsConferencesEditCtrl(SessionsService, ConferencesService, S
         vm.conference.end_time = vm.end_time.getTime()
         ConferencesService.saveConference(vm.conference)
             .then(function() {
-                vm.$router.parent.parent.navigate(['AdminSessionsDashboardData', {
-                    data: "editionConferenceOkay"
-                }])
+                NotificationsService.success('The place has been well edited!')
             })
-            .catch(function() {})
+            .catch(function() {
+                NotificationsService.error('An error occurred... Please try again.')
+            })
     }
 }

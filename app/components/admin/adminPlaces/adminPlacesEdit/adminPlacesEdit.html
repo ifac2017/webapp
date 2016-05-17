@@ -1,16 +1,18 @@
 <div layout="column">
     <wa-breadcrump title-name="$ctrl.titleName" back-name="$ctrl.backName" back-action="$ctrl.backAction()"></wa-breadcrump>
     <md-content layout-padding>
-        <ng-map zoom="15" center="{{$ctrl.place.address}}" disable-default-u-i="true"></ng-map>
+        <ng-map zoom="15" center="{{$ctrl.place.address}}" disable-default-u-i="true">
+          <marker position="{{$ctrl.place.address}}" centered="true" title="{{$ctrl.place.address}}"></marker>
+        </ng-map>
         <form>
             <div layout-padding>
                 <span class="md-heading">General information</span>
                 <div layout-gt-xs="row" class="md-inline-form">
                     <md-input-container flex class="md-block">
-                        <input type="text" name="name" placeholder="Name" ng-model="$ctrl.place.name" required>
+                        <input type="text" name="name" placeholder="Name" ng-change="$ctrl.editPlace()" ng-model="$ctrl.place.name" required>
                     </md-input-container>
                     <md-input-container flex class="md-block">
-                        <input type="text" name="address" placeholder="Address" ng-model="$ctrl.place.address" required>
+                        <input type="text" name="address" placeholder="Address" ng-change="$ctrl.editPlace()" ng-model="$ctrl.place.address" required>
                     </md-input-container>
                 </div>
             </div>
@@ -19,6 +21,7 @@
                     label="Place Color"
                     md-color-picker
                     ng-model="$ctrl.place.color"
+                    ng-change="$ctrl.editPlace()"
                     md-color-alpha-channel="false"
                     md-color-sliders="false"
                     md-color-generic-palette="false"
@@ -26,11 +29,6 @@
                     md-color-history="false"
                     md-color-clear-button="false"
                     md-color-preview></div>
-            </div>
-            <div layout-padding>
-                <md-input-container class="md-block">
-                    <md-button class="md-raised md-accent" ng-click="$ctrl.editPlace()">Edit !</md-button>
-                </md-input-container>
             </div>
         </form>
     </md-content>

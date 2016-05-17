@@ -6,7 +6,7 @@
                 <span class="md-heading">General information</span>
                 <div layout-gt-xs="row" class="md-inline-form">
                     <md-input-container flex class="md-block">
-                        <input type="text" name="name" placeholder="Name" ng-model="$ctrl.conference.name" required>
+                        <input type="text" name="name" placeholder="Name" ng-change="$ctrl.editConference()" ng-model="$ctrl.conference.name" required>
                     </md-input-container>
                     <md-input-container class="md-block">
                         <input type="text" name="name" placeholder="Session" ng-model="$ctrl.session.name" disabled>
@@ -19,11 +19,11 @@
                 <div layout-gt-xs="row">
                     <md-input-container flex class="md-block md-icon-float">
                         <md-icon class="material-icons md-24">access_time</md-icon>
-                        <input type="time" name="start_time" placeholder="Start time" ng-model="$ctrl.start_time" required>
+                        <input type="time" name="start_time" placeholder="Start time" ng-change="$ctrl.editConference()" ng-model="$ctrl.start_time" required>
                     </md-input-container>
                     <md-input-container flex class="md-block md-icon-float">
                         <md-icon class="material-icons md-24">access_time</md-icon>
-                        <input type="time" name="end_time" placeholder="End time" ng-model="$ctrl.end_time" required>
+                        <input type="time" name="end_time" placeholder="End time" ng-change="$ctrl.editConference()" ng-model="$ctrl.end_time" required>
                     </md-input-container>
                 </div>
             </div>
@@ -60,12 +60,7 @@
                 <span class="md-heading">Facultative information</span>
                 <md-input-container class="md-block">
                     <label>Abstract</label>
-                    <textarea ng-model="$ctrl.conference.abstract" md-maxlength="500" rows="5"></textarea>
-                </md-input-container>
-            </div>
-            <div layout-padding>
-                <md-input-container class="md-block">
-                    <md-button class="md-raised md-accent" ng-click="$ctrl.editConference()">Edit !</md-button>
+                    <textarea ng-change="$ctrl.editConference()" ng-model="$ctrl.conference.abstract" md-maxlength="500" rows="5"></textarea>
                 </md-input-container>
             </div>
         </form>

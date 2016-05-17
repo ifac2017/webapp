@@ -21,7 +21,7 @@ function AdminPlacesDashboardCtrl(NotificationsService, PlacesService) {
         vm.$router.parent.navigate(['AdminDashboard'])
     }
     // end breadcrump
-    
+
     vm.places = PlacesService.places
 
     vm.editPlace = function(place) {
@@ -33,8 +33,6 @@ function AdminPlacesDashboardCtrl(NotificationsService, PlacesService) {
     vm.$routerOnActivate = function(next) {
         if (next.params.data === "creationOkay") {
             NotificationsService.success('The place has been well created!')
-        } else if (next.params.data === "editionOkay") {
-            NotificationsService.success('The place has been well edited!')
         }
     }
 }

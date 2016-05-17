@@ -1,12 +1,12 @@
 angular.module('webapp').controller('AdminSessionsEditCtrl', AdminSessionsEditCtrl)
-AdminSessionsEditCtrl.$inject = ['SessionsService', 'EventService', 'PlacesService']
+AdminSessionsEditCtrl.$inject = ['SessionsService', 'EventService', 'PlacesService', 'NotificationsService']
 
 /**
  * @ngdoc controller
  * @name webapp.controller:AdminSessionsEditCtrl
  * @description In charge of the admin sessions edition view.
  */
-function AdminSessionsEditCtrl(SessionsService, EventService, PlacesService) {
+function AdminSessionsEditCtrl(SessionsService, EventService, PlacesService, NotificationsService) {
     var vm = this
 
     vm.titleName = "Edit session"
@@ -25,7 +25,7 @@ function AdminSessionsEditCtrl(SessionsService, EventService, PlacesService) {
     }
 
     vm.$routerOnActivate = function(next) {
-      vm.event.reset()
+        vm.event.reset()
         vm.session = SessionsService.getSessionById(next.params.id)
         vm.date = new Date(vm.session.date)
         vm.timeslot.start_time = new Date(vm.session.start_time)
@@ -55,10 +55,10 @@ function AdminSessionsEditCtrl(SessionsService, EventService, PlacesService) {
         vm.session.end_time = vm.timeslot.end_time.getTime()
         SessionsService.saveSession(vm.session)
             .then(function() {
-                vm.$router.navigate(['AdminSessionsDashboardData', {
-                    data: "editionSessionOkay"
-                }])
+                NotificationsService.success('The session has been well edited!')
             })
-            .catch(function() {})
+            .catch(function() {
+                NotificationsService.error('An error occurred... Please try again.')
+            })
     }
 }

@@ -6,35 +6,30 @@
                 <span class="md-heading">General information</span>
                 <div layout-gt-xs="row" class="md-inline-form">
                     <md-input-container flex class="md-block">
-                        <input type="text" name="name" placeholder="Name" ng-model="$ctrl.session.name" required>
+                        <input type="text" name="name" placeholder="Name" ng-change="$ctrl.editSession()" ng-model="$ctrl.session.name" required>
                     </md-input-container>
                     <md-input-container class="md-block">
-                        <md-select placeholder="Timeslot" ng-model="$ctrl.timeslot">
+                        <md-select placeholder="Timeslot" ng-change="$ctrl.editSession()" ng-model="$ctrl.timeslot">
                             <md-option ng-repeat="timeslot in $ctrl.event.timeslots" ng-value="timeslot">{{timeslot.start_time | amDateFormat:'HH:mm'}}
                                 -
                                 {{timeslot.end_time | amDateFormat:'HH:mm'}}</md-option>
                         </md-select>
                     </md-input-container>
-                    <md-datepicker md-placeholder="Date" ng-model="$ctrl.date" md-min-date="$ctrl.event.start_date" md-max-date="$ctrl.event.end_date"></md-datepicker>
+                    <md-datepicker md-placeholder="Date" ng-change="$ctrl.editSession()" ng-model="$ctrl.date" md-min-date="$ctrl.event.start_date" md-max-date="$ctrl.event.end_date"></md-datepicker>
                 </div>
             </div>
             <div layout-padding>
                 <span class="md-heading">Place</span>
                 <div layout-gt-xs="row" class="md-inline-form">
                     <md-input-container flex class="md-block">
-                        <input type="text" name="room" placeholder="Room" ng-model="$ctrl.session.room" required>
+                        <input type="text" name="room" placeholder="Room" ng-change="$ctrl.editSession()" ng-model="$ctrl.session.room" required>
                     </md-input-container>
                     <md-input-container flex class="md-block">
-                        <md-select placeholder="Place" ng-model="$ctrl.session.placeId">
+                        <md-select placeholder="Place" ng-change="$ctrl.editSession()" ng-model="$ctrl.session.placeId">
                             <md-option ng-repeat="place in $ctrl.places" ng-value="place.$id">{{place.name}}</md-option>
                         </md-select>
                     </md-input-container>
                 </div>
-            </div>
-            <div layout-padding>
-                <md-input-container class="md-block">
-                    <md-button class="md-raised md-accent" ng-click="$ctrl.editSession()">Edit !</md-button>
-                </md-input-container>
             </div>
         </form>
     </md-content>

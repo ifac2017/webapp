@@ -1,12 +1,12 @@
 angular.module('webapp').controller('AdminPlacesEditCtrl', AdminPlacesEditCtrl)
-AdminPlacesEditCtrl.$inject = ['PlacesService']
+AdminPlacesEditCtrl.$inject = ['PlacesService', 'NotificationsService']
 
 /**
  * @ngdoc controller
  * @name webapp.controller:AdminPlacesEditCtrl
  * @description In charge of the admin places edition view.
  */
-function AdminPlacesEditCtrl(PlacesService) {
+function AdminPlacesEditCtrl(PlacesService, NotificationsService) {
     var vm = this
 
     vm.titleName = "Edit place"
@@ -22,10 +22,10 @@ function AdminPlacesEditCtrl(PlacesService) {
     vm.editPlace = function() {
         PlacesService.savePlace(vm.place)
             .then(function() {
-                vm.$router.navigate(['AdminPlacesDashboardData', {
-                    data: "editionOkay"
-                }])
+              NotificationsService.success('The place has been well edited!')
             })
-            .catch(function() {})
+            .catch(function() {
+              NotificationsService.error('An error occurred... Please try again.')
+            })
     }
 }

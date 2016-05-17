@@ -6,7 +6,9 @@
                 <div layout="row">
                     <div class="colored no-margin" style="background-color:{{$ctrl.place.color}}"></div>
                     <div hide show-gt-xs flex>
-                        <ng-map flex id="placesMap" zoom="15" center="{{$ctrl.place.address}}" disable-default-u-i="true"></ng-map>
+                        <ng-map flex id="placesMap" zoom="15" center="{{$ctrl.place.address}}" disable-default-u-i="true">
+                          <marker position="{{$ctrl.place.address}}" centered="true" title="{{$ctrl.place.address}}"></marker>
+                        </ng-map>
                     </div>
                 </div>
                 <div flex layout="row">

@@ -1,7 +1,9 @@
 <div layout="column">
     <wa-breadcrump title-name="$ctrl.titleName" back-name="$ctrl.backName" back-action="$ctrl.backAction()"></wa-breadcrump>
     <md-content layout-padding>
-        <ng-map ng-if="$ctrl.place.address" zoom="15" center="{{$ctrl.place.address}}" disable-default-u-i="true"></ng-map>
+        <ng-map ng-if="$ctrl.place.address" zoom="15" center="{{$ctrl.place.address}}" disable-default-u-i="true">
+          <marker position="{{$ctrl.place.address}}" centered="true" title="{{$ctrl.place.address}}"></marker>
+        </ng-map>
         <form>
             <div layout-padding>
                 <span class="md-heading">General information</span>
