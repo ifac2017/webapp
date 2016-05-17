@@ -38,7 +38,7 @@ function LoginCtrl(AuthService, NotificationsService) {
     vm.login = function() {
         AuthService.login(vm.user.email, vm.user.password)
             .then(function() {
-                vm.$router.navigate(['Planner'])
+                location.reload()
             })
             .catch(function(error) {
                 NotificationsService.error("Error during logging. Please verify your password.")
