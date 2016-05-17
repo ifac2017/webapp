@@ -10,8 +10,12 @@ Theme.$inject = ['$mdThemingProvider']
  */
 function Theme($mdThemingProvider) {
     $mdThemingProvider.theme('default')
-        .primaryPalette('blue-grey')
-        .accentPalette('blue')
+        .primaryPalette('light-blue', {
+          'default': '800'
+        })
+        .accentPalette('orange', {
+          'default': '800'
+        })
         .warnPalette('red')
 
     $mdThemingProvider.theme("error-toast")
