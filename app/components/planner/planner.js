@@ -13,8 +13,8 @@ angular.module('webapp').component('waPlanner', {
     $routeConfig: [
       {path: '/', name:'PlannerCalendar', component: 'waPlannerCalendar', useAsDefault: true},
       {path: '/:id', name:'PlannerCalendar', component: 'waPlannerCalendar'},
-      {path: ':back/session/:id', name:'PlannerSession', component: 'waPlannerSession'},
-      {path: ':back/conference/:id', name:'PlannerConference', component: 'waPlannerConference'}
+      {path: '/:back/session/:id', name:'PlannerSession', component: 'waPlannerSession'},
+      {path: '/:back/conference/:id', name:'PlannerConference', component: 'waPlannerConference'}
     ],
     $canActivate: ['PlacesService', '$rootRouter', function(PlacesService, $rootRouter) {
       return PlacesService.loadArray()

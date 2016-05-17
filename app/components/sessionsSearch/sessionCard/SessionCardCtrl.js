@@ -42,7 +42,8 @@ function SessionCardCtrl(PlacesService, ConferencesService) {
   vm.conferences = []
 
   if(typeof vm.session.conferences !== 'undefined' ){
-    for (var i = 0; i < vm.session.conferences.length; i++) {
+    var cpt = vm.session.conferences.length
+    for (var i = 0; i < cpt; i++) {
         vm.conferences.push(ConferencesService.getConferenceById(vm.session.conferences[i]))
     }
   }

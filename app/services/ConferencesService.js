@@ -155,7 +155,8 @@ function ConferencesService(CurrentUser, SessionsService, SessionsConferencesSer
                   return []
               } else {
                   var conferences = []
-                  for (var i = 0; i < CurrentUser.conferences().length; i++) {
+                  var cpt = CurrentUser.conferences().length
+                  for (var i = 0; i < cpt; i++) {
                       conferences.push(ConferencesService.getConferenceById(CurrentUser.conferences()[i]))
                   }
                   return conferences

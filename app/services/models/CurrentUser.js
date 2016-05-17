@@ -58,7 +58,7 @@ function CurrentUser($firebaseObject) {
      * @description Conferences of the connected user
      */
     CurrentUser.conferences = function() {
-      return CurrentUser._user.conferences
+        return CurrentUser._user.conferences
     }
 
     /**
@@ -142,8 +142,10 @@ function CurrentUser($firebaseObject) {
       ```
       */
     CurrentUser.removeConference = function(conference) {
-      CurrentUser._user.conferences.splice(CurrentUser._user.conferences.indexOf(conference.$id), 1)
-      CurrentUser.save()
+        if (CurrentUser._user.conferences) {
+            CurrentUser._user.conferences.splice(CurrentUser._user.conferences.indexOf(conference.$id), 1)
+            CurrentUser.save()
+        }
     }
 
     /**

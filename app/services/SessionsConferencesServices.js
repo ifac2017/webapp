@@ -53,8 +53,9 @@ function SessionsConferencesService(CurrentUser, $firebaseArray) {
       ```
       */
     SessionsConferencesService.removeSession = function(session) {
-        if (session.conferences) {
-            for (var i = 0; i < session.conferences.length; i++) {
+        if (session.conferences && typeof session.conferences !== 'undefined') {
+            var cpt = session.conferences.length
+            for (var i = 0; i < cpt; i++) {
                 SessionsConferencesService.removeConference(SessionsConferencesService.getConferenceById(session.conferences[i]), session)
             }
         }
@@ -117,7 +118,8 @@ function SessionsConferencesService(CurrentUser, $firebaseArray) {
     SessionsConferencesService.getConferencesBySession = function(session) {
         if (typeof session.conferences !== 'undefined') {
             var conferences = []
-            for (var i = 0; i < session.conferences.length; i++) {
+            var cpt = session.conferences.length
+            for (var i = 0; i < cpt; i++) {
                 conferences.push(SessionsConferencesService.getConferenceById(session.conferences[i]))
             }
             return conferences

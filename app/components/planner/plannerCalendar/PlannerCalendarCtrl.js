@@ -63,7 +63,7 @@ function PlannerCalendarCtrl(SessionsService, EventService, moment) {
     vm.showSession = function(session) {
         vm.$router.navigate(['PlannerSession', {
             id: session.$id,
-            back: vm.selectedIndex
+            back: ""+vm.selectedIndex+""
         }])
     }
 }

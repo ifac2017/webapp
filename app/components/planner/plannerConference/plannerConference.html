@@ -10,20 +10,22 @@
             <div id="directions-panel" style="width: 30%;float: right;height: 400px;overflow: scroll;"></div>
         </div>
         <md-divider></md-divider>
-        <div layout="row">
-            <div layout="column">
+        <div layout="column" flex>
+            <div layout="row">
                 <span class="md-subhead">
                     <md-icon class="material-icons md-24">access_time</md-icon>
                     From
                     {{$ctrl.start_time | amDateFormat:'HH:mm'}}
                     until
                     {{$ctrl.end_time | amDateFormat:'HH:mm'}}</span>
+                <span flex></span>
                 <span class="md-subhead">
                     <md-icon class="material-icons md-24">place</md-icon>{{$ctrl.place.name}}
                     -
                     {{$ctrl.session.room}}</span>
             </div>
-            <span flex></span>
+            <span layout-padding></span>
+            <span layout-padding></span>
             <div layout-wrap>
                 <span class="md-body-2">Speakers:
                 </span>
@@ -34,14 +36,13 @@
                         {{speaker.institution}}</span>
                 </span>
             </div>
-        </div>
-        <span layout-padding></span>
-        <div layout="column">
-          <span layout-padding></span>
-            <span class="md-body-2">
-                Abstract:
-            </span>
-            <p>{{$ctrl.conference.abstract}}</p>
+            <div layout="column">
+                <span layout-padding></span>
+                <span class="md-body-2">
+                    Abstract:
+                </span>
+                <p>{{$ctrl.conference.abstract}}</p>
+            </div>
         </div>
     </md-content>
 </div>
