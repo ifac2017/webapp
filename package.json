@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -rf ./node_modules ./public ./sass-cache ./docs",
-    "start": "mkdir -p ./public/js/ && mkdir -p ./public/css && cp ./node_modules/md-color-picker/dist/mdColorPicker.min.css public/css && cp ./node_modules/@angular/router/angular1/angular_1_router.js public/js/ && gulp"
+    "start": "mkdir -p ./public/js/ && mkdir -p ./public/css && cp ./app/favicon.png ./public/ && cp ./node_modules/md-color-picker/dist/mdColorPicker.min.css public/css && cp ./node_modules/@angular/router/angular1/angular_1_router.js public/js/ && gulp"
   },
   "repository": {
     "type": "git",
