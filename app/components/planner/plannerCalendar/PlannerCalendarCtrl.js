@@ -49,11 +49,14 @@ function PlannerCalendarCtrl(SessionsService, EventService, moment) {
     }
 
     vm.selectDay = function(index) {
-        /*vm.$router.navigate(['PlannerCalendar', {
-            id: index
-        }])*/
         vm.selectedIndex = index
         vm.getSessions(vm.selectedIndex)
+    }
+
+    vm.selectDayMobile = function(index) {
+        vm.$router.navigate(['PlannerCalendar', {
+            id: index
+        }])
     }
 
     vm.getSessions = function(index) {

@@ -4,7 +4,7 @@
         <span flex></span>
         <md-input-container class="md-block">
             <md-select placeholder="Day" ng-model="$ctrl.selectedIndex">
-                <md-option ng-click="$ctrl.selectDay($index)" ng-repeat="day in $ctrl.days" ng-value="$index">{{day | amDateFormat:'dddd, MMMM D'}}</md-option>
+                <md-option ng-click="$ctrl.selectDayMobile($index)" ng-repeat="day in $ctrl.days" ng-value="$index">{{day | amDateFormat:'dddd, MMMM D'}}</md-option>
             </md-select>
         </md-input-container>
         <md-input-container class="md-block">

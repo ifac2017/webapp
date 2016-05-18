@@ -19,20 +19,4 @@
         </md-tabs>
       </div>
     </div>
-    <!--<div>
-        <div layout-gt-xs="row">
-            <md-button ng-click="$ctrl.selectDay($index)" flex class="md-raised" aria-label="date" ng-repeat="day in $ctrl.days" ng-disabled="$ctrl.selectedIndex == $index">{{day | amDateFormat:'dddd, MMMM D'}}</md-button>
-        </div>
-    </div>
-    <md-content flex>
-        <div layout-gt-xs="row">
-            <div flex ng-repeat="timeslot in $ctrl.timeslots | orderBy:'start_time'" layout="column">
-                <h4>{{timeslot.start_time | amDateFormat:'HH:mm'}}
-                    -
-                    {{timeslot.end_time | amDateFormat:'HH:mm'}}</h4>
-                <md-divider></md-divider>
-                <wa-calendar-session-card ng-repeat="session in $ctrl.sessions | filter:{ start_time: timeslot.start_time.getTime()}:true" session="session" session-clicked="$ctrl.showSession"></wa-calendar-session-card>
-            </div>
-        </div>
-    </md-content>-->
 </div>
