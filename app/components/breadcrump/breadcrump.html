@@ -1,18 +1,20 @@
-<div layout="row" layout-align="center center">
-    <div ng-if="$ctrl.backName" layout="column" layout-align="center center">
-        <md-button class="md-icon-button" ng-click="$ctrl.backAction()">
-            <i class="material-icons md-24">arrow_back</i>
+<div class="content" layout="column">
+    <div layout="row" layout-align="center center">
+        <div ng-if="$ctrl.backName" layout="column" layout-align="center center">
+            <md-button class="md-icon-button" ng-click="$ctrl.backAction()">
+                <i class="material-icons md-24">arrow_back</i>
+            </md-button>
+            <span class="md-caption">{{$ctrl.backName}}</span>
+        </div>
+        <span flex></span>
+        <h2 ng-if="$ctrl.titleName" class="md-title">{{$ctrl.titleName}}</h2>
+        <span flex></span>
+        <md-button ng-if="$ctrl.iconAction" class="md-fab wa-icon-button" ng-click="$ctrl.action()">
+            <md-tooltip md-direction="left">
+                {{$ctrl.textAction}}
+            </md-tooltip>
+            <i class="material-icons md-24">{{$ctrl.iconAction}}</i>
         </md-button>
-        <span class="md-caption">{{$ctrl.backName}}</span>
     </div>
-    <span flex></span>
-    <h2 ng-if="$ctrl.titleName" class="md-title">{{$ctrl.titleName}}</h2>
-    <span flex></span>
-    <md-button ng-if="$ctrl.iconAction" class="md-fab wa-icon-button" ng-click="$ctrl.action()">
-        <md-tooltip md-direction="left">
-            {{$ctrl.textAction}}
-        </md-tooltip>
-        <i class="material-icons md-24">{{$ctrl.iconAction}}</i>
-    </md-button>
+    <md-divider></md-divider>
 </div>
-<md-divider></md-divider>

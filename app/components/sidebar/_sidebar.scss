@@ -24,9 +24,9 @@ wa-sidebar {
     md-sidenav,
     md-sidenav.md-closed.md-locked-open-add-active,
     md-sidenav.md-locked-open {
-        min-width: 220px !important;
-        width: 220px !important;
-        max-width: 220px !important;
+        min-width: $sidebarWidth !important;
+        width: $sidebarWidth !important;
+        max-width: $sidebarWidth !important;
     }
     .footer {
       color: rgba(0,0,0, 0.5);

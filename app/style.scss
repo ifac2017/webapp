@@ -5,6 +5,11 @@ $info: #3498db;
 $error: #e74c3c;
 $success: #2ecc71;
 $warn: #e67e22;
+
+$sidebarWidth: 220px;
+$breadcrumpHeight: 65px;
+$topbarHeight: 55px;
+
 /***********/
 /** Icons **/
 /***********/
@@ -54,6 +59,11 @@ md-toolbar h3 {
 }
 md-toolbar a h3 {
     font-size: 36px;
+}
+md-toolbar {
+  min-height: $topbarHeight;
+  height: $topbarHeight;
+  max-height: $topbarHeight;
 }
 /***********/
 /** Icons **/
@@ -130,7 +140,7 @@ md-input-container.md-icon-float > md-icon {
     display: none !important;
   }
 }
-
+@import "components/breadcrump/breadcrump";
 @import "components/planner/plannerConference/plannerConference";
 @import "components/planner/plannerSession/plannerSession";
 @import "components/planner/plannerCalendar/plannerCalendar";

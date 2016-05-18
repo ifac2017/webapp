@@ -1,5 +1,12 @@
 wa-planner-calendar {
-  h4 {
-    text-align: center;
-  }
+    h4 {
+        text-align: center;
+    }
+    .full-size {
+        position: absolute !important;
+        top: ($topbarHeight + $breadcrumpHeight) !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        left: $sidebarWidth !important;
+    }
 }
