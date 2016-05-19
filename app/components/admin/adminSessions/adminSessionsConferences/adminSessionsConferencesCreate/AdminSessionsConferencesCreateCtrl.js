@@ -14,6 +14,17 @@ function AdminSessionsConferencesCreateCtrl(ConferencesService, SessionsService,
     vm.backAction = function() {
         vm.$router.parent.parent.navigate(['AdminSessionsDashboard'])
     }
+    vm.textAction = "Save the conference"
+    vm.iconAction = "save"
+    vm.action = function() {
+      ConferencesService.addConference(vm.conference, vm.session)
+          .then(function() {
+              vm.$router.parent.parent.navigate(['AdminSessionsDashboardData', {
+                  data: "creationConferenceOkay"
+              }])
+          })
+          .catch(function() {})
+    }
 
     vm.speaker = Speaker
 
@@ -38,15 +49,5 @@ function AdminSessionsConferencesCreateCtrl(ConferencesService, SessionsService,
 
     vm.removeSpeaker = function(speaker) {
         vm.conference.speakers.splice(vm.conference.speakers.indexOf(speaker), 1)
-    }
-
-    vm.addConference = function() {
-        ConferencesService.addConference(vm.conference, vm.session)
-            .then(function() {
-                vm.$router.parent.parent.navigate(['AdminSessionsDashboardData', {
-                    data: "creationConferenceOkay"
-                }])
-            })
-            .catch(function() {})
     }
 }

@@ -14,18 +14,19 @@ function AdminPlacesCreateCtrl(PlacesService) {
     vm.backAction = function() {
         vm.$router.navigate(['AdminPlacesDashboard'])
     }
+    vm.textAction = "Save the place"
+    vm.iconAction = "save"
+    vm.action = function() {
+      PlacesService.addPlace(vm.place)
+          .then(function() {
+              vm.$router.navigate(['AdminPlacesDashboardData', {
+                  data: "creationOkay"
+              }])
+          })
+          .catch(function() {})
+    }
 
     vm.place = PlacesService.Model
-
-    vm.addPlace = function() {
-        PlacesService.addPlace(vm.place)
-            .then(function() {
-                vm.$router.navigate(['AdminPlacesDashboardData', {
-                    data: "creationOkay"
-                }])
-            })
-            .catch(function() {})
-    }
 
     vm.$routerOnActivate = function(next, prev) {
         PlacesService.Model.reset()

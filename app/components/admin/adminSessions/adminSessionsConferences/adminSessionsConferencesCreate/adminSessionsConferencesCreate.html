@@ -1,5 +1,5 @@
 <div layout="column">
-    <wa-breadcrump title-name="$ctrl.titleName" back-name="$ctrl.backName" back-action="$ctrl.backAction()"></wa-breadcrump>
+    <wa-breadcrump title-name="$ctrl.titleName" back-name="$ctrl.backName" back-action="$ctrl.backAction()" text-action="$ctrl.textAction" icon-action="$ctrl.iconAction" action="$ctrl.action()"></wa-breadcrump>
     <md-content layout-padding>
         <form>
             <div layout-padding>
@@ -61,11 +61,6 @@
                 <md-input-container class="md-block">
                     <label>Abstract</label>
                     <textarea ng-model="$ctrl.conference.abstract" md-maxlength="500" rows="5"></textarea>
-                </md-input-container>
-            </div>
-            <div layout-padding>
-                <md-input-container class="md-block">
-                    <md-button class="md-raised md-accent" ng-click="$ctrl.addConference()">Create !</md-button>
                 </md-input-container>
             </div>
         </form>

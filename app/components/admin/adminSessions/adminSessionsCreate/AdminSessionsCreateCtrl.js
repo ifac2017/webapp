@@ -14,6 +14,19 @@ function AdminSessionsCreateCtrl(SessionsService, EventService, PlacesService) {
     vm.backAction = function() {
         vm.$router.navigate(['AdminSessionsDashboard'])
     }
+    vm.textAction = "Save the session"
+    vm.iconAction = "save"
+    vm.action = function() {
+      vm.session.start_time = vm.timeslot.start_time
+      vm.session.end_time = vm.timeslot.end_time
+      SessionsService.addSession(vm.session)
+          .then(function() {
+              vm.$router.navigate(['AdminSessionsDashboardData', {
+                  data: "creationSessionOkay"
+              }])
+          })
+          .catch(function() {})
+    }
 
     vm.session = SessionsService.Model
     vm.event = EventService.Model
@@ -23,18 +36,6 @@ function AdminSessionsCreateCtrl(SessionsService, EventService, PlacesService) {
     vm.timeslot = {
         start_time: null,
         end_time: null
-    }
-
-    vm.addSession = function() {
-        vm.session.start_time = vm.timeslot.start_time
-        vm.session.end_time = vm.timeslot.end_time
-        SessionsService.addSession(vm.session)
-            .then(function() {
-                vm.$router.navigate(['AdminSessionsDashboardData', {
-                    data: "creationSessionOkay"
-                }])
-            })
-            .catch(function() {})
     }
 
     vm.$routerOnActivate = function(next, prev) {

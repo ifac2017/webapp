@@ -1,5 +1,5 @@
 <div layout="column">
-    <wa-breadcrump title-name="$ctrl.titleName" back-name="$ctrl.backName" back-action="$ctrl.backAction()"></wa-breadcrump>
+    <wa-breadcrump title-name="$ctrl.titleName" back-name="$ctrl.backName" back-action="$ctrl.backAction()" text-action="$ctrl.textAction" icon-action="$ctrl.iconAction" action="$ctrl.action()"></wa-breadcrump>
     <md-content layout-padding>
         <form>
             <div layout-padding>
@@ -30,11 +30,6 @@
                         </md-select>
                     </md-input-container>
                 </div>
-            </div>
-            <div layout-padding>
-                <md-input-container class="md-block">
-                    <md-button class="md-raised md-accent" ng-click="$ctrl.addSession()">Create !</md-button>
-                </md-input-container>
             </div>
         </form>
     </md-content>
