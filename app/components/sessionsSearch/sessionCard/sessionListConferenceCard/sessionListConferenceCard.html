@@ -1,8 +1,9 @@
-<div layout="row">
+<div layout-gt-xs="row">
   <md-list-item flex class="md-3-line" ng-click="$ctrl.conferenceClicked()">
-      <md-icon class="material-icons">chat</md-icon>
+      <md-icon ng-if="true | isMobile: false" class="material-icons">chat</md-icon>
       <div flex class="md-list-item-text" layout="column">
-          <h3>{{ $ctrl.conference.name }}</h3>
+          <p ng-if="false | isMobile: true" class="md-headline">{{ $ctrl.conference.name }}</p>
+          <h3 ng-if="true | isMobile: false">{{ $ctrl.conference.name }}</h3>
           <p>Schedule :
               {{ $ctrl.conference.start_time | amDateFormat:'HH:mm'}}
               -
