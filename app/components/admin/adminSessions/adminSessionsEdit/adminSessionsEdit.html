@@ -10,7 +10,7 @@
                     </md-input-container>
                     <md-input-container class="md-block">
                         <md-select placeholder="Timeslot" ng-change="$ctrl.editSession()" ng-model="$ctrl.timeslot">
-                            <md-option ng-repeat="timeslot in $ctrl.event.timeslots" ng-value="timeslot">{{timeslot.start_time | amDateFormat:'HH:mm'}}
+                            <md-option ng-repeat="timeslot in $ctrl.event.timeslots | orderBy:'start_time'" ng-value="timeslot">{{timeslot.start_time | amDateFormat:'HH:mm'}}
                                 -
                                 {{timeslot.end_time | amDateFormat:'HH:mm'}}</md-option>
                         </md-select>
